@@ -1,0 +1,18 @@
+{
+    "name": "boao_utils",
+    "version": "1.0.0",
+    "description": "frontend use",
+    "main": "index.js",
+    "scripts": {
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Cyan-963852/boao_utils.git"
+    },
+    "author": "Cyan",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Cyan-963852/boao_utils/issues"
+    },
+    "homepage": "https://github.com/Cyan-963852/boao_utils#readme"
+}
