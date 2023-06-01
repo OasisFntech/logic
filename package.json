@@ -1,10 +1,9 @@
 {
     "name": "boao_utils",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "frontend use",
     "main": "index.js",
-    "scripts": {
-    },
+    "scripts": {},
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Cyan-963852/boao_utils.git"
@@ -14,5 +13,10 @@
     "bugs": {
         "url": "https://github.com/Cyan-963852/boao_utils/issues"
     },
-    "homepage": "https://github.com/Cyan-963852/boao_utils#readme"
+    "homepage": "https://github.com/Cyan-963852/boao_utils#readme",
+    "dependencies": {
+        "axios": "^1.4.0",
+        "pinia": "^2.1.3",
+        "vue": "^3.3.4"
+    }
 }
