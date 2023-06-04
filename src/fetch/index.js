@@ -20,7 +20,7 @@ const FETCH_METHOD = {
     DELETE: 'delete'
 }
 
-function api_fetch({ url, params, method = 'post' }) {
+function api_fetch({ url, params, method = 'post', options }) {
     try {
         switch (method) {
             case FETCH_METHOD.GET:
@@ -94,7 +94,8 @@ function useRequest({
     }
 }
 
-module.exports = {
+export {
+    axios,
     api_fetch,
     useRequest,
     axiosInterceptors,
