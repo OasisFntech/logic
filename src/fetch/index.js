@@ -9,7 +9,7 @@ function axiosDefaultConfig(config) {
     })
 }
 
-const onFetchErr = err => {
+function onFetchErr(err) {
     console.error(err)
     return Promise.reject(err)
 }
