@@ -9,9 +9,14 @@ function axiosDefaultConfig(config) {
     })
 }
 
+const onFetchErr = err => {
+    console.error(err)
+    return Promise.reject(err)
+}
+
 function axiosInterceptors({ request, response }) {
-    axios.interceptors.request.use(request)
-    axios.interceptors.response.use(response)
+    axios.interceptors.request.use(request, onFetchErr)
+    axios.interceptors.response.use(response, onFetchErr)
 }
 
 const FETCH_METHOD = {
@@ -58,7 +63,7 @@ function useRequest({
     onErr,
 }) {
     const response = ref(initialValues),
-        loading = ref()
+        loading = ref(false)
 
     const requestParams = computed(() => isRef(params) ? params.value : params)
 
@@ -100,5 +105,6 @@ export {
     useRequest,
     axiosInterceptors,
     axiosDefaultConfig,
+    onFetchErr,
     FETCH_METHOD
 }
