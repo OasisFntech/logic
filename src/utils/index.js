@@ -1,3 +1,29 @@
+import { inflate } from 'pako'
+
+/**
+ * @function utils_base64
+ * @param base64String base64加密字符串
+ * @return object
+ * @description 解析接口返回的base64加密字符串
+ * */
+export const utils_base64 = base64String => {
+    try {
+        return JSON.parse(
+            inflate(
+                new Uint8Array(
+                    atob(base64String)
+                        .split('')
+                        .map(e => e.charCodeAt(0))
+                ),
+                { to: 'string' }
+            )
+        )
+    } catch (e) {
+        console.error(e)
+        return {}
+    }
+}
+
 /**
  * @function utils_link
  * @param url 跳转地址 | HTMLHyperlinkElementUtils.href
