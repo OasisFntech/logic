@@ -1,31 +1,17 @@
-import axios from 'axios'
-import { ref, computed, isRef } from 'vue'
+import { computed, isRef, ref } from 'vue'
 
-function axiosDefaultConfig(config) {
-    Object.entries(config).forEach(e => {
-        const [ key, val ] = e
+export * from './apis'
+export * from './axios'
 
-        axios.defaults[key] = val
-    })
-}
+import { axios } from './axios'
 
-function onFetchErr(err) {
-    console.error(err)
-    return Promise.reject(err)
-}
-
-function axiosInterceptors({ request, response }) {
-    axios.interceptors.request.use(request, onFetchErr)
-    axios.interceptors.response.use(response, onFetchErr)
-}
-
-const FETCH_METHOD = {
+export const FETCH_METHOD = {
     POST: 'post',
     GET: 'get',
     DELETE: 'delete'
 }
 
-function api_fetch({ url, params, method = 'post', options }) {
+export function api_fetch({ url, params, method = 'post', options }) {
     try {
         switch (method) {
             case FETCH_METHOD.GET:
@@ -52,7 +38,7 @@ function api_fetch({ url, params, method = 'post', options }) {
     }
 }
 
-function useRequest({
+export function useRequest({
     url,
     params,
     method,
@@ -97,14 +83,4 @@ function useRequest({
         run,
         onRefresh: () => run(requestParams.value),
     }
-}
-
-export {
-    axios,
-    api_fetch,
-    useRequest,
-    axiosInterceptors,
-    axiosDefaultConfig,
-    onFetchErr,
-    FETCH_METHOD
 }

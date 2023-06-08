@@ -15,6 +15,7 @@
     },
     "homepage": "https://github.com/Cyan-963852/boao_utils#readme",
     "dependencies": {
+        "@vueuse/core": "^10.1.2",
         "axios": "^1.4.0",
         "lodash": "^4.17.21",
         "pako": "^2.1.0",

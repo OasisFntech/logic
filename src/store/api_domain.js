@@ -41,7 +41,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
         try {
             //  获取可用的api地址
             const all_apis = await api_fetch({
-                url: '/api/check/domains/getApiDmian',
+                url: '/check/domains/getApiDmian',
                 method: 'get'
             })
 
@@ -50,7 +50,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
                 all_apis.forEach(e => {
                     const fetchTime = +new Date()
                     onCheckDomain({
-                        url: '/api/check/systemConfigCheck/getCheck',
+                        url: '/check/systemConfigCheck/getCheck',
                         params: { domainName: e.domain, time: fetchTime },
                         fetchTime
                     }).then(res => {
@@ -61,7 +61,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
 
             // 获取所有域名线路
             const all_webs = await api_fetch({
-                url: '/api/check/domains/getWebDmian',
+                url: '/check/domains/getWebDmian',
                 method: 'get'
             })
 
