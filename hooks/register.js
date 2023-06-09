@@ -3,7 +3,7 @@ import { useIntervalFn, useLocalStorage } from '@vueuse/core'
 import JSEncrypt from 'jsencrypt'
 import _ from 'lodash'
 
-import { api_fetch, API_PATH } from '../fetch'
+import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
 
 export const useRegister = ({
@@ -75,7 +75,7 @@ export const useRegister = ({
             checkLoading.value = true
             try {
                 const isRepeat = await api_fetch({
-                    url: API_PATH.CHECK_ACCOUNT,
+                    url: API_PATH.CHECK_ACCOUNT_REGISTER,
                     params: {
                         username
                     }
@@ -99,12 +99,24 @@ export const useRegister = ({
         if (!smsLoading.value) {
             smsLoading.value = true
             try {
-                await api_fetch({
-                    url: API_PATH.SEND_SMS + phone
+                const isRepeat = await api_fetch({
+                    url: API_PATH.CHECK_ACCOUNT_REGISTER,
+                    method: FETCH_METHOD.GET,
+                    params: {
+                        phone
+                    }
                 })
-                successTip?.('短信验证码已发送，请注意查收')
 
-                onCountdown()
+                if (isRepeat) {
+                    await api_fetch({
+                        url: API_PATH.SEND_SMS + phone
+                    })
+                    successTip?.('短信验证码已发送，请注意查收')
+
+                    onCountdown()
+                } else {
+                    warnTip?.('当前手机号已注册')
+                }
             } catch (err) {
                 errorTip?.(err.message)
             } finally {

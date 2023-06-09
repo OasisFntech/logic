@@ -7,8 +7,9 @@ export const API_PATH = {
     // K 线图
     K_LINE: '/market/getKLineData',
 
-    // 检查注册账号是否重复
-    CHECK_ACCOUNT: '/auth/member/checkAccountRegister',
+    // 检查注册账号、手机号是否注册过
+    CHECK_ACCOUNT_REGISTER: '/auth/member/checkAccountRegister',
+    CHECK_MOBILE_REGISTER: '/auth/member/checkPhoneRegister',
     // 发送短信验证码
     SEND_SMS: '/member/sms/operlog/86/',
     // 检查短信验证码
