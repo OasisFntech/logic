@@ -2,6 +2,7 @@ import { computed, isRef, ref } from 'vue'
 
 export * from './apis'
 export * from './axios'
+export * from './stocket'
 
 import { axios } from './axios'
 
