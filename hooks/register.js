@@ -100,7 +100,7 @@ export const useRegister = ({
             smsLoading.value = true
             try {
                 const isRepeat = await api_fetch({
-                    url: API_PATH.CHECK_ACCOUNT_REGISTER,
+                    url: API_PATH.CHECK_MOBILE_REGISTER,
                     method: FETCH_METHOD.GET,
                     params: {
                         phone
