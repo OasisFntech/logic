@@ -19,12 +19,12 @@ export const useRegister = ({
      * @const submitLoading 提交 loading
      * */
     const formState = reactive({
-            username: '',
-            loginPassword: '',
+            account: '',
+            password: '',
             repeat: '',
-            phone: '',
+            mobile: '',
             code: '',
-            inviterPhone: ''
+            referrer: ''
         }),
         checkLoading = ref(false),
         smsLoading = ref(false),
@@ -109,13 +109,13 @@ export const useRegister = ({
             submitLoading.value = true
 
             try {
-                const { phone, code } = values
+                const { account, password, mobile, code, referrer } = values
 
                 // 校验短信验证码
                 await api_fetch({
                     url: API_PATH.CHECK_SMS,
                     params: {
-                        phone,
+                        phone: mobile,
                         code
                     }
                 })
@@ -127,16 +127,16 @@ export const useRegister = ({
 
                 const encrypt = new JSEncrypt()
                 encrypt.setPublicKey(publicKey)
-                const loginPassword = encrypt.encrypt(values.loginPassword)
+                const loginPassword = encrypt.encrypt(password)
 
                 await api_fetch({
                     url: API_PATH.REGISTER,
                     params: {
-                        ...values,
-                        nickName: phone,
+                        username: account,
+                        nickName: mobile,
+                        inviterPhone: referrer,
                         userType: 1,
                         transactionPassword: '',
-                        repeat: undefined,
                         loginPassword,
                         exclusiveDomain: window.location.origin
                     }
