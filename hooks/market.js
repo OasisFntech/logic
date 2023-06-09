@@ -6,7 +6,10 @@ import {
     ECHART_CONFIG,
     MINUTES_RANGE,
     utils_amountFormatter,
-    utils_base64
+    utils_base64,
+    utils_timeParser,
+    utils_renderTooltip,
+    utils_kLineCalculateMA
 } from '../utils'
 import {
     API_PATH,
