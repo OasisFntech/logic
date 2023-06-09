@@ -107,7 +107,7 @@ const morningRange = generateMinuteRange('09:30', '11:29'),
     afternoonRange = generateMinuteRange('13:01', '15:00')
 
 // 分时时间段数据
-export const minuteRange = _.concat(morningRange, '11:30/13:00', afternoonRange)
+export const MINUTES_RANGE = _.concat(morningRange, '11:30/13:00', afternoonRange)
 
 /**
  * @function timeParser

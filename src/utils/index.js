@@ -1,5 +1,7 @@
 import { inflate } from 'pako'
 
+export * from './charts'
+
 /**
  * @function utils_base64
  * @param base64String base64加密字符串
