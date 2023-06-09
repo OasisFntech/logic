@@ -1,4 +1,4 @@
-export fetch from './src/fetch'
-export store from './src/store'
-export utils from './src/utils'
-export hooks from './src/hooks'
+export { default as fetch } from './src/fetch'
+export { default as store } from './src/store'
+export { default as utils } from './src/utils'
+export { default as hooks } from './src/hooks'
