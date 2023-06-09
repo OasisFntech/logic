@@ -230,7 +230,7 @@ export const useMarketHooks = () => {
             xAxis: [
                 {
                     type: 'category',
-                    data: minuteRange,
+                    data: MINUTES_RANGE,
                     boundaryGap: false,
                     axisLine: {
                         lineStyle: {
@@ -260,7 +260,7 @@ export const useMarketHooks = () => {
                 {
                     type: 'category',
                     boundaryGap: false,
-                    data: minuteRange,
+                    data: MINUTES_RANGE,
                     gridIndex: 1,
                     axisLine: {
                         lineStyle: {
@@ -738,7 +738,6 @@ export const useMarketHooks = () => {
         totalMarketCode,
         totalMarket,
         chartType,
-        CHART_TYPES_CONFIG,
         onChangeTotalMarket,
         onChangeKLineType,
         option,
