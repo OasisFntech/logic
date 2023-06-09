@@ -4,7 +4,7 @@ export * from './apis'
 export * from './axios'
 export * from './stocket'
 
-import { axios } from './axios'
+import axios from './axios'
 
 export const FETCH_METHOD = {
     POST: 'post',

@@ -1,10 +1,9 @@
 import { ref, computed, onBeforeUnmount } from 'vue'
 import _ from 'lodash'
 
+import { CHART_TYPE, CHART_TYPES_CONFIG } from '../config'
 import {
-    CHART_TYPE,
     ECHART_CONFIG,
-    CHART_TYPES_CONFIG,
     MINUTES_RANGE,
     utils_amountFormatter,
     utils_base64

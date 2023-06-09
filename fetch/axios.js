@@ -18,8 +18,9 @@ function axiosInterceptors({ request, response }) {
     axios.interceptors.response.use(response, onFetchErr)
 }
 
+export default axios
+
 export {
-    axios,
     axiosInterceptors,
     axiosDefaultConfig,
     onFetchErr
