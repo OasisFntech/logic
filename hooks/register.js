@@ -1,6 +1,7 @@
 import { reactive, ref, computed, onMounted } from 'vue'
 import { useIntervalFn, useLocalStorage } from '@vueuse/core'
 import JSEncrypt from 'jsencrypt'
+import _ from 'lodash'
 
 import { api_fetch, API_PATH } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
@@ -153,7 +154,7 @@ export const useRegister = ({
 
     return {
         formState,
-        REGISTER_FORM_CONFIG: COMMON_FORM_CONFIG,
+        REGISTER_FORM_CONFIG: _.values(COMMON_FORM_CONFIG),
         checkLoading,
         onCheckAccount,
         smsLoading,
