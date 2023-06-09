@@ -17,6 +17,7 @@
     "dependencies": {
         "@vueuse/core": "^10.1.2",
         "axios": "^1.4.0",
+        "dayjs": "^1.11.8",
         "lodash": "^4.17.21",
         "pako": "^2.1.0",
         "pinia": "^2.1.3",

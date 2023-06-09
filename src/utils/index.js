@@ -43,3 +43,23 @@ export const utils_link = (url, target = '_blank') => {
     })
     link.dispatchEvent(event)
 }
+
+/**
+ * @function utils_amountFormatter
+ * @param amount 金额
+ * @return string
+ * @description 将金额处理为带汉字的缩略
+ * */
+export const utils_amountFormatter = amount => {
+    if (isNaN(amount)) return '--'
+
+    if (amount < 1000) return amount.toString()
+
+    if (amount < 10000) return (amount / 1000).toFixed(2) + ' 千'
+
+    if (amount < 100000000) return (amount / 10000).toFixed(2) + ' 万'
+
+    if (amount < 1000000000000) return (amount / 100000000).toFixed(2) + ' 亿'
+
+    return (amount / 1000000000000).toFixed(2) + ' 千亿'
+}
