@@ -35,8 +35,18 @@ export const useRegister = ({
      * @const smsText 发送验证码动态文本
      * */
     const countdown = useLocalStorage('countdown', 0),
-        smsText = computed(() => {
-            return countdown.value ? `${countdown.value}s` : '发送验证码'
+        smsBtn = computed(() => {
+            if (countdown.value) {
+                return {
+                    text: `${countdown.value}s`,
+                    disabled: true
+                }
+            } else {
+                return {
+                    text: `${countdown.value}s`,
+                    disabled: false
+                }
+            }
         })
 
     // 倒计时函数
@@ -158,7 +168,7 @@ export const useRegister = ({
         checkLoading,
         onCheckAccount,
         smsLoading,
-        smsText,
+        smsBtn,
         onSendSms,
         submitLoading,
         onSubmit
