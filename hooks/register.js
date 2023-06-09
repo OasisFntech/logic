@@ -108,14 +108,14 @@ export const useRegister = ({
                 })
 
                 if (isRepeat) {
+                    warnTip?.('当前手机号已注册')
+                } else {
                     await api_fetch({
                         url: API_PATH.SEND_SMS + phone
                     })
                     successTip?.('短信验证码已发送，请注意查收')
 
                     onCountdown()
-                } else {
-                    warnTip?.('当前手机号已注册')
                 }
             } catch (err) {
                 errorTip?.(err.message)
