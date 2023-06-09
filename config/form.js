@@ -29,7 +29,7 @@ export const COMMON_FORM_CONFIG = {
     account: {
         itemProps: {
             label: '账号',
-            name: 'username',
+            name: 'account',
             rules: COMMON_RULES.account
         },
         controllerType: FORM_CONTROLLER_TYPE.INPUT,
@@ -51,7 +51,7 @@ export const COMMON_FORM_CONFIG = {
     mobile: {
         itemProps: {
             label: '手机号',
-            name: 'phone',
+            name: 'mobile',
             rules: COMMON_RULES.mobile
         },
         controllerType: FORM_CONTROLLER_TYPE.NUMBER,
@@ -77,7 +77,7 @@ export const COMMON_FORM_CONFIG = {
     referrer: {
         itemProps: {
             label: '邀请码',
-            name: 'inviterPhone'
+            name: 'referrer'
         },
         controllerType: FORM_CONTROLLER_TYPE.INPUT,
         controllerProps: {}

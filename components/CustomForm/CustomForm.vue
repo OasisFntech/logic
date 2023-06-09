@@ -1,7 +1,6 @@
 <template>
     <Form
         v-bind="formProps"
-        layout="vertical"
         @finish="$emit('finish', $event)"
     >
         <Row :gutter="[ 16 ]">
