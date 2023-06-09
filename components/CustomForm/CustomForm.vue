@@ -1,32 +1,35 @@
 <template>
-    <a-form
+    <Form
         v-bind="formProps"
         layout="vertical"
         @finish="$emit('finish', $event)"
     >
-        <a-row :gutter="[ 16 ]">
+        <Row :gutter="[ 16 ]">
             <template v-for="({ itemProps, controllerType, controllerProps, slots }) in formConfig" :key="itemProps.name">
-                <a-col :span="colSpan">
-                    <a-form-item v-bind="itemProps">
+                <Col :span="colSpan">
+                    <FormItem v-bind="itemProps">
                         <ControllerRender
                             :controllerType="controllerType"
                             :controllerProps="controllerProps"
                             :slots="slots"
                             v-model="modelValue[itemProps.name]"
                         />
-                    </a-form-item>
-                </a-col>
+                    </FormItem>
+                </Col>
             </template>
 
-            <a-col :span="colSpan">
+            <Col :span="colSpan">
                 <slot />
-            </a-col>
-        </a-row>
-    </a-form>
+            </Col>
+        </Row>
+    </Form>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { Form, Row, Col } from 'ant-design-vue'
+
+const { Item: FormItem } = Form
 
 import ControllerRender from './ControllerRender.js'
 
