@@ -43,7 +43,7 @@ export const useRegister = ({
                 }
             } else {
                 return {
-                    text: `${countdown.value}s`,
+                    text: '发送验证码',
                     disabled: false
                 }
             }
@@ -144,6 +144,8 @@ export const useRegister = ({
                     params: {
                         username: account,
                         nickName: mobile,
+                        phone: mobile,
+                        code,
                         inviterPhone: referrer,
                         userType: 1,
                         transactionPassword: '',
