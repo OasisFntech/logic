@@ -3,6 +3,7 @@ import { useIntervalFn, useLocalStorage } from '@vueuse/core'
 import JSEncrypt from 'jsencrypt'
 
 import { api_fetch, API_PATH } from '../fetch'
+import { COMMON_FORM_CONFIG } from '../config'
 
 export const useRegister = ({
     successTip,
@@ -55,39 +56,6 @@ export const useRegister = ({
     // 页面加载时有未完成倒计时，继续倒计时
     onMounted(() => {
         if (countdown.value > 0) resume()
-    })
-
-    // 表单校验规则
-    const rules = ref({
-        username: [
-            { required: true, message: '请输入会员账号' },
-            { pattern: /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,18}$/i, message: '账号格式为4-18位小写字母和数字组合' },
-        ],
-        phone: [
-            { required: true, message: '请输入手机号' },
-            { pattern: /^1[3456789]\d{9}$/, length: 13, message: '请输入正确的手机号格式' }
-        ],
-        code: [
-            { required: true, message: '请输入短信验证码' },
-            { pattern: /^\d{6}$/, message: '请输入正确的短信验证码' }
-        ],
-        loginPassword: [
-            { required: true, message: '请输入登录密码' },
-            { pattern: /^(?=.*[a-z])(?=.*\d)[a-z\d]{6,18}$/i, message: '密码格式为6-18位小写字母和数字组合' },
-        ],
-        repeat: [
-            { required: true, message: '请确认登录密码' },
-            { pattern: /^(?=.*[a-z])(?=.*\d)[a-z\d]{6,18}$/i, message: '密码格式为6-18位小写字母和数字组合' },
-            {
-                validator: (_, value) => {
-                    if (value !== formState.loginPassword) {
-                        return Promise.reject(new Error('两次密码不一致，请重新输入'))
-                    }
-                    return Promise.resolve()
-                }
-            }
-        ],
-        inviterPhone: []
     })
 
     // 检查账号是否重复
@@ -185,7 +153,7 @@ export const useRegister = ({
 
     return {
         formState,
-        rules,
+        REGISTER_FORM_CONFIG: COMMON_FORM_CONFIG,
         checkLoading,
         onCheckAccount,
         smsLoading,
