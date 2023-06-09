@@ -39,10 +39,7 @@ export const useMarketHooks = () => {
     // 大盘指数数据
     const { response: totalMarket } = useRequest({
         url: `${API_PATH.DO}?event=${KLINE_URL.TOTAL_MARKETS}`,
-        params: {
-            ...doParams([]),
-            url: KLINE_URL.TOTAL_MARKETS
-        },
+        params: doParams([], { url: KLINE_URL.TOTAL_MARKETS }),
         initialValues: {
             fellNum: 0,
             flatNum: 0,
@@ -133,10 +130,7 @@ export const useMarketHooks = () => {
     const onGetDoAction = async (url) => {
         const res = await api_fetch({
             url: `${API_PATH.DO}?event=${url}`,
-            params: {
-                ...doParams([ totalMarketCode.value ]),
-                url
-            }
+            params: doParams([ totalMarketCode.value ], { url })
         })
 
         const resParse = utils_base64(res)

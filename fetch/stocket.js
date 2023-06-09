@@ -39,11 +39,12 @@ export const KLINE_URL = {
 }
 
 // do 接口参数整合
-export const doParams = (params) => ({
+export const doParams = (params, payload) => ({
     event: SOCKET_EVENTS.SUBSCRIBE,
     isCompress: true,
     params,
-    uuid: v4()
+    uuid: v4(),
+    ...payload
 })
 
 /**
