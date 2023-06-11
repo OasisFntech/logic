@@ -11,7 +11,7 @@ export const usePublicKeyStore = defineStore('publicKey', () => {
         url: API_PATH.PUBLIC_KEY,
         manual: !publicKey.value,
         onSuccess: res => {
-            console.log(res)
+            console.log('success callback', res)
             publicKey.value = res
             console.log(publicKey.value, '1')
         }

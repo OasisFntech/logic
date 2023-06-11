@@ -66,9 +66,11 @@ export function useRequest({
                     params: actualParams,
                     method
                 })
+                console.log('request success', res)
 
                 response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
+                console.log('request success -----', res)
             } catch (e) {
                 console.log('err', e)
                 onErr?.(e)
