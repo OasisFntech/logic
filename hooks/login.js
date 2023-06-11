@@ -15,15 +15,15 @@ export const useAccountLogin = () => {
 
     const loading = ref(false)
 
-    const onAccountLogin = async({ username, password }) => {
+    const onAccountLogin = async({ account, password }) => {
         if (!loading.value) {
             loading.value = true
             try {
                 await api_fetch({
                     url: API_PATH.ACCOUNT_LOGIN,
                     params: {
-                        username,
-                        password: utils_passwordEncode(password, publicKey)
+                        username: account,
+                        password: utils_passwordEncode(password, publicKey.value)
                     }
                 })
             } finally {
@@ -38,6 +38,7 @@ export const useAccountLogin = () => {
             COMMON_FORM_CONFIG.account,
             COMMON_FORM_CONFIG.password
         ],
+        loading,
         onAccountLogin
     }
 }

@@ -141,7 +141,7 @@ export const useRegister = ({
                         inviterPhone: referrer,
                         userType: 1,
                         transactionPassword: '',
-                        loginPassword: utils_passwordEncode(password, publicKey),
+                        loginPassword: utils_passwordEncode(password, publicKey.value),
                         exclusiveDomain: window.location.origin
                     }
                 })

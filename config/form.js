@@ -43,7 +43,7 @@ export const COMMON_FORM_CONFIG = {
             name: 'password',
             rules: COMMON_RULES.password
         },
-        controllerType: FORM_CONTROLLER_TYPE.INPUT,
+        controllerType: FORM_CONTROLLER_TYPE.PASSWORD,
         controllerProps: {
             maxlength: 18
         }
