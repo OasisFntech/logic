@@ -1,12 +1,18 @@
 import { ref, reactive } from 'vue'
+import { storeToRefs } from 'pinia'
 
 import { COMMON_FORM_CONFIG } from '../config'
 import { api_fetch, API_PATH } from '../fetch'
 import { utils_passwordEncode } from '../utils'
 import { usePublicKeyStore } from '../store'
 
-export const useAccountLogin = () => {
-    const { publicKey } = usePublicKeyStore()
+export const useAccountLogin = ({
+    successTip,
+    warnTip,
+    errorTip,
+    submitCallback
+}) => {
+    const { publicKey } = storeToRefs(usePublicKeyStore())
 
     const formState = reactive({
         account: '',

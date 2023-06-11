@@ -69,7 +69,6 @@ export const utils_amountFormatter = amount => {
 
 // 密码加密
 export const utils_passwordEncode = (password, publicKey) => {
-    console.log(publicKey)
     const encrypt = new JSEncrypt()
     encrypt.setPublicKey(publicKey)
     return encrypt.encrypt(password)

@@ -1,4 +1,5 @@
 import { reactive, ref, computed, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import _ from 'lodash'
 
 import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
@@ -13,7 +14,7 @@ export const useRegister = ({
     errorTip,
     submitCallback
 }) => {
-    const { publicKey } = usePublicKeyStore()
+    const { publicKey } = storeToRefs(usePublicKeyStore())
 
     /**
      * @const formState form表单数据
