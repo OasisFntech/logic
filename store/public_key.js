@@ -6,7 +6,8 @@ import { useRequest, API_PATH } from '../fetch'
 export const usePublicKeyStore = defineStore('publicKey', () => {
     const publicKey = ref('')
 
-    useRequest({
+    console.log('publicKeyStore')
+    const { response } = useRequest({
         url: API_PATH.PUBLIC_KEY,
         manual: !publicKey.value,
         onSuccess: res => {
@@ -15,6 +16,7 @@ export const usePublicKeyStore = defineStore('publicKey', () => {
             console.log(publicKey.value, '1')
         }
     })
+    console.log('publicKeyStore response', response)
 
     return {
         publicKey
