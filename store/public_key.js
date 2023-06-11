@@ -8,7 +8,7 @@ export const usePublicKeyStore = defineStore('publicKey', () => {
 
     useRequest({
         url: API_PATH.PUBLIC_KEY,
-        manual: publicKey.value,
+        manual: !publicKey.value,
         onSuccess: res => {
             publicKey.value = res
         }
