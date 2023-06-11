@@ -1,3 +1,4 @@
+import JSEncrypt from 'jsencrypt'
 import { inflate } from 'pako'
 
 export * from './charts'
@@ -64,4 +65,11 @@ export const utils_amountFormatter = amount => {
     if (amount < 1000000000000) return (amount / 100000000).toFixed(2) + ' 亿'
 
     return (amount / 1000000000000).toFixed(2) + ' 千亿'
+}
+
+// 密码加密
+export const utils_passwordEncode = (password, publicKey) => {
+    const encrypt = new JSEncrypt()
+    encrypt.setPublicKey(publicKey)
+    return encrypt.encrypt(password)
 }

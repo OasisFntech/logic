@@ -1,10 +1,11 @@
 import { reactive, ref, computed, onMounted } from 'vue'
-import { useIntervalFn, useLocalStorage } from '@vueuse/core'
-import JSEncrypt from 'jsencrypt'
 import _ from 'lodash'
 
 import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
+import { useCountdown } from './countdown'
+import { usePublicKeyStore } from '../store'
+import { utils_passwordEncode } from '../utils'
 
 export const useRegister = ({
     successTip,
@@ -12,6 +13,8 @@ export const useRegister = ({
     errorTip,
     submitCallback
 }) => {
+    const { publicKey } = usePublicKeyStore()
+
     /**
      * @const formState form表单数据
      * @const checkLoading 检查账号 loading
@@ -30,11 +33,7 @@ export const useRegister = ({
         smsLoading = ref(false),
         submitLoading = ref(false)
 
-    /**
-     * @const countdown 倒计时
-     * @const smsText 发送验证码动态文本
-     * */
-    const countdown = useLocalStorage('countdown', 0),
+    const { resume, countdown, onCountdown } = useCountdown('register-sms'),
         smsBtn = computed(() => {
             if (countdown.value) {
                 return {
@@ -49,20 +48,10 @@ export const useRegister = ({
             }
         })
 
-    // 倒计时函数
-    const { pause, resume } = useIntervalFn(() => {
-        if (countdown.value > 0) {
-            countdown.value --
-        } else {
-            pause()
-        }
-    }, 1000)
-
-    // 开始倒计时
-    const onCountdown = () => {
-        countdown.value = 60
-        resume()
-    }
+    // 页面加载时有未完成倒计时，继续倒计时
+    onMounted(() => {
+        if (countdown.value > 0) resume()
+    })
 
     // 页面加载时有未完成倒计时，继续倒计时
     onMounted(() => {
@@ -142,15 +131,6 @@ export const useRegister = ({
                     }
                 })
 
-                // 获取加密 publicKey
-                const publicKey = await api_fetch({
-                    url: API_PATH.PUBLIC_KEY
-                })
-
-                const encrypt = new JSEncrypt()
-                encrypt.setPublicKey(publicKey)
-                const loginPassword = encrypt.encrypt(password)
-
                 await api_fetch({
                     url: API_PATH.REGISTER,
                     params: {
@@ -161,7 +141,7 @@ export const useRegister = ({
                         inviterPhone: referrer,
                         userType: 1,
                         transactionPassword: '',
-                        loginPassword,
+                        loginPassword: utils_passwordEncode(password, publicKey),
                         exclusiveDomain: window.location.origin
                     }
                 })

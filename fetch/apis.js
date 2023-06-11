@@ -17,5 +17,8 @@ export const API_PATH = {
     // 加密Key
     PUBLIC_KEY: '/auth/system/getPublicKey',
     // 注册
-    REGISTER: '/auth/member/register'
+    REGISTER: '/auth/member/register',
+
+    // 账号密码登录
+    ACCOUNT_LOGIN: '/auth/member/login',
 }
