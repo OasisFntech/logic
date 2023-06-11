@@ -60,6 +60,7 @@ export function useRequest({
 
             const actualParams = runParams ?? requestParams.value
             try {
+                console.log('useRequest')
                 const res = await api_fetch({
                     url,
                     params: actualParams,
@@ -69,6 +70,7 @@ export function useRequest({
                 response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
+                console.log('err', e)
                 onErr?.(e)
             } finally {
                 loading.value = false
