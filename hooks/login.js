@@ -24,6 +24,7 @@ export const useAccountLogin = ({
     const onAccountLogin = async({ account, password }) => {
         if (!loading.value) {
             loading.value = true
+            console.log(publicKey.value, 2)
             try {
                 await api_fetch({
                     url: API_PATH.ACCOUNT_LOGIN,
