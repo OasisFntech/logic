@@ -69,7 +69,6 @@ export function useRequest({
                 response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
-                console.log('err', e)
                 onErr?.(e)
             } finally {
                 loading.value = false
