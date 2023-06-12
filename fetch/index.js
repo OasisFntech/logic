@@ -1,4 +1,5 @@
-import { computed, isRef, ref } from 'vue'
+import { computed, isRef, reactive, ref } from 'vue'
+import { set } from '@vueuse/core'
 
 export * from './apis'
 export * from './axios'
@@ -83,5 +84,64 @@ export function useRequest({
         response,
         run,
         onRefresh: () => run(requestParams.value),
+    }
+}
+
+export function usePagination(fetchOptions, paginationOptions) {
+    const pagination = ref({
+        current: 1,
+        pageSize: 20,
+        total: 0,
+        ...paginationOptions,
+        finished: false,
+    })
+
+    const list = ref([])
+
+    const requestParams = computed(() => {
+        const baseFetchParams = isRef(fetchOptions.params) ? fetchOptions.params.value : fetchOptions.params
+
+        return {
+            ...pagination.value,
+            ...baseFetchParams
+        }
+    })
+
+    const { loading, response, run } = useRequest({
+        ...fetchOptions,
+        params: requestParams,
+        onSuccess: res => {
+            const { list, pageNum, pageSize, total } = res
+
+            list.value = list
+
+            set(pagination, {
+                ...pagination.value,
+                current: pageNum,
+                pageSize: pageSize,
+                total: total,
+                finished: pageNum >= total / pageSize
+            })
+        }
+    })
+
+    const onRefresh = async() => {
+        pagination.value.current = 1
+        await run(requestParams.value)
+    }
+
+    const onLoadMore = async() => {
+        pagination.value.current += 1
+        await run(requestParams.value)
+    }
+
+    return {
+        loading,
+        list,
+        response,
+        pagination,
+        run,
+        onRefresh,
+        onLoadMore
     }
 }
