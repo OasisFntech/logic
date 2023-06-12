@@ -99,11 +99,13 @@ export function usePagination(fetchOptions, paginationOptions) {
     const list = ref([])
 
     const requestParams = computed(() => {
-        const baseFetchParams = isRef(fetchOptions.params) ? fetchOptions.params.value : fetchOptions.params
+        const baseFetchParams = isRef(fetchOptions.params) ? fetchOptions.params.value : fetchOptions.params,
+            { current, pageSize } = pagination.value
 
         return {
-            ...pagination.value,
-            ...baseFetchParams
+            ...baseFetchParams.value,
+            pageNum: current,
+            pageSize
         }
     })
 
