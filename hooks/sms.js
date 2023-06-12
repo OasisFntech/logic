@@ -9,11 +9,11 @@ export const useSms = (name, { successTip, warnTip, errorTip }) => {
     const loading = ref(false)
 
     const smsBtn = computed(() => {
-        const counting = countdown.value > 0
+        const isCounting = countdown.value === 0
 
         return {
-            text: counting ? `${countdown.value}s` : '发送验证码',
-            disabled: counting,
+            text: isCounting ? '发送验证码' : `${countdown.value}s`,
+            disabled: !isCounting,
             loading: loading.value
         }
     })

@@ -54,7 +54,7 @@ export const COMMON_FORM_CONFIG = {
             name: 'mobile',
             rules: COMMON_RULES.mobile
         },
-        controllerType: FORM_CONTROLLER_TYPE.NUMBER,
+        controllerType: FORM_CONTROLLER_TYPE.INPUT,
         controllerProps: {
             type: 'tel',
             maxlength: 11,
@@ -67,7 +67,7 @@ export const COMMON_FORM_CONFIG = {
             name: 'code',
             rules: COMMON_RULES.code
         },
-        controllerType: FORM_CONTROLLER_TYPE.NUMBER,
+        controllerType: FORM_CONTROLLER_TYPE.INPUT,
         controllerProps: {
             type: 'tel',
             maxlength: 6,
