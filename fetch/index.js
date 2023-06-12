@@ -1,4 +1,4 @@
-import { computed, isRef, reactive, ref } from 'vue'
+import { computed, isRef, ref } from 'vue'
 import { set } from '@vueuse/core'
 
 export * from './apis'
@@ -92,11 +92,11 @@ export function usePagination(fetchOptions, paginationOptions) {
         current: 1,
         pageSize: 20,
         total: 0,
-        ...paginationOptions,
-        finished: false,
+        ...paginationOptions
     })
 
-    const list = ref([])
+    const list = ref([]),
+        finished = ref(false)
 
     const requestParams = computed(() => {
         const baseFetchParams = isRef(fetchOptions.params) ? fetchOptions.params.value : fetchOptions.params,
@@ -109,27 +109,29 @@ export function usePagination(fetchOptions, paginationOptions) {
         }
     })
 
-    let formatResult = undefined
-    if (fetchOptions.formatResult) {
-        formatResult = res => fetchOptions.formatResult(res.list)
-    }
-
     const { loading, response, run } = useRequest({
         ...fetchOptions,
         params: requestParams,
-        formatResult,
         onSuccess: res => {
             const { list: dataSource, pageNum, pageSize, total } = res
 
-            list.value = dataSource
+            if (pageNum === 1) {
+                list.value = dataSource
+            } else {
+                list.value = [
+                    ...list.value,
+                    ...dataSource
+                ]
+            }
 
             set(pagination, {
                 ...pagination.value,
                 current: pageNum,
                 pageSize: pageSize,
-                total: total,
-                finished: pageNum >= total / pageSize
+                total: total
             })
+
+            finished.value = pageNum >= total / pageSize
         }
     })
 
@@ -139,7 +141,7 @@ export function usePagination(fetchOptions, paginationOptions) {
     }
 
     const onLoadMore = async() => {
-        if (!pagination.value.finished){
+        if (!finished.value){
             pagination.value.current += 1
             await run(requestParams.value)
         }
@@ -150,6 +152,7 @@ export function usePagination(fetchOptions, paginationOptions) {
         list,
         response,
         pagination,
+        finished,
         run,
         onRefresh,
         onLoadMore
