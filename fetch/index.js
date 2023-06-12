@@ -109,9 +109,15 @@ export function usePagination(fetchOptions, paginationOptions) {
         }
     })
 
+    let formatResult = undefined
+    if (fetchOptions.formatResult) {
+        formatResult = res => fetchOptions.formatResult(res.list)
+    }
+
     const { loading, response, run } = useRequest({
         ...fetchOptions,
         params: requestParams,
+        formatResult,
         onSuccess: res => {
             const { list: dataSource, pageNum, pageSize, total } = res
 
