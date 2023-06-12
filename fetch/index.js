@@ -103,7 +103,7 @@ export function usePagination(fetchOptions, paginationOptions) {
             { current, pageSize } = pagination.value
 
         return {
-            ...baseFetchParams.value,
+            ...baseFetchParams,
             pageNum: current,
             pageSize
         }
