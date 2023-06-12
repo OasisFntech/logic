@@ -1,7 +1,7 @@
-import { onBeforeUnmount } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
 import { useIntervalFn, useLocalStorage } from '@vueuse/core'
 
-export const useCountdown = (name) => {
+export const useCountdown = (name = 'noname') => {
     const key = `${name}-countdown`,
         countdown = useLocalStorage(key, 0)
 
@@ -21,8 +21,9 @@ export const useCountdown = (name) => {
         resume()
     }
 
-    onBeforeUnmount(() => {
-        pause()
+    // 页面加载时有未完成倒计时，继续倒计时
+    onMounted(() => {
+        if (countdown.value > 0) resume()
     })
 
     return {

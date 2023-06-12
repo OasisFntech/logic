@@ -14,11 +14,13 @@ export const API_PATH = {
     SEND_SMS: '/member/sms/operlog/86/',
     // 检查短信验证码
     CHECK_SMS: '/member/member/codeCheck',
-    // 加密Key
+    // 密码加密公钥
     PUBLIC_KEY: '/auth/system/getPublicKey',
     // 注册
     REGISTER: '/auth/member/register',
 
     // 账号密码登录
     ACCOUNT_LOGIN: '/auth/member/login',
+    // 手机号登录
+    MOBILE_LOGIN: 'auth/member/verificationLogin'
 }

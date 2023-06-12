@@ -1,10 +1,10 @@
-import { reactive, ref, computed, onMounted } from 'vue'
+import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import _ from 'lodash'
 
-import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
+import { api_fetch, API_PATH } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
-import { useCountdown } from './countdown'
+import { useSms } from './sms'
 import { usePublicKeyStore } from '../store'
 import { utils_passwordEncode } from '../utils'
 
@@ -34,30 +34,14 @@ export const useRegister = ({
         smsLoading = ref(false),
         submitLoading = ref(false)
 
-    const { resume, countdown, onCountdown } = useCountdown('register-sms'),
-        smsBtn = computed(() => {
-            if (countdown.value) {
-                return {
-                    text: `${countdown.value}s`,
-                    disabled: true
-                }
-            } else {
-                return {
-                    text: '发送验证码',
-                    disabled: false
-                }
-            }
+    const { smsBtn, onSendSms } = useSms(
+        'register-sms',
+        {
+            successTip,
+            warnTip,
+            errorTip
         })
 
-    // 页面加载时有未完成倒计时，继续倒计时
-    onMounted(() => {
-        if (countdown.value > 0) resume()
-    })
-
-    // 页面加载时有未完成倒计时，继续倒计时
-    onMounted(() => {
-        if (countdown.value > 0) resume()
-    })
 
     // 检查账号是否重复
     const onCheckAccount = async (username) => {
@@ -80,37 +64,6 @@ export const useRegister = ({
                 errorTip?.(err.message)
             } finally {
                 checkLoading.value = false
-            }
-        }
-    }
-
-    // 发送短信验证码
-    const onSendSms = async (phone) => {
-        if (!smsLoading.value) {
-            smsLoading.value = true
-            try {
-                const isRepeat = await api_fetch({
-                    url: API_PATH.CHECK_MOBILE_REGISTER,
-                    method: FETCH_METHOD.GET,
-                    params: {
-                        phone
-                    }
-                })
-
-                if (isRepeat) {
-                    warnTip?.('当前手机号已注册')
-                } else {
-                    await api_fetch({
-                        url: API_PATH.SEND_SMS + phone
-                    })
-                    successTip?.('短信验证码已发送，请注意查收')
-
-                    onCountdown()
-                }
-            } catch (err) {
-                errorTip?.(err.message)
-            } finally {
-                smsLoading.value = false
             }
         }
     }
