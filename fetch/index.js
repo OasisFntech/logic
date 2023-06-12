@@ -113,9 +113,9 @@ export function usePagination(fetchOptions, paginationOptions) {
         ...fetchOptions,
         params: requestParams,
         onSuccess: res => {
-            const { list, pageNum, pageSize, total } = res
+            const { list: dataSource, pageNum, pageSize, total } = res
 
-            list.value = list
+            list.value = dataSource
 
             set(pagination, {
                 ...pagination.value,
@@ -133,8 +133,10 @@ export function usePagination(fetchOptions, paginationOptions) {
     }
 
     const onLoadMore = async() => {
-        pagination.value.current += 1
-        await run(requestParams.value)
+        if (!pagination.value.finished){
+            pagination.value.current += 1
+            await run(requestParams.value)
+        }
     }
 
     return {
