@@ -704,12 +704,10 @@ export const useMarketHooks = () => {
     // 修改涨跌幅类型
     const onChangeRaiseFallType = async (type) => {
         if (!raiseFallLoading.value) {
-            try {
-                raiseFallType.value = type
-                await raiseFallRun(doParams(raiseFallParams.value))
-            } finally {
-                raiseFallLoading.value = false
-            }
+            raiseFallData.value = []
+
+            raiseFallType.value = type
+            await raiseFallRun(doParams(raiseFallParams.value))
         }
     }
 
