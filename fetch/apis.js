@@ -22,5 +22,5 @@ export const API_PATH = {
     // 账号密码登录
     ACCOUNT_LOGIN: '/auth/member/login',
     // 手机号登录
-    MOBILE_LOGIN: 'auth/member/verificationLogin'
+    MOBILE_LOGIN: '/auth/member/verificationLogin'
 }
