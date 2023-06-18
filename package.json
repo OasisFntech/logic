@@ -6,14 +6,11 @@
     "scripts": {},
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Cyan-963852/boao_utils.git"
+        "url": "git+http://gitlab.guchacha89.cn/cyan/frontend_logic.git"
     },
     "author": "Cyan",
     "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/Cyan-963852/boao_utils/issues"
-    },
-    "homepage": "https://github.com/Cyan-963852/boao_utils#readme",
+    "homepage": "http://gitlab.guchacha89.cn/cyan/frontend_logic",
     "dependencies": {
         "@vueuse/core": "^10.1.2",
         "ant-design-vue": "4.0.0-rc.5",
