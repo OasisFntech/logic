@@ -1,12 +1,17 @@
 export const API_PATH = {
+    /** 系统类 */
     // 弹窗公告
     POPUP: '/information/platformPopups',
+    /** 系统类 */
 
+    /** 股票行情 */
     // 行情操作；需要拼接event传递
     DO: '/market/v2/data/doAction',
     // K 线图
     K_LINE: '/market/getKLineData',
+    /** 股票行情 */
 
+    /** 登录注册 */
     // 检查注册账号、手机号是否注册过
     CHECK_ACCOUNT_REGISTER: '/auth/member/checkAccountRegister',
     CHECK_MOBILE_REGISTER: '/auth/member/checkPhoneRegister',
@@ -18,9 +23,18 @@ export const API_PATH = {
     PUBLIC_KEY: '/auth/system/getPublicKey',
     // 注册
     REGISTER: '/auth/member/register',
-
     // 账号密码登录
     ACCOUNT_LOGIN: '/auth/member/login',
     // 手机号登录
-    MOBILE_LOGIN: '/auth/member/verificationLogin'
+    MOBILE_LOGIN: '/auth/member/verificationLogin',
+    /** 登录注册 */
+
+    /** 新闻类 */
+    // A股新闻
+    NEWS_STOCK: '/market/getNewsStockList',
+    // 要闻
+    NEWS: '/information/yaowen',
+    // 快讯
+    NEWS_FLASH: '/information/preview/save'
+    /** 新闻类 */
 }
