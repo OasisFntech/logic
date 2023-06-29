@@ -73,3 +73,21 @@ export const utils_passwordEncode = (password, publicKey) => {
     encrypt.setPublicKey(publicKey)
     return encrypt.encrypt(password)
 }
+
+export const utils_decisionDevice = () => {
+    const isPhone = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+
+    const pathname = window.location.pathname
+
+    if (isPhone) {
+        if (!pathname.startsWith('/m/')) {
+            let url = '/m'
+            window.location.replace(url)
+        }
+    } else {
+        if (!pathname.startsWith('/pc/')) {
+            let url = '/pc'
+            window.location.replace(url)
+        }
+    }
+}
