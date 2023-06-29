@@ -12,7 +12,8 @@ export const useRegister = ({
     successTip,
     warnTip,
     errorTip,
-    submitCallback
+    submitCallback,
+    initialValues
 }) => {
     const { publicKey } = storeToRefs(usePublicKeyStore())
 
@@ -28,7 +29,8 @@ export const useRegister = ({
             repeat: '',
             mobile: '',
             code: '',
-            referrer: ''
+            referrer: '',
+            ...initialValues
         }),
         checkLoading = ref(false),
         smsLoading = ref(false),
