@@ -74,13 +74,9 @@ export const utils_passwordEncode = (password, publicKey) => {
     return encrypt.encrypt(password)
 }
 
-export const utils_inviteCode = (url) => {
-    const { href, origin, pathname, search } = window.location,
-        params = new URLSearchParams(
-            href.includes('/#/')
-                ? href.replace(`${origin}${pathname}#/`, '')
-                : search
-        ) ,
+export const utils_inviteCode = () => {
+    const { href } = window.location,
+        params = new URLSearchParams(href.split('?')[1]),
         inviteCode = params.get('inviteCode')
 
     if (inviteCode) sessionStorage.setItem('inviteCode', inviteCode)
