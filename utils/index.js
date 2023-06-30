@@ -94,7 +94,11 @@ export const utils_decisionDevice = () => {
 
 export const utils_inviteCode = () => {
     const { href, origin, pathname, search } = window.location,
-        params = href.includes('/#/') ? new URLSearchParams(href.replace(`${origin}${pathname}#/`, '')) : search,
+        params = new URLSearchParams(
+            href.includes('/#/')
+                ? href.replace(`${origin}${pathname}#/`, '')
+                : search
+        ) ,
         inviteCode = params.get('inviteCode')
 
     if (inviteCode) sessionStorage.setItem('inviteCode', inviteCode)
