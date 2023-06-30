@@ -74,25 +74,7 @@ export const utils_passwordEncode = (password, publicKey) => {
     return encrypt.encrypt(password)
 }
 
-export const utils_decisionDevice = () => {
-    const isPhone = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-
-    const pathname = window.location.pathname
-
-    if (isPhone) {
-        if (!pathname.startsWith('/m/')) {
-            let url = '/m'
-            window.location.replace(url)
-        }
-    } else {
-        if (!pathname.startsWith('/pc/')) {
-            let url = '/pc'
-            window.location.replace(url)
-        }
-    }
-}
-
-export const utils_inviteCode = () => {
+export const utils_inviteCode = (url) => {
     const { href, origin, pathname, search } = window.location,
         params = new URLSearchParams(
             href.includes('/#/')
@@ -106,7 +88,7 @@ export const utils_inviteCode = () => {
     return inviteCode
 }
 
-export const utils_guideRedirect = (url) => {
+export const utils_guideRedirect = (url, target) => {
     const params = new URLSearchParams(),
         inviteCode = utils_inviteCode()
 
@@ -115,5 +97,20 @@ export const utils_guideRedirect = (url) => {
         url += `?${params.toString()}`
     }
 
-    utils_link(url)
+    utils_link(url, target)
+}
+
+export const utils_decisionDevice = () => {
+    const isPhone = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i),
+        pathname = window.location.pathname
+
+    if (isPhone) {
+        if (!pathname.startsWith('/m/')) {
+            utils_guideRedirect('/m/', '_self')
+        }
+    } else {
+        if (!pathname.startsWith('/pc/')) {
+            utils_guideRedirect('/pc/', '_self')
+        }
+    }
 }
