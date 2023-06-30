@@ -91,3 +91,13 @@ export const utils_decisionDevice = () => {
         }
     }
 }
+
+export const utils_inviteCode = () => {
+    const { href, origin, pathname } = window.location,
+        params = new URLSearchParams(href.replace(`${origin}${pathname}#/`, '')),
+        inviteCode = params.get('inviteCode')
+
+    if (inviteCode) sessionStorage.setItem('inviteCode', inviteCode)
+
+    return inviteCode
+}
