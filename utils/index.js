@@ -105,3 +105,15 @@ export const utils_inviteCode = () => {
 
     return inviteCode
 }
+
+export const utils_guideRedirect = (url) => {
+    const params = new URLSearchParams(),
+        inviteCode = utils_inviteCode()
+
+    if (inviteCode) {
+        params.set('inviteCode', inviteCode)
+        url += `?${params.toString()}`
+    }
+
+    utils_link(url)
+}

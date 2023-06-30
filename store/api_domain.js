@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import _ from 'lodash'
 
 import { api_fetch } from '../fetch'
-import { utils_link } from '../utils'
+import { utils_guideRedirect } from '../utils'
 
 //  检查域名地址，会额外返回delay延迟时间
 const onCheckDomain = async ({ url, params, fetchTime, config }) => {
@@ -97,7 +97,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
     const onChooseBest = () => {
         // 获取域名列表中延迟最小的
         const bestDomain = _.minBy(showSites.value, 'delay')
-        if (bestDomain) utils_link(bestDomain.domainName)
+        if (bestDomain) utils_guideRedirect(bestDomain.domainName)
     }
 
     return {
