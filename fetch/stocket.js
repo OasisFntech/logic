@@ -12,7 +12,7 @@ export const SOCKET_EVENTS = {
 
 export let socket = null
 
-export const createSocket = (socketUri) => {
+export const createSocket = (socketUri = '/socket') => {
     socket = SocketIO(
         `${socketUri}?deviceID=${deviceID}`,
         {

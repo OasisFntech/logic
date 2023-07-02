@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+axios.defaults.baseURL = '/api'
+
 function axiosDefaultConfig(config) {
     Object.entries(config).forEach(e => {
         const [ key, val ] = e

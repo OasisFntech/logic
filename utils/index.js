@@ -101,12 +101,12 @@ export const utils_decisionDevice = () => {
         pathname = window.location.pathname
 
     if (isPhone) {
-        if (!pathname.startsWith('/m/')) {
-            utils_guideRedirect('/m/#/home', '_self')
+        if (pathname.includes('/m/')) {
+            utils_guideRedirect('/pc/', '_self')
         }
     } else {
-        if (!pathname.startsWith('/pc/')) {
-            utils_guideRedirect('/pc/', '_self')
+        if (pathname.includes('/pc/')) {
+            utils_guideRedirect('/m/#/home', '_self')
         }
     }
 }
