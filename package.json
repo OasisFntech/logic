@@ -6,11 +6,11 @@
     "scripts": {},
     "repository": {
         "type": "git",
-        "url": "git+http://gitlab.guchacha89.cn/cyan/frontend_logic.git"
+        "url": "git+https://github.com/OasisFntech/logic.git"
     },
     "author": "Cyan",
     "license": "ISC",
-    "homepage": "http://gitlab.guchacha89.cn/cyan/frontend_logic",
+    "homepage": "https://github.com/OasisFntech/logic.git",
     "dependencies": {
         "@vueuse/core": "^10.1.2",
         "ant-design-vue": "4.0.0-rc.5",
