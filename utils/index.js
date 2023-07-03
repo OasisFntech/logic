@@ -76,12 +76,9 @@ export const utils_passwordEncode = (password, publicKey) => {
 
 export const utils_inviteCode = () => {
     const { href } = window.location,
-        params = new URLSearchParams(href.split('?')[1]),
-        inviteCode = params.get('inviteCode')
+        params = new URLSearchParams(href.split('?')[1])
 
-    if (inviteCode) sessionStorage.setItem('inviteCode', inviteCode)
-
-    return inviteCode
+    return params.get('inviteCode')
 }
 
 export const utils_guideRedirect = (url, target) => {
@@ -101,12 +98,12 @@ export const utils_decisionDevice = () => {
         pathname = window.location.pathname
 
     if (isPhone) {
-        if (pathname.includes('/m/')) {
-            utils_guideRedirect('/pc/', '_self')
+        if (!pathname.includes('/m/')) {
+            utils_guideRedirect('/m/', '_self')
         }
     } else {
-        if (pathname.includes('/pc/')) {
-            utils_guideRedirect('/m/#/home', '_self')
+        if (!pathname.includes('/pc/')) {
+            utils_guideRedirect('/pc/', '_self')
         }
     }
 }

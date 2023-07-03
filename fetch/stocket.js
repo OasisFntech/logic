@@ -17,7 +17,7 @@ export const createSocket = (socketUri = '/socket') => {
         `${socketUri}?deviceID=${deviceID}`,
         {
             transports: [ 'websocket' ],
-            deviceID: deviceID,
+            deviceID,
         }
     )
 
