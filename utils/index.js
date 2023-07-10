@@ -107,3 +107,12 @@ export const utils_decisionDevice = () => {
         }
     }
 }
+
+export const utils_favicon = (href) => {
+    const faviconLink = document.createElement('link')
+    faviconLink.rel = 'icon'
+    faviconLink.href = href
+    faviconLink.type = 'image/x-icon'
+
+    document.head.appendChild(faviconLink)
+}

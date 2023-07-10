@@ -9,6 +9,14 @@ export const API_PATH = {
     API_CHECK: '/check/systemConfigCheck/getCheck',
     // 用于访问的前端域名站
     WEB_DOMAIN: '/check/domains/getWebDmian',
+
+    // 站点配置项
+    PC_CONFIG: '/member/systemConfig/getPCSiteConfig',
+    SITE_CONFIG: '/member/systemConfig/getSiteConfig',
+    // 基础信息 ps:重复接口数据可优化
+    BASE_INFO: '/member/systemConfig/getSystemConfigValue',
+    // 获取客服信息
+    SERVICE: '/member/systemConfig/getCustomerServiceLink',
     /** 系统类 */
 
     /** 股票行情 */
