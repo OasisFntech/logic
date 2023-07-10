@@ -2,6 +2,13 @@ export const API_PATH = {
     /** 系统类 */
     // 弹窗公告
     POPUP: '/information/platformPopups',
+
+    // api 域名列表
+    API_DOMAIN: '/check/domains/getApiDmian',
+    // api域名检查
+    API_CHECK: '/check/systemConfigCheck/getCheck',
+    // 用于访问的前端域名站
+    WEB_DOMAIN: '/check/domains/getWebDmian',
     /** 系统类 */
 
     /** 股票行情 */

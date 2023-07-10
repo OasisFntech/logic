@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import _ from 'lodash'
 
-import { api_fetch } from '../fetch'
+import { api_fetch, API_PATH } from '../fetch'
 import { utils_guideRedirect } from '../utils'
 
 //  检查域名地址，会额外返回delay延迟时间
@@ -41,7 +41,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
         try {
             //  获取可用的api地址
             const all_apis = await api_fetch({
-                url: '/api/check/domains/getApiDmian',
+                url: API_PATH.API_DOMAIN,
                 method: 'get'
             })
 
@@ -50,7 +50,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
                 all_apis.forEach(e => {
                     const fetchTime = +new Date()
                     onCheckDomain({
-                        url: '/api/check/systemConfigCheck/getCheck',
+                        url: API_PATH.API_CHECK,
                         params: { domainName: e.domain, time: fetchTime },
                         fetchTime
                     }).then(res => {
@@ -61,7 +61,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
 
             // 获取所有域名线路
             const all_webs = await api_fetch({
-                url: '/api/check/domains/getWebDmian',
+                url: API_PATH.WEB_DOMAIN,
                 method: 'get'
             })
 
