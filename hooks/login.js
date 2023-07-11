@@ -25,8 +25,7 @@ export const useAccountLogin = () => {
                     url: API_PATH.ACCOUNT_LOGIN,
                     params: {
                         username: account,
-                        password: utils_passwordEncode(password, publicKey.value),
-                        exclusiveDomain: ''
+                        password: utils_passwordEncode(password, publicKey.value)
                     }
                 })
             } finally {
@@ -73,8 +72,7 @@ export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
                     url: API_PATH.MOBILE_LOGIN,
                     params: {
                         phone: mobile,
-                        code,
-                        exclusiveDomain: ''
+                        code
                     }
                 })
             } finally {
