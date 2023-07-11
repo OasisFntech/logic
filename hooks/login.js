@@ -17,15 +17,15 @@ export const useAccountLogin = () => {
 
     const loading = ref(false)
 
-    const onAccountLogin = async({ account, password }) => {
+    const onAccountLogin = async() => {
         if (!loading.value) {
             loading.value = true
             try {
                 await api_fetch({
                     url: API_PATH.ACCOUNT_LOGIN,
                     params: {
-                        username: account,
-                        password: utils_passwordEncode(password, publicKey.value)
+                        username: formState.account,
+                        password: utils_passwordEncode(formState.password, publicKey.value)
                     }
                 })
             } finally {
@@ -47,8 +47,8 @@ export const useAccountLogin = () => {
 
 export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
     const formState = reactive({
-        account: '',
-        password: ''
+        mobile: '',
+        code: ''
     })
 
     const loading = ref(false)
@@ -64,15 +64,15 @@ export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
         COMMON_FORM_CONFIG.code
     ]
 
-    const onMobileLogin = async({ mobile, code }) => {
+    const onMobileLogin = async() => {
         if (!loading.value) {
             loading.value = true
             try {
                 await api_fetch({
                     url: API_PATH.MOBILE_LOGIN,
                     params: {
-                        phone: mobile,
-                        code
+                        phone: formState.mobile,
+                        code: formState.code
                     }
                 })
             } finally {
