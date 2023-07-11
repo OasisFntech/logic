@@ -6,16 +6,17 @@ import { api_fetch, API_PATH } from '../fetch'
 import { utils_passwordEncode } from '../utils'
 import { usePublicKeyStore } from '../store'
 import { useSms } from './sms'
+import { useFormDisabled } from './index'
 
 export const useAccountLogin = () => {
     const { publicKey } = storeToRefs(usePublicKeyStore())
 
     const formState = reactive({
-        account: '',
-        password: ''
-    })
-
-    const loading = ref(false)
+            account: '',
+            password: ''
+        }),
+        disabled = useFormDisabled(formState),
+        loading = ref(false)
 
     const onAccountLogin = async() => {
         if (!loading.value) {
@@ -40,6 +41,7 @@ export const useAccountLogin = () => {
             COMMON_FORM_CONFIG.account,
             COMMON_FORM_CONFIG.password
         ],
+        disabled,
         loading,
         onAccountLogin
     }
@@ -47,11 +49,11 @@ export const useAccountLogin = () => {
 
 export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
     const formState = reactive({
-        mobile: '',
-        code: ''
-    })
-
-    const loading = ref(false)
+            mobile: '',
+            code: ''
+        }),
+        disabled = useFormDisabled(formState),
+        loading = ref(false)
 
     const { smsBtn, onSendSms } = useSms('mobile-login', {
         successTip,
