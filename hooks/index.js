@@ -8,4 +8,4 @@ export * from './sms'
 export * from './login'
 export * from './news'
 
-export const useFormDisabled = formState => computed(() => !_.some(formState, Boolean))
+export const useFormDisabled = formState => computed(() => !_.every(formState, Boolean))
