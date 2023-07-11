@@ -1,4 +1,5 @@
 import { computed } from 'vue'
+import _ from 'lodash'
 
 export * from './market'
 export * from './register'
