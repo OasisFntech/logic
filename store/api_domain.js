@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import _ from 'lodash'
 
-import { api_fetch, API_PATH } from '../fetch'
+import { api_fetch, API_PATH, useRequest, createSocket } from '../fetch'
 import { utils_guideRedirect } from '../utils'
 
 //  检查域名地址，会额外返回delay延迟时间
@@ -28,26 +28,17 @@ const onCheckDomain = async ({ url, params, fetchTime, config }) => {
 export const useApiDomainStore = defineStore('api_domain', () => {
     /**
      * @const api_domain  api请求地址
-     * @const web_domain  域名线路地址列表
-     * @const loading  加载状态
-     * @const service  客服配置信息
      * */
-    const api_domain = ref([]),
-        web_domain = ref([]),
-        loading = ref(false)
+    const api_domain = ref([])
 
-    const onInit = async () => {
-        loading.value = true
-        try {
-            //  获取可用的api地址
-            const all_apis = await api_fetch({
-                url: API_PATH.API_DOMAIN,
-                method: 'get'
-            })
-
-            if (all_apis.length) {
+    //  获取可用的api地址
+    const { loading } = useRequest({
+        url: API_PATH.API_DOMAIN,
+        method: 'get',
+        onSuccess: res => {
+            if (res.length) {
                 // 校验api地址
-                all_apis.forEach(e => {
+                res.forEach((e, i, a) => {
                     const fetchTime = +new Date()
                     onCheckDomain({
                         url: API_PATH.API_CHECK,
@@ -55,19 +46,36 @@ export const useApiDomainStore = defineStore('api_domain', () => {
                         fetchTime
                     }).then(res => {
                         api_domain.value.push(res)
+
+                        if (api_domain.value.length === a.length) {
+                            const bestDomain = _.minBy(api_domain.value, 'delay'),
+                                socketUrl = bestDomain.domainName.includes('https')
+
+                            createSocket(bestDomain.domainName.replace('api', socketUrl ? 'wss' : 'ws'))
+                        }
                     })
                 })
             }
+        }
+    })
 
-            // 获取所有域名线路
-            const all_webs = await api_fetch({
-                url: API_PATH.WEB_DOMAIN,
-                method: 'get'
-            })
+    return {
+        api_domain,
+        loading
+    }
+})
 
-            if (all_webs.length) {
+export const useWebDomainStore = () => {
+    const web_domain = ref([])
+
+    // 获取所有域名线路
+    const { loading } = useRequest({
+        url: API_PATH.WEB_DOMAIN,
+        method: 'get',
+        onSuccess: res => {
+            if (res.length) {
                 // 检查可用域名
-                all_webs.map(e => {
+                res.map(e => {
                     const fetchTime = +new Date()
                     onCheckDomain({
                         url: `/web/check/${fetchTime}`,
@@ -81,12 +89,8 @@ export const useApiDomainStore = defineStore('api_domain', () => {
                     })
                 })
             }
-        } finally {
-            loading.value = false
         }
-    }
-
-    onInit()
+    })
 
     // 只展示延迟最小的前五条线路
     const showSites = computed(() => {
@@ -101,9 +105,8 @@ export const useApiDomainStore = defineStore('api_domain', () => {
     }
 
     return {
-        api_domain,
         showSites,
         loading,
         onChooseBest
     }
-})
+}

@@ -12,18 +12,20 @@ export const SOCKET_EVENTS = {
 
 export let socket = null
 
-export const createSocket = (socketUri = '/socket') => {
-    socket = SocketIO(
-        `${socketUri}?deviceID=${deviceID}`,
-        {
-            transports: [ 'websocket' ],
-            deviceID,
-        }
-    )
+export const createSocket = (socketUri) => {
+    if (!socket) {
+        socket = SocketIO(
+            `${socketUri}?deviceID=${deviceID}`,
+            {
+                transports: [ 'websocket' ],
+                deviceID,
+            }
+        )
 
-    socket.on('connect', (con) => {
-        console.log('socket connected successfully')
-    })
+        socket.on('connect', (con) => {
+            console.log('socket connected successfully')
+        })
+    }
 }
 
 // K线图请求地址
