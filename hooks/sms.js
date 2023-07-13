@@ -1,9 +1,9 @@
 import { computed, ref } from 'vue'
 
-import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
+import { api_fetch, API_PATH } from '../fetch'
 import { useCountdown } from './countdown'
 
-export const useSms = (name, { successTip, warnTip, errorTip }) => {
+export const useSms = (name, { successTip, errorTip }) => {
     const { countdown, onCountdown } = useCountdown(name)
 
     const loading = ref(false)
@@ -25,11 +25,7 @@ export const useSms = (name, { successTip, warnTip, errorTip }) => {
             loading.value = true
             try {
                 await api_fetch({
-                    url: API_PATH.SEND_SMS,
-                    method: FETCH_METHOD.GET,
-                    params: {
-                        phone
-                    }
+                    url: API_PATH.SEND_SMS + phone
                 })
 
                 successTip?.('短信验证码已发送，请注意查收')
