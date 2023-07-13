@@ -24,24 +24,17 @@ export const useSms = (name, { successTip, warnTip, errorTip }) => {
         if (!loading.value) {
             loading.value = true
             try {
-                const isRepeat = await api_fetch({
-                    url: API_PATH.CHECK_MOBILE_REGISTER,
+                await api_fetch({
+                    url: API_PATH.SEND_SMS,
                     method: FETCH_METHOD.GET,
                     params: {
                         phone
                     }
                 })
 
-                if (isRepeat) {
-                    warnTip?.('当前手机号已注册')
-                } else {
-                    await api_fetch({
-                        url: API_PATH.SEND_SMS + phone
-                    })
-                    successTip?.('短信验证码已发送，请注意查收')
+                successTip?.('短信验证码已发送，请注意查收')
 
-                    onCountdown()
-                }
+                onCountdown()
             } catch (err) {
                 errorTip?.(err.message)
             } finally {

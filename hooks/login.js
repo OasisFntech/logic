@@ -2,7 +2,7 @@ import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import { COMMON_FORM_CONFIG } from '../config'
-import { api_fetch, API_PATH } from '../fetch'
+import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
 import { utils_passwordEncode } from '../utils'
 import { usePublicKeyStore } from '../store'
 import { useSms } from './sms'
@@ -70,13 +70,25 @@ export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
         if (!loading.value) {
             loading.value = true
             try {
-                await api_fetch({
-                    url: API_PATH.MOBILE_LOGIN,
+                const isRegister = await api_fetch({
+                    url: API_PATH.CHECK_MOBILE_REGISTER,
+                    method: FETCH_METHOD.GET,
                     params: {
-                        phone: formState.mobile,
-                        code: formState.code
+                        phone: formState.mobile
                     }
                 })
+
+                if (isRegister) {
+                    warnTip?.('当前手机号已注册')
+                } else {
+                    await api_fetch({
+                        url: API_PATH.MOBILE_LOGIN,
+                        params: {
+                            phone: formState.mobile,
+                            code: formState.code
+                        }
+                    })
+                }
             } finally {
                 loading.value = false
             }
