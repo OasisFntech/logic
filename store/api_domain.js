@@ -45,13 +45,20 @@ export const useApiDomainStore = defineStore('api_domain', () => {
                         params: { domainName: e.domain, time: fetchTime },
                         fetchTime
                     }).then(res => {
-                        api_domain.value.push(res)
+                        api_domain.value.push({
+                            ...e,
+                            ...res
+                        })
 
                         if (api_domain.value.length === a.length) {
-                            const bestDomain = _.minBy(api_domain.value, 'delay'),
-                                socketUrl = bestDomain.domainName.includes('https')
+                            const bestDomain = _.minBy(api_domain.value, 'delay')
 
-                            createSocket(bestDomain.domainName.replace('api', socketUrl ? 'wss' : 'ws'))
+                            if (bestDomain.webSocket) {
+                                createSocket(bestDomain.webSocket)
+                            } else {
+                                const safety = bestDomain.domain.includes('https')
+                                createSocket(bestDomain.domain.replace('api', safety ? 'wss' : 'ws'))
+                            }
                         }
                     })
                 })
