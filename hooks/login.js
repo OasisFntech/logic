@@ -5,7 +5,6 @@ import { COMMON_FORM_CONFIG } from '../config'
 import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
 import { utils_passwordEncode } from '../utils'
 import { usePublicKeyStore } from '../store'
-import { useSms } from './sms'
 import { useFormDisabled } from './index'
 
 export const useAccountLogin = () => {
@@ -47,19 +46,13 @@ export const useAccountLogin = () => {
     }
 }
 
-export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
+export const useMobileLogin = ({ unRegisterCallback }) => {
     const formState = reactive({
             mobile: '',
             code: ''
         }),
         disabled = useFormDisabled(formState),
         loading = ref(false)
-
-    const { smsBtn, onSendSms } = useSms('mobile-login', {
-        successTip,
-        warnTip,
-        errorTip
-    })
 
     const formConfig = [
         COMMON_FORM_CONFIG.mobile,
@@ -79,8 +72,6 @@ export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
                 })
 
                 if (isRegister) {
-                    warnTip?.('当前手机号已注册')
-                } else {
                     await api_fetch({
                         url: API_PATH.MOBILE_LOGIN,
                         params: {
@@ -88,6 +79,8 @@ export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
                             code: formState.code
                         }
                     })
+                } else {
+                    unRegisterCallback?.()
                 }
             } finally {
                 loading.value = false
@@ -100,8 +93,6 @@ export const useMobileLogin = ({ successTip, warnTip, errorTip }) => {
         formConfig,
         disabled,
         loading,
-        smsBtn,
-        onSendSms,
         onMobileLogin
     }
 }
