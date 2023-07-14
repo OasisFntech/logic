@@ -87,7 +87,7 @@ export function useRequest({
     }
 }
 
-export function usePagination(fetchOptions, paginationOptions, mode = 'pagination') {
+export function usePagination({ fetchOptions, paginationOptions, mode } = { mode: 'pagination' }) {
     const pagination = ref({
         current: 1,
         pageSize: 20,
