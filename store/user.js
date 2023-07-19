@@ -65,4 +65,6 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         onSetUserInfo,
         onRefreshUserInfo
     }
+}, {
+    persist: true
 })
