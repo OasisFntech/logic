@@ -4,11 +4,12 @@ import { storeToRefs } from 'pinia'
 import { COMMON_FORM_CONFIG } from '../config'
 import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
 import { utils_passwordEncode } from '../utils'
-import { usePublicKeyStore } from '../store'
+import { usePublicKeyStore, useUserInfoStore } from '../store'
 import { useFormDisabled } from './index'
 
 export const useAccountLogin = () => {
-    const { publicKey } = storeToRefs(usePublicKeyStore())
+    const { publicKey } = storeToRefs(usePublicKeyStore()),
+        { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore()
 
     const formState = reactive({
             account: '',
@@ -21,13 +22,16 @@ export const useAccountLogin = () => {
         if (!loading.value) {
             loading.value = true
             try {
-                await api_fetch({
+                const res = await api_fetch({
                     url: API_PATH.ACCOUNT_LOGIN,
                     params: {
                         username: formState.account,
                         password: utils_passwordEncode(formState.password, publicKey.value)
                     }
                 })
+
+                onSetUserInfo(res)
+                onRefreshUserInfo()
             } finally {
                 loading.value = false
             }
@@ -47,6 +51,8 @@ export const useAccountLogin = () => {
 }
 
 export const useMobileLogin = ({ unRegisterCallback }) => {
+    const { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore()
+
     const formState = reactive({
             mobile: '',
             code: ''
@@ -72,13 +78,17 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
                 })
 
                 if (isRegister) {
-                    await api_fetch({
+                    const res = await api_fetch({
                         url: API_PATH.MOBILE_LOGIN,
                         params: {
                             phone: formState.mobile,
                             code: formState.code
                         }
                     })
+
+                    onSetUserInfo(res)
+                    onRefreshUserInfo()
+
                 } else {
                     unRegisterCallback?.()
                 }

@@ -50,6 +50,11 @@ export const API_PATH = {
     // 要闻
     NEWS: '/information/yaowen',
     // 快讯
-    NEWS_FLASH: '/information/preview/save'
+    NEWS_FLASH: '/information/preview/save',
     /** 新闻类 */
+
+    /** 用户类 */
+    // 用户信息
+    USERINFO: '/auth/member/login'
+    /** 用户类 */
 }
