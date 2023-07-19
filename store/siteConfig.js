@@ -5,7 +5,7 @@ import { useTitle } from '@vueuse/core'
 import { useRequest, API_PATH } from '../fetch'
 import { utils_favicon } from '../utils'
 
-export const useSiteConfigStore = defineStore('siteConfig', () => {
+export const useSiteConfigStore = defineStore('siteConfig', (device) => {
     // 站点配置
     const config = ref({
         keyword: null,
@@ -77,7 +77,8 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         url: API_PATH.PC_CONFIG,
         initialValues: {
             logoAddress: ''
-        }
+        },
+        manual: device !== 'pc'
     })
 
     return {
