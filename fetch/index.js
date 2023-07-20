@@ -131,7 +131,7 @@ export function usePagination(
             if (fetchOptions.formatResult) {
                 return {
                     ...res,
-                    list: fetchOptions.formatResult(res[responseKeys.list])
+                    [responseKeys.list]: fetchOptions.formatResult(res[responseKeys.list])
                 }
             }
             return res
