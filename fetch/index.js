@@ -87,6 +87,13 @@ export function useRequest({
     }
 }
 
+const defaultResponseKeys = {
+    list: 'list',
+    pageSize: 'pageSize',
+    pageNum: 'pageNum',
+    total: 'total'
+}
+
 export function usePagination(
     {
         fetchOptions,
@@ -94,15 +101,11 @@ export function usePagination(
         mode,
         responseKeys
     } = {
-        mode: 'pagination',
-        responseKeys: {
-            list: 'list',
-            pageSize: 'pageSize',
-            pageNum: 'pageNum',
-            total: 'total'
-        }
+        mode: 'pagination'
     }
 ) {
+    responseKeys = { ...defaultResponseKeys, ...responseKeys }
+
     const pagination = ref({
         current: 1,
         pageSize: 20,
@@ -158,6 +161,8 @@ export function usePagination(
                 total: total
             })
 
+            console.log(pageNum, total, pageSize)
+
             finished.value = pageNum >= total / pageSize
         }
     })
@@ -194,3 +199,4 @@ export function usePagination(
         onChange
     }
 }
+
