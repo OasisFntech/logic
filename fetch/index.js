@@ -98,7 +98,8 @@ export function usePagination(
         responseKeys: {
             list: 'list',
             pageSize: 'pageSize',
-            pageNum: 'pageNum'
+            pageNum: 'pageNum',
+            total: 'total'
         }
     }
 ) {
@@ -136,10 +137,10 @@ export function usePagination(
             return res
         },
         onSuccess: res => {
-            const { list: dataSource, total } = res
-
-            const pageNum = res[responseKeys.pageNum],
-                pageSize = res[responseKeys.pageSize]
+            const dataSource = res[responseKeys.list],
+                pageNum = res[responseKeys.pageNum],
+                pageSize = res[responseKeys.pageSize],
+                total = res[responseKeys.total]
 
             if (pageNum === 1 || mode === 'pagination') {
                 list.value = dataSource
