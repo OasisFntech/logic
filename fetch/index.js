@@ -87,7 +87,21 @@ export function useRequest({
     }
 }
 
-export function usePagination({ fetchOptions, paginationOptions, mode } = { mode: 'pagination' }) {
+export function usePagination(
+    {
+        fetchOptions,
+        paginationOptions,
+        mode,
+        responseKeys
+    } = {
+        mode: 'pagination',
+        responseKeys: {
+            list: 'list',
+            pageSize: 'pageSize',
+            pageNum: 'pageNum'
+        }
+    }
+) {
     const pagination = ref({
         current: 1,
         pageSize: 20,
@@ -116,13 +130,16 @@ export function usePagination({ fetchOptions, paginationOptions, mode } = { mode
             if (fetchOptions.formatResult) {
                 return {
                     ...res,
-                    list: fetchOptions.formatResult(res.list)
+                    list: fetchOptions.formatResult(res[responseKeys.list])
                 }
             }
             return res
         },
         onSuccess: res => {
-            const { list: dataSource, pageNum, pageSize, total } = res
+            const { list: dataSource, total } = res
+
+            const pageNum = res[responseKeys.pageNum],
+                pageSize = res[responseKeys.pageSize]
 
             if (pageNum === 1 || mode === 'pagination') {
                 list.value = dataSource
