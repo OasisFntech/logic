@@ -161,7 +161,7 @@ export function usePagination(
                 total: total
             })
 
-            finished.value = pageNum >= total / pageSize
+            finished.value = !total ? true : pageNum >= total / pageSize
         }
     })
 
