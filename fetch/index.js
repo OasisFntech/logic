@@ -161,8 +161,6 @@ export function usePagination(
                 total: total
             })
 
-            console.log(pageNum, total, pageSize)
-
             finished.value = pageNum >= total / pageSize
         }
     })
