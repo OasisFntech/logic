@@ -9,3 +9,4 @@ export * from './login'
 export * from './news'
 
 export const useFormDisabled = formState => computed(() => !_.every(formState, Boolean))
+

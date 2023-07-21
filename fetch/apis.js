@@ -55,6 +55,7 @@ export const API_PATH = {
 
     /** 用户类 */
     // 用户信息
-    USERINFO: '/member/member/getMyPageData'
+    USERINFO: '/member/member/getMyPageData',
+    USERINFO_BASE: '/member/member/getMemberBaseInfo'
     /** 用户类 */
 }

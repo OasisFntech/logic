@@ -1,5 +1,6 @@
 import JSEncrypt from 'jsencrypt'
 import { inflate } from 'pako'
+import _ from 'lodash'
 
 export * from './charts'
 
@@ -115,4 +116,23 @@ export const utils_favicon = (href) => {
     faviconLink.type = 'image/x-icon'
 
     document.head.appendChild(faviconLink)
+}
+
+export const utils_assign_object = (oldObj, newObj, force) => {
+    if (force) {
+        return {
+            ...oldObj,
+            ...newObj
+        }
+    } else {
+        _.entries(newObj).forEach(e => {
+            const [ key, val ] = e
+
+            if (val) {
+                oldObj[key] = val
+            }
+        })
+
+        return oldObj
+    }
 }
