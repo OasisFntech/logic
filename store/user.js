@@ -82,10 +82,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     })
 
     const onRefreshUserInfo = () => {
-        Promise.all(
+        Promise.all([
             userInfoRun(),
             userBaseInfoRun()
-        )
+        ])
     }
 
     return {
