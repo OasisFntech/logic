@@ -128,7 +128,7 @@ export const utils_assign_object = (oldObj, newObj, force) => {
         _.entries(newObj).forEach(e => {
             const [ key, val ] = e
 
-            if (val) {
+            if (val !== undefined) {
                 oldObj[key] = val
             }
         })
