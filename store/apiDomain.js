@@ -40,6 +40,7 @@ export const useApiDomainStore = defineStore('api_domain', () => {
                 // 校验api地址
                 res.forEach((e, i, a) => {
                     const fetchTime = +new Date()
+                    /* eslint-disable promise/prefer-await-to-then */
                     onCheckDomain({
                         url: API_PATH.API_CHECK,
                         params: { domainName: e.domain, time: fetchTime },
@@ -84,6 +85,8 @@ export const useWebDomainStore = () => {
                 // 检查可用域名
                 res.map(e => {
                     const fetchTime = +new Date()
+
+                    /* eslint-disable promise/prefer-await-to-then */
                     onCheckDomain({
                         url: `/web/check/${fetchTime}`,
                         params: { domainName: e.domain },
