@@ -59,8 +59,6 @@ export const utils_amountFormatter = amount => {
 
     if (amount < 1000) return amount.toString()
 
-    if (amount < 10000) return (amount / 1000).toFixed(2) + ' 千'
-
     if (amount < 100000000) return (amount / 10000).toFixed(2) + ' 万'
 
     if (amount < 1000000000000) return (amount / 100000000).toFixed(2) + ' 亿'
