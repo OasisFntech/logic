@@ -51,21 +51,23 @@ export const utils_link = (url, target = '_blank') => {
 /**
  * @function utils_amountFormatter
  * @param amount 金额
+ * @param showThousand 是否展示 千 位
+ * @param fixed 保留小数位数
  * @return string
  * @description 将金额处理为带汉字的缩略
  * */
-export const utils_amountFormatter = amount => {
+export const utils_amountFormatter = (amount, { showThousand, fixed } = { fixed: 2 }) => {
     if (isNaN(amount)) return '--'
 
-    if (amount < 1000) return amount.toString()
+    if (amount < 1000) return amount.toFixed(fixed)
 
-    if (amount < 10000) return (amount / 1000).toFixed(2) + '千'
+    if (amount < 10000) return (amount / 1000).toFixed(fixed) + showThousand ? '千' : ''
 
-    if (amount < 100000000) return (amount / 10000).toFixed(2) + '万'
+    if (amount < 100000000) return (amount / 10000).toFixed(fixed) + '万'
 
-    if (amount < 1000000000000) return (amount / 100000000).toFixed(2) + '亿'
+    if (amount < 1000000000000) return (amount / 100000000).toFixed(fixed) + '亿'
 
-    return (amount / 1000000000000).toFixed(2) + '千亿'
+    return (amount / 1000000000000).toFixed(fixed) + '千亿'
 }
 
 // 密码加密
