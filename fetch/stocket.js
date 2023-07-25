@@ -63,11 +63,11 @@ class KLineSocket {
         this.event = event
         this.active = false
     }
-    emit(params) {
+    emit(params, payload) {
         if (socket) {
             socket.emit(
                 this.event,
-                doParams( typeof params === 'object' ? params : [ params ])
+                doParams( typeof params === 'object' ? params : [ params ], payload)
             )
             this.active = true
         }
