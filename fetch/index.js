@@ -94,22 +94,32 @@ const defaultResponseKeys = {
     total: 'total'
 }
 
+const defaultPaginationKeys = {
+    current: 'pageNum',
+    pageSize: 'pageSize',
+    total: 'total',
+}
+
 export function usePagination(
     {
         fetchOptions,
         paginationOptions,
         mode,
-        responseKeys
+        responseKeys,
+        paginationKeys
     } = {
         mode: 'pagination'
     }
 ) {
     responseKeys = { ...defaultResponseKeys, ...responseKeys }
+    paginationKeys = { ...defaultPaginationKeys, ...paginationKeys }
+
+    const { current, pageSize, total } = paginationKeys
 
     const pagination = ref({
-        current: 1,
-        pageSize: 20,
-        total: 0,
+        [current]: 1,
+        [pageSize]: 20,
+        [total]: 0,
         ...paginationOptions
     })
 
@@ -117,13 +127,12 @@ export function usePagination(
         finished = ref(false)
 
     const requestParams = computed(() => {
-        const baseFetchParams = isRef(fetchOptions.params) ? fetchOptions.params.value : fetchOptions.params,
-            { current, pageSize } = pagination.value
+        const baseFetchParams = isRef(fetchOptions.params) ? fetchOptions.params.value : fetchOptions.params
 
         return {
             ...baseFetchParams,
-            pageNum: current,
-            pageSize
+            [current]: pagination.value[current],
+            [pageSize]: pagination.value[pageSize]
         }
     })
 
@@ -156,9 +165,9 @@ export function usePagination(
 
             set(pagination, {
                 ...pagination.value,
-                current: pageNum,
-                pageSize: pageSize,
-                total: total
+                [current]: pageNum,
+                [pageSize]: pageSize,
+                [total]: total
             })
 
             finished.value = !total ? true : pageNum >= total / pageSize
@@ -166,13 +175,13 @@ export function usePagination(
     })
 
     const onRefresh = async() => {
-        pagination.value.current = 1
+        pagination.value[current] = 1
         await run(requestParams.value)
     }
 
     const onLoadMore = async() => {
         if (!finished.value){
-            pagination.value.current += 1
+            pagination.value[current] += 1
             await run(requestParams.value)
         }
     }
