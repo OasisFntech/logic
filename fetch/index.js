@@ -111,8 +111,8 @@ export function usePagination(
         mode: 'pagination'
     }
 ) {
-    responseKeys = { ...defaultResponseKeys, ...responseKeys }
-    paginationKeys = { ...defaultPaginationKeys, ...paginationKeys }
+    responseKeys = responseKeys || defaultResponseKeys
+    paginationKeys = paginationKeys || defaultPaginationKeys
 
     const { current, pageSize, total } = paginationKeys
 
