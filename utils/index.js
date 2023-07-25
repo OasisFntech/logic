@@ -56,12 +56,12 @@ export const utils_link = (url, target = '_blank') => {
  * @return string
  * @description 将金额处理为带汉字的缩略
  * */
-export const utils_amountFormatter = (amount, { showThousand, fixed } = { fixed: 2 }) => {
+const utils_amountFormatter = (amount, { showThousand, fixed } = { showThousand: true, fixed: 2 }) => {
     if (isNaN(amount)) return '--'
 
     if (amount < 1000) return amount.toFixed(fixed)
 
-    if (amount < 10000) return (amount / 1000).toFixed(fixed) + showThousand ? '千' : ''
+    if (amount < 10000) return (amount / 1000).toFixed(fixed) + (showThousand ? '千' : '')
 
     if (amount < 100000000) return (amount / 10000).toFixed(fixed) + '万'
 

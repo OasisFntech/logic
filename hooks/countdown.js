@@ -1,4 +1,4 @@
-import { onBeforeUnmount, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useIntervalFn, useLocalStorage } from '@vueuse/core'
 
 export const useCountdown = (name = 'noname') => {

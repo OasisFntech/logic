@@ -88,7 +88,6 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
 
                     onSetUserInfo(res)
                     onRefreshUserInfo()
-
                 } else {
                     unRegisterCallback?.()
                 }
