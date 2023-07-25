@@ -38,6 +38,8 @@ export const KLINE_URL = {
     FIVE_MINUTES: 'kLineBy5Minutes',
     FIFTEEN_MINUTES: 'kLineBy15Minutes',
     THIRTY_MINUTES: 'kLineBy30Minutes',
+
+    STEP_DETAILS: 'itemByStepDetails',
 }
 
 // do 接口参数整合
@@ -105,3 +107,6 @@ export const KLINE_ONE_MINUTES_SOCKET = new KLineSocket(KLINE_URL.ONE_MINUTES)
 export const KLINE_FIVE_MINUTES_SOCKET = new KLineSocket(KLINE_URL.FIVE_MINUTES)
 export const KLINE_FIFTEEN_MINUTES_SOCKET = new KLineSocket(KLINE_URL.FIFTEEN_MINUTES)
 export const KLINE_THIRTY_MINUTES_SOCKET = new KLineSocket(KLINE_URL.THIRTY_MINUTES)
+
+// 每次成交价格
+export const STEP_DETAILS_SOCKET = new KLineSocket(KLINE_URL.STEP_DETAILS)
