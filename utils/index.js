@@ -56,7 +56,7 @@ export const utils_link = (url, target = '_blank') => {
  * @return string
  * @description 将金额处理为带汉字的缩略
  * */
-const utils_amountFormatter = (amount, { showThousand, fixed } = { showThousand: true, fixed: 2 }) => {
+export const utils_amountFormatter = (amount, { showThousand, fixed } = { showThousand: true, fixed: 2 }) => {
     if (isNaN(amount)) return '--'
 
     if (amount < 1000) return amount.toFixed(fixed)
