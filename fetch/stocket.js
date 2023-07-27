@@ -29,7 +29,7 @@ export const createSocket = (socketUri) => {
 }
 
 // K线图请求地址
-export const KLINE_URL = {
+export const SOCKET_URL = {
     // 股票总数据
     TOTAL_MARKETS: 'blocksDetail',
     // 涨跌幅
@@ -103,18 +103,18 @@ class KLineSocket {
 }
 
 // 大盘指数
-export const TOTAL_MARKET_SOCKET = new KLineSocket(KLINE_URL.TOTAL_MARKETS)
+export const TOTAL_MARKET_SOCKET = new KLineSocket(SOCKET_URL.TOTAL_MARKETS)
 // 涨跌幅
-export const RAISE_FALL_SOCKET = new KLineSocket(KLINE_URL.RAISE_FALL)
+export const RAISE_FALL_SOCKET = new KLineSocket(SOCKET_URL.RAISE_FALL)
 
 // 分时K线图socket
-export const KLINE_REAL_TIME_SOCKET = new KLineSocket(KLINE_URL.REAL_TIME)
-export const KLINE_ONE_MINUTES_SOCKET = new KLineSocket(KLINE_URL.ONE_MINUTES)
-export const KLINE_FIVE_MINUTES_SOCKET = new KLineSocket(KLINE_URL.FIVE_MINUTES)
-export const KLINE_FIFTEEN_MINUTES_SOCKET = new KLineSocket(KLINE_URL.FIFTEEN_MINUTES)
-export const KLINE_THIRTY_MINUTES_SOCKET = new KLineSocket(KLINE_URL.THIRTY_MINUTES)
+export const KLINE_REAL_TIME_SOCKET = new KLineSocket(SOCKET_URL.REAL_TIME)
+export const KLINE_ONE_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.ONE_MINUTES)
+export const KLINE_FIVE_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.FIVE_MINUTES)
+export const KLINE_FIFTEEN_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.FIFTEEN_MINUTES)
+export const KLINE_THIRTY_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.THIRTY_MINUTES)
 
 // 每次价格成交变动详情
-export const STEP_DETAILS_SOCKET = new KLineSocket(KLINE_URL.STEP_DETAILS)
+export const STEP_DETAILS_SOCKET = new KLineSocket(SOCKET_URL.STEP_DETAILS)
 
-export const STOCK_DETAILS_SOCKET = new KLineSocket(KLINE_URL.stock_details)
+export const STOCK_DETAILS_SOCKET = new KLineSocket(SOCKET_URL.stock_details)
