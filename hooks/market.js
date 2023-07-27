@@ -38,8 +38,8 @@ export const useMarketHooks = () => {
 
     // 大盘指数数据
     const { response: totalMarket } = useRequest({
-        url: `${API_PATH.DO}?event=${KLINE_URL.TOTAL_MARKETS}`,
-        params: doParams([], { url: KLINE_URL.TOTAL_MARKETS }),
+        url: `${API_PATH.DO}?event=${SOCKET_URL.TOTAL_MARKETS}`,
+        params: doParams([], { url: SOCKET_URL.TOTAL_MARKETS }),
         initialValues: {
             fellNum: 0,
             flatNum: 0,
@@ -82,7 +82,7 @@ export const useMarketHooks = () => {
         switch (type) {
             // 分时
             case CHART_TYPE.REAL_TIME:
-                await onGetDoAction(KLINE_URL.REAL_TIME)
+                await onGetDoAction(SOCKET_URL.REAL_TIME)
                 // 打开分时K线图socket
                 KLINE_REAL_TIME_SOCKET.emit(totalMarketCode.value)
                 break
@@ -100,25 +100,25 @@ export const useMarketHooks = () => {
                 break
             // 1分
             case CHART_TYPE.ONE_MINUTES:
-                await onGetDoAction(KLINE_URL.ONE_MINUTES)
+                await onGetDoAction(SOCKET_URL.ONE_MINUTES)
                 // 打开 1分 K线图socket
                 KLINE_ONE_MINUTES_SOCKET.emit(totalMarketCode.value)
                 break
             // 5分
             case CHART_TYPE.FIVE_MINUTES:
-                await onGetDoAction(KLINE_URL.FIVE_MINUTES)
+                await onGetDoAction(SOCKET_URL.FIVE_MINUTES)
                 // 打开 5分 K线图socket
                 KLINE_FIVE_MINUTES_SOCKET.emit(totalMarketCode.value)
                 break
             // 15分
             case CHART_TYPE.FIFTEEN_MINUTES:
-                await onGetDoAction(KLINE_URL.FIFTEEN_MINUTES)
+                await onGetDoAction(SOCKET_URL.FIFTEEN_MINUTES)
                 // 打开分15分 线图socket
                 KLINE_FIFTEEN_MINUTES_SOCKET.emit(totalMarketCode.value)
                 break
             // 30分
             case CHART_TYPE.THIRTY_MINUTES:
-                await onGetDoAction(KLINE_URL.THIRTY_MINUTES)
+                await onGetDoAction(SOCKET_URL.THIRTY_MINUTES)
                 // 打开分30分 线图socket
                 KLINE_THIRTY_MINUTES_SOCKET.emit(totalMarketCode.value)
                 break
@@ -136,7 +136,7 @@ export const useMarketHooks = () => {
         const resParse = utils_base64(res)
 
         // 分时渲染图表
-        if (url === KLINE_URL.REAL_TIME) renderRealTimeChart(resParse)
+        if (url === SOCKET_URL.REAL_TIME) renderRealTimeChart(resParse)
         // 1、5、15、30分 K线图渲染图表
         else renderKLineChart(resParse.kLineData)
     }
@@ -692,7 +692,7 @@ export const useMarketHooks = () => {
         run: raiseFallRun,
         loading: raiseFallLoading
     } = useRequest({
-        url: `${API_PATH.DO}?event=${KLINE_URL.RAISE_FALL}`,
+        url: `${API_PATH.DO}?event=${SOCKET_URL.RAISE_FALL}`,
         manual: true,
         initialValues: [],
         formatResult: res => utils_base64(res),
