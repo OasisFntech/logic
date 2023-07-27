@@ -30,16 +30,22 @@ export const createSocket = (socketUri) => {
 
 // K线图请求地址
 export const KLINE_URL = {
+    // 股票总数据
     TOTAL_MARKETS: 'blocksDetail',
+    // 涨跌幅
     RAISE_FALL: 'blockMember',
 
+    // 分时、1分、5分、15分、30分
     REAL_TIME: 'kLineRealTime',
     ONE_MINUTES: 'kLineBy1Minutes',
     FIVE_MINUTES: 'kLineBy5Minutes',
     FIFTEEN_MINUTES: 'kLineBy15Minutes',
     THIRTY_MINUTES: 'kLineBy30Minutes',
 
+    // 每次价格成交变动详情
     STEP_DETAILS: 'itemByStepDetails',
+
+    stock_details: 'foundsDetail'
 }
 
 // do 接口参数整合
@@ -108,5 +114,7 @@ export const KLINE_FIVE_MINUTES_SOCKET = new KLineSocket(KLINE_URL.FIVE_MINUTES)
 export const KLINE_FIFTEEN_MINUTES_SOCKET = new KLineSocket(KLINE_URL.FIFTEEN_MINUTES)
 export const KLINE_THIRTY_MINUTES_SOCKET = new KLineSocket(KLINE_URL.THIRTY_MINUTES)
 
-// 每次成交价格
+// 每次价格成交变动详情
 export const STEP_DETAILS_SOCKET = new KLineSocket(KLINE_URL.STEP_DETAILS)
+
+export const STOCK_DETAILS_SOCKET = new KLineSocket(KLINE_URL.stock_details)
