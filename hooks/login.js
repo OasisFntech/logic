@@ -2,7 +2,7 @@ import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import { COMMON_FORM_CONFIG } from '../config'
-import { api_fetch, API_PATH, FETCH_METHOD } from '../fetch'
+import { api_fetch, COMMON_API_PATH, FETCH_METHOD } from '../fetch'
 import { utils_passwordEncode } from '../utils'
 import { usePublicKeyStore, useUserInfoStore } from '../store'
 import { useFormDisabled } from './index'
@@ -23,7 +23,7 @@ export const useAccountLogin = () => {
             loading.value = true
             try {
                 const res = await api_fetch({
-                    url: API_PATH.ACCOUNT_LOGIN,
+                    url: COMMON_API_PATH.ACCOUNT_LOGIN,
                     params: {
                         username: formState.account,
                         password: utils_passwordEncode(formState.password, publicKey.value)
@@ -70,7 +70,7 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
             loading.value = true
             try {
                 const isRegister = await api_fetch({
-                    url: API_PATH.CHECK_MOBILE_REGISTER,
+                    url: COMMON_API_PATH.CHECK_MOBILE_REGISTER,
                     method: FETCH_METHOD.GET,
                     params: {
                         phone: formState.mobile
@@ -79,7 +79,7 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
 
                 if (isRegister) {
                     const res = await api_fetch({
-                        url: API_PATH.MOBILE_LOGIN,
+                        url: COMMON_API_PATH.MOBILE_LOGIN,
                         params: {
                             phone: formState.mobile,
                             code: formState.code

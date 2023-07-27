@@ -2,14 +2,14 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useSessionStorage } from '@vueuse/core'
 
-import { useRequest, API_PATH } from '../fetch'
+import { useRequest, COMMON_API_PATH } from '../fetch'
 
 export const usePopupStore = defineStore('popup', () => {
     const alreadyRead = useSessionStorage('alreadyRead', false),
         visible = ref(false)
 
     const { response: popup, loading, run } = useRequest({
-        url: API_PATH.POPUP,
+        url: COMMON_API_PATH.POPUP,
         manual: alreadyRead.value,
         initialValues: {
             title: '',

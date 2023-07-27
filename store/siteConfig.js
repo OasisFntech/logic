@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useTitle } from '@vueuse/core'
 
-import { useRequest, API_PATH } from '../fetch'
+import { useRequest, COMMON_API_PATH } from '../fetch'
 import { utils_favicon } from '../utils'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
@@ -46,7 +46,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
 
     // 请求基础配置
     useRequest({
-        url: API_PATH.SITE_CONFIG,
+        url: COMMON_API_PATH.SITE_CONFIG,
         onSuccess: res => {
             useTitle(res.siteName)
             utils_favicon(res.titleAddress)
@@ -60,7 +60,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
 
     // 请求客服配置 ps:后端可优化的接口
     useRequest({
-        url: API_PATH.BASE_INFO,
+        url: COMMON_API_PATH.BASE_INFO,
         params: {
             configKey: 'customerServiceManagement'
         },

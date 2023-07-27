@@ -1,11 +1,11 @@
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 
-import { useRequest, usePagination, API_PATH } from '../fetch'
+import { useRequest, usePagination, COMMON_API_PATH } from '../fetch'
 
 export const useNews = () => {
     return usePagination({
-        url: API_PATH.NEWS,
+        url: COMMON_API_PATH.NEWS,
         params: {
             type: 1
         }
@@ -14,7 +14,7 @@ export const useNews = () => {
 
 export const useNewsFlash = () => {
     return usePagination({
-        url: API_PATH.NEWS_FLASH,
+        url: COMMON_API_PATH.NEWS_FLASH,
         params: {
             type: 2
         },
@@ -37,7 +37,7 @@ export const useNewsStock = () => {
         finished = ref(false)
 
     const { response, loading, run, onRefresh } = useRequest({
-        url: API_PATH.NEWS_STOCK,
+        url: COMMON_API_PATH.NEWS_STOCK,
         params: {
             stocks: [],
             ...pagination

@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-import { API_PATH, useRequest } from '../fetch'
+import { COMMON_API_PATH, useRequest } from '../fetch'
 import { utils_assign_object } from '../utils'
 
 export const useUserInfoStore = defineStore('userInfo', () => {
@@ -66,7 +66,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     }
 
     const { loading: userInfoLoading, run: userInfoRun } = useRequest({
-        url: API_PATH.USERINFO,
+        url: COMMON_API_PATH.USERINFO,
         manual: true,
         onSuccess: res => {
             onSetUserInfo(res)
@@ -74,7 +74,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     })
 
     const { loading: userBaseInfoLoading, run: userBaseInfoRun } = useRequest({
-        url: API_PATH.USERINFO_BASE,
+        url: COMMON_API_PATH.USERINFO_BASE,
         manual: true,
         onSuccess: res => {
             onSetUserInfo(res)

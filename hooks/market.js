@@ -12,7 +12,7 @@ import {
     utils_kLineCalculateMA
 } from '../utils'
 import {
-    API_PATH,
+    COMMON_API_PATH,
     api_fetch,
     useRequest,
     doParams,
@@ -38,7 +38,7 @@ export const useMarketHooks = () => {
 
     // 大盘指数数据
     const { response: totalMarket } = useRequest({
-        url: `${API_PATH.DO}?event=${SOCKET_URL.TOTAL_MARKETS}`,
+        url: `${COMMON_API_PATH.DO}?event=${SOCKET_URL.TOTAL_MARKETS}`,
         params: doParams([], { url: SOCKET_URL.TOTAL_MARKETS }),
         initialValues: {
             fellNum: 0,
@@ -129,7 +129,7 @@ export const useMarketHooks = () => {
     // 分时，1、5、15、30分 数据使用接口
     const onGetDoAction = async (url) => {
         const res = await api_fetch({
-            url: `${API_PATH.DO}?event=${url}`,
+            url: `${COMMON_API_PATH.DO}?event=${url}`,
             params: doParams([ totalMarketCode.value ], { url })
         })
 
@@ -416,7 +416,7 @@ export const useMarketHooks = () => {
     // 获取 K 线图数据；日K、周K、月K
     const onGetKLine = async (period) => {
         const { kLineData } = await api_fetch({
-            url: API_PATH.K_LINE,
+            url: COMMON_API_PATH.K_LINE,
             params: {
                 period,
                 stockCode: totalMarketCode.value,
@@ -692,7 +692,7 @@ export const useMarketHooks = () => {
         run: raiseFallRun,
         loading: raiseFallLoading
     } = useRequest({
-        url: `${API_PATH.DO}?event=${SOCKET_URL.RAISE_FALL}`,
+        url: `${COMMON_API_PATH.DO}?event=${SOCKET_URL.RAISE_FALL}`,
         manual: true,
         initialValues: [],
         formatResult: res => utils_base64(res),

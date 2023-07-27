@@ -2,7 +2,7 @@ import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import _ from 'lodash'
 
-import { api_fetch, API_PATH } from '../fetch'
+import { api_fetch, COMMON_API_PATH } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
 import { useSms } from './sms'
 import { usePublicKeyStore } from '../store'
@@ -51,7 +51,7 @@ export const useRegister = ({
             checkLoading.value = true
             try {
                 const isRepeat = await api_fetch({
-                    url: API_PATH.CHECK_ACCOUNT_REGISTER,
+                    url: COMMON_API_PATH.CHECK_ACCOUNT_REGISTER,
                     params: {
                         username
                     }
@@ -80,7 +80,7 @@ export const useRegister = ({
 
                 // 校验短信验证码
                 await api_fetch({
-                    url: API_PATH.CHECK_SMS,
+                    url: COMMON_API_PATH.CHECK_SMS,
                     params: {
                         phone: mobile,
                         code
@@ -88,7 +88,7 @@ export const useRegister = ({
                 })
 
                 await api_fetch({
-                    url: API_PATH.REGISTER,
+                    url: COMMON_API_PATH.REGISTER,
                     params: {
                         username: account,
                         nickName: mobile,

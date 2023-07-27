@@ -1,4 +1,4 @@
-export const API_PATH = {
+export const COMMON_API_PATH = {
     /** 系统类 */
     // 弹窗公告
     POPUP: '/information/platformPopups',
