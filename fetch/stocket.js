@@ -45,7 +45,7 @@ export const SOCKET_URL = {
     // 每次价格成交变动详情
     STEP_DETAILS: 'itemByStepDetails',
 
-    stock_details: 'foundsDetail'
+    STOCK_DETAILS: 'foundsDetail'
 }
 
 // do 接口参数整合
@@ -117,4 +117,4 @@ export const KLINE_THIRTY_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.THIRTY_MIN
 // 每次价格成交变动详情
 export const STEP_DETAILS_SOCKET = new KLineSocket(SOCKET_URL.STEP_DETAILS)
 
-export const STOCK_DETAILS_SOCKET = new KLineSocket(SOCKET_URL.stock_details)
+export const STOCK_DETAILS_SOCKET = new KLineSocket(SOCKET_URL.STOCK_DETAILS)
