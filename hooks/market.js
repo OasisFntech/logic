@@ -16,7 +16,7 @@ import {
     api_fetch,
     useRequest,
     doParams,
-    KLINE_URL,
+    SOCKET_URL,
     TOTAL_MARKET_SOCKET,
     KLINE_REAL_TIME_SOCKET,
     KLINE_ONE_MINUTES_SOCKET,
