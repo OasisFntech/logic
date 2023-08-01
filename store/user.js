@@ -21,18 +21,22 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         nickname: '',
         // 头像
         avatarUrl: '',
-        // vip 登记
+        // vip 等级
         level: '',
         commissionPercent: null,
-        // 净资产？
+        // 总资产
         totalAssets: 0,
         // 钱包余额
         amount: 0,
         // 提现冻结
         withdrawFreeze: 0,
+        // 合约净资产
         contractPrincipal: 0,
+        // 总操盘资金
         totalTradersMoney: 0,
+        // 未使用
         surplusAmount: 0,
+        // 已使用
         usedAmount: 0,
         expiryAmount: null,
         count: null,
@@ -69,6 +73,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         url: COMMON_API_PATH.USERINFO,
         manual: true,
         onSuccess: res => {
+            delete res.amount
             onSetUserInfo(res)
         }
     })
