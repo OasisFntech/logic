@@ -3,11 +3,11 @@ import { defineStore } from 'pinia'
 import { useTitle } from '@vueuse/core'
 
 import { useRequest, COMMON_API_PATH } from '../fetch'
-import { utils_favicon } from '../utils'
+import { utils_assign_object, utils_favicon } from '../utils'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
     // 站点配置
-    const config = ref({
+    const siteConfig = ref({
         keyword: null,
         siteLogo: null,
         siteLogo2: null,
@@ -51,10 +51,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
             useTitle(res.siteName)
             utils_favicon(res.titleAddress)
 
-            config.value = {
-                ...config.value,
-                ...res
-            }
+            siteConfig.value = utils_assign_object(siteConfig.value, res)
         }
     })
 
@@ -65,14 +62,14 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
             configKey: 'customerServiceManagement'
         },
         onSuccess: res => {
-            config.value = {
-                ...config.value,
+            siteConfig.value = {
+                ...siteConfig.value,
                 ...res
             }
         }
     })
 
     return {
-        config
+        siteConfig
     }
 })
