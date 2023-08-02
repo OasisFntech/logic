@@ -69,7 +69,16 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         }
     })
 
+    // 获取logo
+    const { response: logoRes } = useRequest({
+        url: COMMON_API_PATH.PC_CONFIG,
+        initialValues: {
+            logoAddress: ''
+        }
+    })
+
     return {
-        siteConfig
+        siteConfig,
+        logoRes
     }
 })
