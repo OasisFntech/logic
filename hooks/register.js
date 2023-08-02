@@ -4,14 +4,10 @@ import _ from 'lodash'
 
 import { api_fetch, COMMON_API_PATH } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
-import { useSms } from './sms'
 import { usePublicKeyStore } from '../store'
 import { utils_passwordEncode } from '../utils'
 
 export const useRegister = ({
-    successTip,
-    warnTip,
-    errorTip,
     submitCallback,
     initialValues
 }) => {
@@ -20,7 +16,6 @@ export const useRegister = ({
     /**
      * @const formState form表单数据
      * @const checkLoading 检查账号 loading
-     * @const smsLoading 发送验证码 loading
      * @const submitLoading 提交 loading
      * */
     const formState = reactive({
@@ -33,17 +28,7 @@ export const useRegister = ({
             ...initialValues
         }),
         checkLoading = ref(false),
-        smsLoading = ref(false),
         submitLoading = ref(false)
-
-    const { smsBtn, onSendSms } = useSms(
-        'register-sms',
-        {
-            successTip,
-            warnTip,
-            errorTip
-        })
-
 
     // 检查账号是否重复
     const onCheckAccount = async (username) => {
@@ -58,12 +43,10 @@ export const useRegister = ({
                 })
 
                 if (isRepeat) {
-                    warnTip?.('用户名已注册')
+                    return Promise.resolve()
                 } else {
-                    successTip?.('用户名可用')
+                    return Promise.reject()
                 }
-            } catch (err) {
-                errorTip?.(err.message)
             } finally {
                 checkLoading.value = false
             }
@@ -102,10 +85,7 @@ export const useRegister = ({
                     }
                 })
 
-                successTip?.('注册成功')
                 submitCallback?.()
-            } catch (err) {
-                if (err?.message) errorTip?.(err.message)
             } finally {
                 submitLoading.value = false
             }
@@ -117,9 +97,6 @@ export const useRegister = ({
         REGISTER_FORM_CONFIG: _.values(COMMON_FORM_CONFIG),
         checkLoading,
         onCheckAccount,
-        smsLoading,
-        smsBtn,
-        onSendSms,
         submitLoading,
         onSubmit
     }
