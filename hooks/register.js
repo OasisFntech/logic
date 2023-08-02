@@ -43,9 +43,9 @@ export const useRegister = ({
                 })
 
                 if (isRepeat) {
-                    return Promise.resolve()
-                } else {
                     return Promise.reject()
+                } else {
+                    return Promise.resolve()
                 }
             } finally {
                 checkLoading.value = false
