@@ -22,7 +22,8 @@ export const COMMON_RULES = {
     code: [
         { required: true, message: '请输入短信验证码' },
         { pattern: /^\d{6}$/, message: '请输入正确的短信验证码' }
-    ]
+    ],
+    referrer: []
 }
 
 export const COMMON_FORM_CONFIG = {
