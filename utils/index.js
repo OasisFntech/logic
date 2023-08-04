@@ -63,7 +63,7 @@ export const utils_amount_chinesization = (amount, options) => {
         fixed: 2,
         ...options
     }
-    
+
     if (isNaN(amount)) return '--'
 
     if (amount < 1000) return amount.toFixed(fixed)

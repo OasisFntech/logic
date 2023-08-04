@@ -5,7 +5,7 @@ import { CHART_TYPE, CHART_TYPES_CONFIG } from '../config'
 import {
     ECHART_CONFIG,
     MINUTES_RANGE,
-    utils_amountFormatter,
+    utils_amount_chinesization,
     utils_base64,
     utils_timeParser,
     utils_renderTooltip,
@@ -212,11 +212,11 @@ export const useMarketHooks = () => {
                         },
                         {
                             title: '成交量',
-                            content: utils_amountFormatter(currentData.vol)
+                            content: utils_amount_chinesization(currentData.vol)
                         },
                         {
                             title: '成交额',
-                            content: utils_amountFormatter(currentData.amount)
+                            content: utils_amount_chinesization(currentData.amount)
                         }
                     ]
 
@@ -318,7 +318,7 @@ export const useMarketHooks = () => {
                     show: false,
                     axisPointer: {
                         label: {
-                            formatter: ({ value }) => utils_amountFormatter(value)
+                            formatter: ({ value }) => utils_amount_chinesization(value)
                         }
                     }
                 },
@@ -489,11 +489,11 @@ export const useMarketHooks = () => {
                         },
                         {
                             title: '成交量',
-                            content: utils_amountFormatter(currentData[6])
+                            content: utils_amount_chinesization(currentData[6])
                         },
                         {
                             title: '成交额',
-                            content: utils_amountFormatter(currentData[7])
+                            content: utils_amount_chinesization(currentData[7])
                         },
                         {
                             title: 'MA5',
@@ -591,7 +591,7 @@ export const useMarketHooks = () => {
                     },
                     axisPointer: {
                         label: {
-                            formatter: ({ value }) => utils_amountFormatter(value)
+                            formatter: ({ value }) => utils_amount_chinesization(value)
                         }
                     }
                 }
