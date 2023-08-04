@@ -49,14 +49,21 @@ export const utils_link = (url, target = '_blank') => {
 }
 
 /**
- * @function utils_amountFormatter
+ * @function utils_amount_chinesization
  * @param amount 金额
- * @param showThousand 是否展示 千 位
- * @param fixed 保留小数位数
+ * @param options
+ * @params showThousand 是否展示 千 位
+ * @params fixed 保留小数位数
  * @return string
  * @description 将金额处理为带汉字的缩略
  * */
-export const utils_amountFormatter = (amount, { showThousand, fixed } = { showThousand: true, fixed: 2 }) => {
+export const utils_amount_chinesization = (amount, options) => {
+    const { showThousand, fixed } = {
+        showThousand: true,
+        fixed: 2,
+        ...options
+    }
+    
     if (isNaN(amount)) return '--'
 
     if (amount < 1000) return amount.toFixed(fixed)
@@ -68,6 +75,21 @@ export const utils_amountFormatter = (amount, { showThousand, fixed } = { showTh
     if (amount < 1000000000000) return (amount / 100000000).toFixed(fixed) + '亿'
 
     return (amount / 1000000000000).toFixed(fixed) + '千亿'
+}
+
+export const utils_number_format = (number, options) => {
+    if (isNaN(number)) {
+        return number
+    } else {
+        const { prefix, fixed, suffix } = {
+            fixed: 2,
+            prefix: '',
+            suffix: '',
+            ...options,
+        }
+
+        return `${prefix}${Number(number).toFixed(fixed)}${suffix}`
+    }
 }
 
 // 密码加密
