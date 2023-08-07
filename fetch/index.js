@@ -150,11 +150,11 @@ export function usePagination(
         },
         onSuccess: res => {
             const dataSource = res[responseKeys.list],
-                pageNum = res[responseKeys.pageNum],
-                pageSize = res[responseKeys.pageSize],
-                total = res[responseKeys.total]
+                resCurrent = res[responseKeys.pageNum],
+                resPageSize = res[responseKeys.pageSize],
+                resTotal = res[responseKeys.total]
 
-            if (pageNum === 1 || mode === 'pagination') {
+            if (resCurrent === 1 || mode === 'pagination') {
                 list.value = dataSource
             } else {
                 list.value = [
@@ -165,12 +165,12 @@ export function usePagination(
 
             set(pagination, {
                 ...pagination.value,
-                [current]: pageNum,
-                [pageSize]: pageSize,
-                [total]: total
+                [current]: resCurrent,
+                [pageSize]: resPageSize,
+                [total]: resTotal
             })
 
-            finished.value = !total ? true : pageNum >= total / pageSize
+            finished.value = !resTotal ? true : resCurrent >= resTotal / resPageSize
         }
     })
 
