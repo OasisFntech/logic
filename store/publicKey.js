@@ -1,20 +1,15 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 import { useRequest, COMMON_API_PATH } from '../fetch'
 
 export const usePublicKeyStore = defineStore('publicKey', () => {
-    const publicKey = ref('')
-
-    useRequest({
+    const { response } = useRequest({
         url: COMMON_API_PATH.PUBLIC_KEY,
-        manual: publicKey.value,
-        onSuccess: res => {
-            publicKey.value = res
-        }
+        manual: true,
+        initialValues: ''
     })
 
     return {
-        publicKey
+        publicKey: response
     }
 })
