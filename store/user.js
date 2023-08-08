@@ -25,19 +25,19 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         level: '',
         commissionPercent: null,
         // 总资产
-        totalAssets: 0,
+        totalAssets: '--',
         // 钱包余额
-        amount: 0,
+        amount: '--',
         // 提现冻结
-        withdrawFreeze: 0,
+        withdrawFreeze: '--',
         // 合约净资产
-        contractPrincipal: 0,
+        contractPrincipal: '--',
         // 总操盘资金
-        totalTradersMoney: 0,
+        totalTradersMoney: '--',
         // 未使用
-        surplusAmount: 0,
+        surplusAmount: '--',
         // 已使用
-        usedAmount: 0,
+        usedAmount: '--',
         expiryAmount: null,
         count: null,
         subCount: null,
@@ -46,10 +46,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         rechargeSum: null,
         status: null,
         inviteLink: null,
-        backMoneyFreeze: 0,
+        backMoneyFreeze: '--',
         realBalance: null,
         isAgent: true,
-        netAssets: 0,
+        netAssets: '--',
 
         email: null,
         // 邀请码
@@ -59,10 +59,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         customerService: null,
         pid: '',
         customerServiceId: null,
-        memberLevelId: 0,
-        handlingFeePercent: 0,
-        interestFeePercent: 0,
-        withdrawAmount: 0
+        memberLevelId: '--',
+        handlingFeePercent: '--',
+        interestFeePercent: '--',
+        withdrawAmount: '--'
     })
 
     const onSetUserInfo = newUserInfo => {
