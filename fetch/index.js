@@ -171,6 +171,10 @@ export function usePagination(
             })
 
             finished.value = !resTotal ? true : resCurrent >= resTotal / resPageSize
+        },
+        onErr: err => {
+            console.error(err)
+            finished.value = true
         }
     })
 
