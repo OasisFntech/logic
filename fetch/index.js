@@ -6,6 +6,7 @@ export * from './axios'
 export * from './stocket'
 
 import axios from './axios'
+import { utils_assign_object } from '../utils'
 
 export const FETCH_METHOD = {
     POST: 'post',
@@ -111,8 +112,8 @@ export function usePagination(
         mode: 'pagination'
     }
 ) {
-    responseKeys = responseKeys || defaultResponseKeys
-    paginationKeys = paginationKeys || defaultPaginationKeys
+    responseKeys = utils_assign_object(defaultResponseKeys,responseKeys)
+    paginationKeys = utils_assign_object(defaultPaginationKeys, paginationKeys)
 
     const { current, pageSize, total } = paginationKeys
 
