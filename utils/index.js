@@ -1,5 +1,6 @@
 import JSEncrypt from 'jsencrypt'
 import { inflate } from 'pako'
+import { useClipboard, usePermission } from '@vueuse/core'
 import _ from 'lodash'
 
 export * from './charts'
@@ -162,5 +163,19 @@ export const utils_assign_object = (oldObj, newObj, force) => {
         })
 
         return obj
+    }
+}
+
+// 用户浏览器授权
+usePermission('clipboard-write')
+const { copy } = useClipboard()
+// 复制函数
+export const utils_copy = async ({ content, onSuccess, onFail }) => {
+    try {
+        await copy(content)
+        onSuccess()
+    } catch (e) {
+        console.error(e)
+        onFail()
     }
 }
