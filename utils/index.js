@@ -179,3 +179,9 @@ export const utils_copy = async ({ content, onSuccess, onFail }) => {
         onFail()
     }
 }
+
+// 清楚所有缓存
+export const utils_storage_clear = () => {
+    sessionStorage.clear()
+    localStorage.clear()
+}
