@@ -21,12 +21,14 @@ export const useSiteConfig = async(callback) => {
         url: COMMON_API_PATH.SITE_CONFIG
     })
 
-    await callback(res.siteSwitch)
+    try {
+        await callback(res.siteSwitch)
 
-    useTitle(res.siteName)
-    utils_favicon(res.titleAddress)
+        const { siteConfig } = storeToRefs(useSiteConfigStore())
 
-    const { siteConfig } = storeToRefs(useSiteConfigStore())
-
-    siteConfig.value = utils_assign_object(siteConfig.value, res)
+        siteConfig.value = utils_assign_object(siteConfig.value, res)
+    } finally {
+        useTitle(res.siteName)
+        utils_favicon(res.titleAddress)
+    }
 }
