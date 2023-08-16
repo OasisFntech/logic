@@ -1,9 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { useTitle } from '@vueuse/core'
 
 import { useRequest, COMMON_API_PATH } from '../fetch'
-import { utils_assign_object, utils_favicon } from '../utils'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
     // 站点配置
@@ -42,17 +40,6 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         autoAgent: false,
         // 底部二维码地址 - Footer展示
         qrCodeAddress: ''
-    })
-
-    // 请求基础配置
-    useRequest({
-        url: COMMON_API_PATH.SITE_CONFIG,
-        onSuccess: res => {
-            useTitle(res.siteName)
-            utils_favicon(res.titleAddress)
-
-            siteConfig.value = utils_assign_object(siteConfig.value, res)
-        }
     })
 
     // 请求客服配置 ps:后端可优化的接口
