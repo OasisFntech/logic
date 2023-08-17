@@ -64,13 +64,13 @@ export const doParams = (params, payload) => ({
 })
 
 /**
- * @class KLineSocket Socket 对象
+ * @class CreateSocket Socket 对象
  * @constructor url 创建socket的event事件
  * @emit 发送事件
  * @on 监听事件 传送回调参数
  * @close 关闭socket连接
  * */
-class KLineSocket {
+class CreateSocket {
     constructor(event) {
         this.event = event
         this.active = false
@@ -109,21 +109,21 @@ class KLineSocket {
 }
 
 // 大盘指数
-export const TOTAL_MARKET_SOCKET = new KLineSocket(SOCKET_URL.TOTAL_MARKETS)
+export const TOTAL_MARKET_SOCKET = new CreateSocket(SOCKET_URL.TOTAL_MARKETS)
 // 涨跌幅
-export const RAISE_FALL_SOCKET = new KLineSocket(SOCKET_URL.RAISE_FALL)
+export const RAISE_FALL_SOCKET = new CreateSocket(SOCKET_URL.RAISE_FALL)
 
 // 分时K线图socket
-export const KLINE_REAL_TIME_SOCKET = new KLineSocket(SOCKET_URL.REAL_TIME)
-export const KLINE_ONE_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.ONE_MINUTES)
-export const KLINE_FIVE_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.FIVE_MINUTES)
-export const KLINE_FIFTEEN_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.FIFTEEN_MINUTES)
-export const KLINE_THIRTY_MINUTES_SOCKET = new KLineSocket(SOCKET_URL.THIRTY_MINUTES)
+export const KLINE_REAL_TIME_SOCKET = new CreateSocket(SOCKET_URL.REAL_TIME)
+export const KLINE_ONE_MINUTES_SOCKET = new CreateSocket(SOCKET_URL.ONE_MINUTES)
+export const KLINE_FIVE_MINUTES_SOCKET = new CreateSocket(SOCKET_URL.FIVE_MINUTES)
+export const KLINE_FIFTEEN_MINUTES_SOCKET = new CreateSocket(SOCKET_URL.FIFTEEN_MINUTES)
+export const KLINE_THIRTY_MINUTES_SOCKET = new CreateSocket(SOCKET_URL.THIRTY_MINUTES)
 
 // 每次价格成交变动详情
-export const STEP_DETAILS_SOCKET = new KLineSocket(SOCKET_URL.STEP_DETAILS)
+export const STEP_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STEP_DETAILS)
 
-export const STOCK_DETAILS_SOCKET = new KLineSocket(SOCKET_URL.STOCK_DETAILS)
+export const STOCK_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STOCK_DETAILS)
 
-// 行业板块
-export const STOCK_BLOCK_SOCKET = new KLineSocket(SOCKET_URL.BLOCK)
+// 消息通知
+export const NOTICE_SOCKET = new CreateSocket(SOCKET_URL.NOTICE)
