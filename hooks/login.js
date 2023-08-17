@@ -2,7 +2,7 @@ import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import { COMMON_FORM_CONFIG } from '../config'
-import { api_fetch, COMMON_API_PATH, FETCH_METHOD } from '../fetch'
+import { api_fetch, COMMON_API_PATH, FETCH_METHOD, NOTICE_SOCKET } from '../fetch'
 import { utils_passwordEncode, utils_storage_clear } from '../utils'
 import { usePublicKeyStore, useUserInfoStore } from '../store'
 import { useFormDisabled } from './index'
@@ -34,6 +34,10 @@ export const useAccountLogin = () => {
 
                 onSetUserInfo(res)
                 onRefreshUserInfo()
+                NOTICE_SOCKET.emit(undefined, {
+                    memberId: res.memberId,
+                    token: res.token,
+                })
             } finally {
                 loading.value = false
             }
@@ -92,6 +96,10 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
 
                     onSetUserInfo(res)
                     onRefreshUserInfo()
+                    NOTICE_SOCKET.emit(undefined, {
+                        memberId: res.memberId,
+                        token: res.token,
+                    })
                 } else {
                     unRegisterCallback?.()
                 }

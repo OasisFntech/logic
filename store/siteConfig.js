@@ -1,7 +1,8 @@
 import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 
-import { useRequest, COMMON_API_PATH } from '../fetch'
+import { useRequest, COMMON_API_PATH, NOTICE_SOCKET } from '../fetch'
+import { useUserInfoStore } from './user'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
     // 站点配置
@@ -67,5 +68,39 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
     return {
         siteConfig,
         logoRes
+    }
+})
+
+export const useNoticeStore = defineStore('notice', () => {
+    const { userInfo } = storeToRefs(useUserInfoStore())
+
+    if (userInfo.value.token && !NOTICE_SOCKET.active) {
+        NOTICE_SOCKET.emit(undefined,
+            {
+                memberId: userInfo.value.memberId,
+                token: userInfo.value.token,
+            }
+        )
+    }
+
+    const visible = ref(false),
+        notice = ref({
+            details: '',
+            sendTime: '',
+            title: '',
+            type: '',
+        })
+
+    NOTICE_SOCKET.on(res => {
+        visible.value = false
+
+        notice.value = res
+
+        visible.value = true
+    })
+
+    return {
+        visible,
+        notice,
     }
 })
