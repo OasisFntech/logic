@@ -87,7 +87,7 @@ export const useNoticeStore = defineStore('notice', () => {
 
     NOTICE_SOCKET.on(res => {
         notice.value = [
-            ...notice.value.slice(0, 4),
+            ...notice.value.slice(-4),
             res[0]
         ]
     })
