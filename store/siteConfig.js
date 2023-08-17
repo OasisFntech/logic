@@ -83,24 +83,16 @@ export const useNoticeStore = defineStore('notice', () => {
         )
     }
 
-    const visible = ref(false),
-        notice = ref({
-            details: '',
-            sendTime: '',
-            title: '',
-            type: '',
-        })
+    const notice = ref([])
 
     NOTICE_SOCKET.on(res => {
-        visible.value = false
-
-        notice.value = res[0]
-
-        visible.value = true
+        notice.value = [
+            ...notice.value.slice(0, 4),
+            res[0]
+        ]
     })
 
     return {
-        visible,
         notice,
     }
 })
