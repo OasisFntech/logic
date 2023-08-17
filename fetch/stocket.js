@@ -79,7 +79,7 @@ class CreateSocket {
         if (socket) {
             socket.emit(
                 this.event,
-                doParams( typeof params === 'object' ? params : [ params ], payload)
+                doParams(params, payload)
             )
             this.active = true
         }

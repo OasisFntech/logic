@@ -53,7 +53,7 @@ export const useMarketHooks = () => {
         formatResult: res => utils_base64(res),
         onSuccess: res => {
             if (res.indexPlate.length) {
-                TOTAL_MARKET_SOCKET.emit('')
+                TOTAL_MARKET_SOCKET.emit([ '' ])
 
                 // 初始化默认第一个大盘指数代码
                 onChangeTotalMarket(res.indexPlate[0].indexCode)
@@ -84,7 +84,7 @@ export const useMarketHooks = () => {
             case CHART_TYPE.REAL_TIME:
                 await onGetDoAction(SOCKET_URL.REAL_TIME)
                 // 打开分时K线图socket
-                KLINE_REAL_TIME_SOCKET.emit(totalMarketCode.value)
+                KLINE_REAL_TIME_SOCKET.emit([ totalMarketCode.value ])
                 break
             // 日K
             case CHART_TYPE.DAILY:
@@ -102,25 +102,25 @@ export const useMarketHooks = () => {
             case CHART_TYPE.ONE_MINUTES:
                 await onGetDoAction(SOCKET_URL.ONE_MINUTES)
                 // 打开 1分 K线图socket
-                KLINE_ONE_MINUTES_SOCKET.emit(totalMarketCode.value)
+                KLINE_ONE_MINUTES_SOCKET.emit([ totalMarketCode.value ])
                 break
             // 5分
             case CHART_TYPE.FIVE_MINUTES:
                 await onGetDoAction(SOCKET_URL.FIVE_MINUTES)
                 // 打开 5分 K线图socket
-                KLINE_FIVE_MINUTES_SOCKET.emit(totalMarketCode.value)
+                KLINE_FIVE_MINUTES_SOCKET.emit([ totalMarketCode.value ])
                 break
             // 15分
             case CHART_TYPE.FIFTEEN_MINUTES:
                 await onGetDoAction(SOCKET_URL.FIFTEEN_MINUTES)
                 // 打开分15分 线图socket
-                KLINE_FIFTEEN_MINUTES_SOCKET.emit(totalMarketCode.value)
+                KLINE_FIFTEEN_MINUTES_SOCKET.emit([ totalMarketCode.value ])
                 break
             // 30分
             case CHART_TYPE.THIRTY_MINUTES:
                 await onGetDoAction(SOCKET_URL.THIRTY_MINUTES)
                 // 打开分30分 线图socket
-                KLINE_THIRTY_MINUTES_SOCKET.emit(totalMarketCode.value)
+                KLINE_THIRTY_MINUTES_SOCKET.emit([ totalMarketCode.value ])
                 break
         }
     }
@@ -697,7 +697,7 @@ export const useMarketHooks = () => {
         initialValues: [],
         formatResult: res => utils_base64(res),
         onSuccess: () => {
-            RAISE_FALL_SOCKET.emit(raiseFallParams.value)
+            RAISE_FALL_SOCKET.emit([ raiseFallParams.value ])
         }
     })
 
@@ -707,7 +707,7 @@ export const useMarketHooks = () => {
             raiseFallData.value = []
 
             raiseFallType.value = type
-            await raiseFallRun(doParams(raiseFallParams.value))
+            await raiseFallRun(doParams([ raiseFallParams.value ]))
         }
     }
 
