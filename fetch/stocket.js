@@ -48,7 +48,10 @@ export const SOCKET_URL = {
     STOCK_DETAILS: 'foundsDetail',
 
     // 行业板块
-    BLOCK: 'blockInfo'
+    BLOCK: 'blockInfo',
+
+    // 消息通知
+    NOTICE: 'notice'
 }
 
 // do 接口参数整合
