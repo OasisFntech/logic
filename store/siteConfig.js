@@ -94,7 +94,7 @@ export const useNoticeStore = defineStore('notice', () => {
     NOTICE_SOCKET.on(res => {
         visible.value = false
 
-        notice.value = res
+        notice.value = res[0]
 
         visible.value = true
     })
