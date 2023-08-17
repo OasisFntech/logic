@@ -70,9 +70,10 @@ export const doParams = (params, payload) => ({
  * @close 关闭socket连接
  * */
 class CreateSocket {
-    constructor(event) {
+    constructor(event, isBase64 = true) {
         this.event = event
         this.active = false
+        this.isBase64 = isBase64
     }
     emit(params, payload) {
         if (socket) {
@@ -87,9 +88,13 @@ class CreateSocket {
         if (socket) {
             socket.on(this.event, ({ code, data }) => {
                 if (code === 1) {
-                    callback(
-                        utils_base64(data)
-                    )
+                    if (this.isBase64) {
+                        callback(
+                            utils_base64(data)
+                        )
+                    } else {
+                        callback(data)
+                    }
                 }
             })
         }
@@ -125,4 +130,4 @@ export const STEP_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STEP_DETAILS)
 export const STOCK_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STOCK_DETAILS)
 
 // 消息通知
-export const NOTICE_SOCKET = new CreateSocket(SOCKET_URL.NOTICE)
+export const NOTICE_SOCKET = new CreateSocket(SOCKET_URL.NOTICE, false)
