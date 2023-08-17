@@ -63,7 +63,7 @@ export const useRegister = ({
 
                 // 校验短信验证码
                 await api_fetch({
-                    url: COMMON_API_PATH.CHECK_SMS,
+                    url: COMMON_API_PATH.SMS_CHECK,
                     params: {
                         phone: mobile,
                         code

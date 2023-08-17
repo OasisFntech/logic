@@ -25,7 +25,7 @@ export const useSms = (name, { successTip, errorTip }) => {
             loading.value = true
             try {
                 await api_fetch({
-                    url: COMMON_API_PATH.SEND_SMS + phone
+                    url: COMMON_API_PATH.SMS_SEND + phone
                 })
 
                 successTip?.('短信验证码已发送，请注意查收')

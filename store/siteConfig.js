@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 
 import { useRequest, COMMON_API_PATH, NOTICE_SOCKET } from '../fetch'
-import { useUserInfoStore } from './user'
+import { useMessageStore, useUserInfoStore } from './user'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
     // 站点配置
@@ -45,7 +45,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
 
     // 请求客服配置 ps:后端可优化的接口
     useRequest({
-        url: COMMON_API_PATH.BASE_INFO,
+        url: COMMON_API_PATH.SITE_CONFIG_BASE,
         params: {
             configKey: 'customerServiceManagement'
         },
@@ -72,7 +72,8 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
 })
 
 export const useNoticeStore = defineStore('notice', () => {
-    const { userInfo } = storeToRefs(useUserInfoStore())
+    const { userInfo } = storeToRefs(useUserInfoStore()),
+        { onRefreshReadStatus } = useMessageStore()
 
     if (userInfo.value.token && !NOTICE_SOCKET.active) {
         NOTICE_SOCKET.emit(undefined,
@@ -90,6 +91,7 @@ export const useNoticeStore = defineStore('notice', () => {
             ...notice.value.slice(-4),
             res[0]
         ]
+        onRefreshReadStatus()
     })
 
     return {

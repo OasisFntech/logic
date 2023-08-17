@@ -23,7 +23,7 @@ export const useAccountLogin = () => {
             loading.value = true
             try {
                 const res = await api_fetch({
-                    url: COMMON_API_PATH.ACCOUNT_LOGIN,
+                    url: COMMON_API_PATH.LOGIN_BY_ACCOUNT,
                     params: {
                         username: formState.account,
                         password: utils_passwordEncode(formState.password, publicKey.value)
@@ -85,7 +85,7 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
 
                 if (isRegister) {
                     const res = await api_fetch({
-                        url: COMMON_API_PATH.MOBILE_LOGIN,
+                        url: COMMON_API_PATH.LOGIN_BY_MOBILE,
                         params: {
                             phone: formState.mobile,
                             code: formState.code

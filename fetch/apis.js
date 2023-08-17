@@ -14,7 +14,7 @@ export const COMMON_API_PATH = {
     PC_CONFIG: '/member/systemConfig/getPCSiteConfig',
     SITE_CONFIG: '/member/systemConfig/getSiteConfig',
     // 基础信息 ps:重复接口数据可优化
-    BASE_INFO: '/member/systemConfig/getSystemConfigValue',
+    SITE_CONFIG_BASE: '/member/systemConfig/getSystemConfigValue',
     // 获取客服信息
     SERVICE: '/member/systemConfig/getCustomerServiceLink',
     /** 系统类 */
@@ -31,17 +31,17 @@ export const COMMON_API_PATH = {
     CHECK_ACCOUNT_REGISTER: '/auth/member/checkAccountRegister',
     CHECK_MOBILE_REGISTER: '/auth/member/checkPhoneRegister',
     // 发送短信验证码
-    SEND_SMS: '/member/sms/operlog/86/',
+    SMS_SEND: '/member/sms/operlog/86/',
     // 检查短信验证码
-    CHECK_SMS: '/member/member/codeCheck',
+    SMS_CHECK: '/member/member/codeCheck',
     // 密码加密公钥
     PUBLIC_KEY: '/auth/system/getPublicKey',
     // 注册
     REGISTER: '/auth/member/register',
     // 账号密码登录
-    ACCOUNT_LOGIN: '/auth/member/login',
+    LOGIN_BY_ACCOUNT: '/auth/member/login',
     // 手机号登录
-    MOBILE_LOGIN: '/auth/member/verificationLogin',
+    LOGIN_BY_MOBILE: '/auth/member/verificationLogin',
     /** 登录注册 */
 
     /** 新闻类 */
@@ -56,6 +56,8 @@ export const COMMON_API_PATH = {
     /** 用户类 */
     // 用户信息
     USERINFO: '/member/member/getMyPageData',
-    USERINFO_BASE: '/member/member/getMemberBaseInfo'
+    USERINFO_BASE: '/member/member/getMemberBaseInfo',
+
+    MESSAGE_READ_STATUE: '/member/statistics/messagestatistics',
     /** 用户类 */
 }

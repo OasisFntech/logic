@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import _ from 'lodash'
 
 import { COMMON_API_PATH, useRequest } from '../fetch'
 import { utils_assign_object } from '../utils'
@@ -101,4 +102,27 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     }
 }, {
     persist: true
+})
+
+export const useMessageStore = defineStore('message', () => {
+    const hasUnread = ref(false)
+
+    const { response, onRefresh } = useRequest({
+        url: COMMON_API_PATH,
+        initialValues: {
+            isSystemMessages: null,
+            isStandInsideLetters: false,
+            isAnnouncementMessages: null,
+            isStockWarning: false
+        },
+        onSuccess: res => {
+            if (_.values(res).some(Boolean)) hasUnread.value = true
+        }
+    })
+
+    return {
+        hasUnread,
+        readStatus: response,
+        onRefreshReadStatus: onRefresh
+    }
 })
