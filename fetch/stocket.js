@@ -51,13 +51,12 @@ export const SOCKET_URL = {
     BLOCK: 'blockInfo',
 
     // 消息通知
-    NOTICE: 'notice'
+    NOTICE: '/notice'
 }
 
 // do 接口参数整合
 export const doParams = (params, payload) => ({
     event: SOCKET_EVENTS.SUBSCRIBE,
-    isCompress: true,
     params,
     uuid: v4(),
     ...payload
