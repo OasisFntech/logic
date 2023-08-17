@@ -25,7 +25,7 @@ export const utils_base64 = base64String => {
         )
     } catch (e) {
         console.error(e)
-        return {}
+        return base64String
     }
 }
 
