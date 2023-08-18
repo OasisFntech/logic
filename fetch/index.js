@@ -173,12 +173,12 @@ export function usePagination(
 
             finished.value = !resTotal ? true : resCurrent >= resTotal / resPageSize
 
-            fetchOptions?.onSuccess(res, list.value)
+            fetchOptions.onSuccess?.(res, list.value)
         },
         onErr: err => {
             console.error(err)
             finished.value = true
-            fetchOptions?.onErr(err)
+            fetchOptions.onErr?.(err)
         }
     })
 
