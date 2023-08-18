@@ -119,7 +119,7 @@ export const useMessageStore = defineStore('message', () => {
         },
         manual: !userInfo.value.token,
         onSuccess: res => {
-            if (_.values(res).some(Boolean)) hasUnread.value = true
+            hasUnread.value = _.values(res).some(Boolean)
         }
     })
 
