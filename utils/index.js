@@ -166,11 +166,12 @@ export const utils_assign_object = (oldObj, newObj, force) => {
     }
 }
 
-// 用户浏览器授权
-usePermission('clipboard-write')
-const { copy } = useClipboard()
 // 复制函数
 export const utils_copy = async ({ content, onSuccess, onFail }) => {
+    // 用户浏览器授权
+    usePermission('clipboard-write')
+    const { copy } = useClipboard()
+
     try {
         await copy(content)
         onSuccess()
@@ -184,4 +185,11 @@ export const utils_copy = async ({ content, onSuccess, onFail }) => {
 export const utils_storage_clear = () => {
     sessionStorage.clear()
     localStorage.clear()
+}
+
+export const utils_hide_info = (content, type) => {
+    switch (type) {
+        case 'mobile':
+            return `${content.slice(0, 3)}****${content.slice(-4)}`
+    }
 }
