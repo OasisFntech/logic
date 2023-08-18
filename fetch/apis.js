@@ -58,6 +58,6 @@ export const COMMON_API_PATH = {
     USERINFO: '/member/member/getMyPageData',
     USERINFO_BASE: '/member/member/getMemberBaseInfo',
 
-    MESSAGE_READ_STATUS: '/member/statistics/messagestatistics',
+    MESSAGE_STATUS: '/member/statistics/messagestatistics',
     /** 用户类 */
 }

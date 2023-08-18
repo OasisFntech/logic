@@ -110,7 +110,7 @@ export const useMessageStore = defineStore('message', () => {
     const hasUnread = ref(false)
 
     const { response, onRefresh } = useRequest({
-        url: COMMON_API_PATH.MESSAGE_READ_STATUS,
+        url: COMMON_API_PATH.MESSAGE_STATUS,
         initialValues: {
             isSystemMessages: null,
             isStandInsideLetters: false,
