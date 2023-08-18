@@ -105,7 +105,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
 })
 
 export const useMessageStore = defineStore('message', () => {
-    const { userinfo } = storeToRefs(useUserInfoStore())
+    const { userInfo } = storeToRefs(useUserInfoStore())
 
     const hasUnread = ref(false)
 
@@ -117,7 +117,7 @@ export const useMessageStore = defineStore('message', () => {
             isAnnouncementMessages: null,
             isStockWarning: false
         },
-        manual: !userinfo.value.token,
+        manual: !userInfo.value.token,
         onSuccess: res => {
             if (_.values(res).some(Boolean)) hasUnread.value = true
         }
