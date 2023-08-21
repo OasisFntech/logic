@@ -697,7 +697,7 @@ export const useMarketHooks = () => {
         initialValues: [],
         formatResult: res => utils_base64(res),
         onSuccess: () => {
-            RAISE_FALL_SOCKET.emit([ raiseFallParams.value ])
+            RAISE_FALL_SOCKET.emit(raiseFallParams.value)
         }
     })
 
@@ -707,7 +707,7 @@ export const useMarketHooks = () => {
             raiseFallData.value = []
 
             raiseFallType.value = type
-            await raiseFallRun(doParams([ raiseFallParams.value ]))
+            await raiseFallRun(doParams(raiseFallParams.value))
         }
     }
 
