@@ -167,7 +167,6 @@ export function usePagination(
             set(pagination, {
                 ...pagination.value,
                 [current]: resCurrent,
-                [pageSize]: resPageSize,
                 [total]: resTotal
             })
 
