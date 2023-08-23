@@ -54,9 +54,9 @@ export const SOCKET_URL = {
     NOTICE: '/notice',
 
     // 合约
-    CONTRACT: 'contractList',
+    CONTRACT: '/contractList',
     // 合约 - 股票持仓
-    STOCK_HOLD: 'stockPosition'
+    STOCK_HOLD: '/stockPosition'
 }
 
 // do 接口参数整合
