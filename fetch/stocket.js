@@ -51,7 +51,10 @@ export const SOCKET_URL = {
     BLOCK: 'blockInfo',
 
     // 消息通知
-    NOTICE: '/notice'
+    NOTICE: '/notice',
+
+    // 合约
+    CONTRACT: 'contractList'
 }
 
 // do 接口参数整合
@@ -131,3 +134,6 @@ export const STOCK_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STOCK_DETAILS)
 
 // 消息通知
 export const NOTICE_SOCKET = new CreateSocket(SOCKET_URL.NOTICE, false)
+
+// 合约
+export const CONTRACT_SOCKET = new CreateSocket(SOCKET_URL.CONTRACT, false)
