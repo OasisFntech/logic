@@ -155,7 +155,7 @@ export function usePagination(
                 resPageSize = res[responseKeys.pageSize],
                 resTotal = res[responseKeys.total]
 
-            if (resCurrent === 1 || mode === 'pagination') {
+            if (resCurrent <= 1 || mode === 'pagination') {
                 list.value = dataSource
             } else {
                 list.value = [
