@@ -66,6 +66,13 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         withdrawAmount: '--'
     })
 
+    const balance_visible = ref(false),
+        balance = computed(() => balance_visible.value ? userInfo.value.totalAssets : '******')
+
+    const onBalanceToggle = () => {
+        balance_visible.value = !balance_visible.value
+    }
+
     const onSetUserInfo = newUserInfo => {
         userInfo.value = utils_assign_object(userInfo.value, newUserInfo)
     }
@@ -96,7 +103,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
 
     return {
         userInfo,
+        balance_visible,
+        balance,
         loading: computed(() => userInfoLoading.value || userBaseInfoLoading.value),
+        onBalanceToggle,
         onSetUserInfo,
         onRefreshUserInfo
     }
