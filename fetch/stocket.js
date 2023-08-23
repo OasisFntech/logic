@@ -54,7 +54,9 @@ export const SOCKET_URL = {
     NOTICE: '/notice',
 
     // 合约
-    CONTRACT: 'contractList'
+    CONTRACT: 'contractList',
+    // 合约 - 股票持仓
+    STOCK_HOLD: 'stockPosition'
 }
 
 // do 接口参数整合
@@ -136,4 +138,6 @@ export const STOCK_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STOCK_DETAILS)
 export const NOTICE_SOCKET = new CreateSocket(SOCKET_URL.NOTICE, false)
 
 // 合约
-export const CONTRACT_SOCKET = new CreateSocket(SOCKET_URL.CONTRACT, false)
+export const CONTRACT_SOCKET = new CreateSocket(SOCKET_URL.CONTRACT)
+// 合约 - 股票持仓
+export const STOCK_HOLD_SOCKET = new CreateSocket(SOCKET_URL.STOCK_HOLD)
