@@ -138,6 +138,6 @@ export const STOCK_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STOCK_DETAILS)
 export const NOTICE_SOCKET = new CreateSocket(SOCKET_URL.NOTICE, false)
 
 // 合约
-export const CONTRACT_SOCKET = new CreateSocket(SOCKET_URL.CONTRACT)
+export const CONTRACT_SOCKET = new CreateSocket(SOCKET_URL.CONTRACT, false)
 // 合约 - 股票持仓
-export const STOCK_HOLD_SOCKET = new CreateSocket(SOCKET_URL.STOCK_HOLD)
+export const STOCK_HOLD_SOCKET = new CreateSocket(SOCKET_URL.STOCK_HOLD, false)
