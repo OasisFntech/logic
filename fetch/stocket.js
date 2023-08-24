@@ -134,6 +134,8 @@ export const STEP_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STEP_DETAILS)
 
 export const STOCK_DETAILS_SOCKET = new CreateSocket(SOCKET_URL.STOCK_DETAILS)
 
+export const STOCK_BLOCK_SOCKET = new CreateSocket(SOCKET_URL.BLOCK)
+
 // 消息通知
 export const NOTICE_SOCKET = new CreateSocket(SOCKET_URL.NOTICE, false)
 
