@@ -82,6 +82,8 @@ class CreateSocket {
     }
     emit(params, payload) {
         if (socket) {
+            if (this.active) this.close()
+
             socket.emit(
                 this.event,
                 doParams(params, payload)
