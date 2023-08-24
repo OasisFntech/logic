@@ -169,8 +169,7 @@ export const utils_assign_object = (oldObj, newObj, force) => {
 // 复制函数
 export const utils_copy = async ({ content, onSuccess, onFail }) => {
     // 用户浏览器授权
-    const permission = usePermission('clipboard-write')
-    const { isSupported, copy } = useClipboard()
+    const { copy } = useClipboard()
 
     const onCopy = async() => {
         try {
@@ -182,12 +181,7 @@ export const utils_copy = async ({ content, onSuccess, onFail }) => {
         }
     }
 
-    if (!isSupported.value || permission.value !== 'granted') {
-        await navigator.clipboard.readText()
-        onCopy()
-    } else {
-        onCopy()
-    }
+    return onCopy
 }
 
 // 清楚所有缓存
