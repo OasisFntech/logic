@@ -171,17 +171,13 @@ export const utils_copy = async ({ content, onSuccess, onFail }) => {
     // 用户浏览器授权
     const { copy } = useClipboard()
 
-    const onCopy = async() => {
-        try {
-            await copy(content)
-            onSuccess()
-        } catch (e) {
-            console.error(e)
-            onFail()
-        }
+    try {
+        await copy(content)
+        onSuccess()
+    } catch (e) {
+        console.error(e)
+        onFail()
     }
-
-    return onCopy
 }
 
 // 清楚所有缓存
