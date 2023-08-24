@@ -79,6 +79,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         userInfo.value = utils_assign_object(userInfo.value, newUserInfo)
     }
 
+    const onResetUserInfo = () => {
+        userInfo.value = { ...initialValues }
+    }
+
     const { loading: userInfoLoading, run: userInfoRun } = useRequest({
         url: COMMON_API_PATH.USERINFO,
         manual: true,
@@ -110,15 +114,11 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         loading: computed(() => userInfoLoading.value || userBaseInfoLoading.value),
         onBalanceToggle,
         onSetUserInfo,
+        onResetUserInfo,
         onRefreshUserInfo
     }
 }, {
-    persist: true,
-    actions: {
-        reset() {
-            this.userInfo = { ...initialValues }
-        }
-    }
+    persist: true
 })
 
 export const useMessageStore = defineStore('message', () => {
