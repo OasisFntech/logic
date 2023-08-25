@@ -101,8 +101,8 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
                         token: res.token,
                     })
                 } else {
-                    return Promise.reject()
                     unRegisterCallback?.()
+                    return Promise.reject()
                 }
             } finally {
                 loading.value = false
