@@ -56,7 +56,7 @@ export const useAccountLogin = () => {
     }
 }
 
-export const useMobileLogin = ({ unRegisterCallback }) => {
+export const useMobileLogin = (callback) => {
     const { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore()
 
     const formState = reactive({
@@ -101,7 +101,7 @@ export const useMobileLogin = ({ unRegisterCallback }) => {
                         token: res.token,
                     })
                 } else {
-                    unRegisterCallback?.()
+                    callback?.()
                     return Promise.reject()
                 }
             } finally {

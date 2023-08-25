@@ -7,7 +7,7 @@ import { COMMON_FORM_CONFIG } from '../config'
 import { usePublicKeyStore } from '../store'
 import { utils_passwordEncode } from '../utils'
 
-export const useRegister = ({ initialValues }) => {
+export const useRegister = (initialValues) => {
     const { publicKey } = storeToRefs(usePublicKeyStore())
 
     /**
