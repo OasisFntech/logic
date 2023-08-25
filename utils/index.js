@@ -167,17 +167,11 @@ export const utils_assign_object = (oldObj, newObj, force) => {
 }
 
 // 复制函数
-export const utils_copy = async ({ content, onSuccess, onFail }) => {
+export const utils_copy = async (content) => {
     // 用户浏览器授权
-    const { copy } = useClipboard()
+    const { copy } = useClipboard({ legacy: true })
 
-    try {
-        await copy(content)
-        onSuccess()
-    } catch (e) {
-        console.error(e)
-        onFail()
-    }
+    await copy(content)
 }
 
 // 清楚所有缓存
