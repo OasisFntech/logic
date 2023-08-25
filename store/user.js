@@ -66,7 +66,9 @@ const initialValues = {
 }
 
 export const useUserInfoStore = defineStore('userInfo', () => {
-    const userInfo = ref(initialValues)
+    const userInfo = ref({
+        ...initialValues
+    })
 
     const balance_visible = ref(false),
         balance = computed(() => balance_visible.value ? userInfo.value.totalAssets : '******')
