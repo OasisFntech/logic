@@ -14,7 +14,7 @@ export * from './sms'
 export * from './login'
 export * from './news'
 
-export const useFormDisabled = formState => computed(() => !_.every(formState, Boolean))
+export const useFormDisabled = (formState, omits) => computed(() => !_.every(_.omit(formState, omits), Boolean))
 
 export const useSiteConfig = async(callback) => {
     const res = await api_fetch({
