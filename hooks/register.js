@@ -7,7 +7,10 @@ import { COMMON_FORM_CONFIG } from '../config'
 import { usePublicKeyStore } from '../store'
 import { utils_passwordEncode } from '../utils'
 
-export const useRegister = (initialValues) => {
+export const useRegister = ({
+    submitCallback,
+    initialValues
+}) => {
     const { publicKey } = storeToRefs(usePublicKeyStore())
 
     /**
@@ -81,6 +84,8 @@ export const useRegister = (initialValues) => {
                         exclusiveDomain: window.location.origin
                     }
                 })
+
+                submitCallback?.()
             } finally {
                 submitLoading.value = false
             }
