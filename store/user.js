@@ -5,6 +5,19 @@ import _ from 'lodash'
 import { COMMON_API_PATH, useRequest } from '../fetch'
 import { utils_assign_object } from '../utils'
 
+const fixedKeys = [
+    'totalAssets',
+    'amount',
+    'withdrawFreeze',
+    'contractPrincipal',
+    'totalTradersMoney',
+    'surplusAmount',
+    'usedAmount',
+    'backMoneyFreeze',
+    'netAssets',
+    'withdrawAmount',
+]
+
 const initialValues = {
     // 账号
     account: '',
@@ -49,6 +62,7 @@ const initialValues = {
     backMoneyFreeze: '--',
     realBalance: null,
     isAgent: true,
+    // 合约净资产
     netAssets: '--',
 
     email: null,
@@ -78,6 +92,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     }
 
     const onSetUserInfo = newUserInfo => {
+        fixedKeys.forEach(e => {
+            const val = newUserInfo[e]
+            if (_.isNumber(val)) newUserInfo[e] = val.toFixed(2)
+        })
         userInfo.value = utils_assign_object(userInfo.value, newUserInfo)
     }
 
