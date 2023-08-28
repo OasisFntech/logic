@@ -1,6 +1,6 @@
 import JSEncrypt from 'jsencrypt'
 import { inflate } from 'pako'
-import { useClipboard, usePermission } from '@vueuse/core'
+import { useClipboard } from '@vueuse/core'
 import _ from 'lodash'
 
 export * from './charts'
@@ -144,26 +144,26 @@ export const utils_favicon = (href) => {
 }
 
 export const utils_assign_object = (oldObj, newObj, force) => {
-    if (force) {
-        return {
-            ...oldObj,
-            ...newObj
-        }
-    } else {
-        const obj = {
-            ...oldObj
-        }
 
-        _.entries(newObj).forEach(e => {
-            const [ key, val ] = e
+    const obj = {
+        ...oldObj
+    }
 
-            if (val !== undefined) {
+    _.entries(newObj).forEach(e => {
+        const [ key, val ] = e
+
+        if (force) {
+            obj[key] = val
+        } else if (val !== undefined) {
+            if (_.isNumber(val)) {
+                obj[key] = val.toFixed(2)
+            } else {
                 obj[key] = val
             }
-        })
+        }
+    })
 
-        return obj
-    }
+    return obj
 }
 
 // 复制函数
