@@ -144,7 +144,6 @@ export const utils_favicon = (href) => {
 }
 
 export const utils_assign_object = (oldObj, newObj, force) => {
-
     const obj = {
         ...oldObj
     }
@@ -155,11 +154,7 @@ export const utils_assign_object = (oldObj, newObj, force) => {
         if (force) {
             obj[key] = val
         } else if (val !== undefined) {
-            if (_.isNumber(val)) {
-                obj[key] = val.toFixed(2)
-            } else {
-                obj[key] = val
-            }
+            obj[key] = val
         }
     })
 
