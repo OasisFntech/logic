@@ -1,5 +1,5 @@
-import { onMounted } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
+import _ from 'lodash'
 
 let countdown_interval = null
 
@@ -35,13 +35,17 @@ export const useCountdown = (name = 'noname') => {
         onStart()
     }
 
-    // 页面加载时有未完成倒计时，继续倒计时
-    onMounted(() => {
-        if (countdown.value > 0) onStart()
-    })
-
     return {
         countdown,
         onCountdown,
     }
 }
+
+_.keys(localStorage).filter(e => e.includes('countdown')).forEach(e => {
+    const rest = localStorage.getItem(e, '')
+
+    if (+rest > 0) {
+        const { onCountdown } = useCountdown(e.replace('-countdown'))
+        onCountdown(rest)
+    }
+})
