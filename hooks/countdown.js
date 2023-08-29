@@ -42,10 +42,10 @@ export const useCountdown = (name = 'noname') => {
 }
 
 _.keys(localStorage).filter(e => e.includes('countdown')).forEach(e => {
-    const rest = localStorage.getItem(e, '')
+    const rest = localStorage.getItem(e)
 
     if (+rest > 0) {
-        const { onCountdown } = useCountdown(e.replace('-countdown'))
+        const { onCountdown } = useCountdown(e.replace('-countdown', ''))
         onCountdown(rest)
     }
 })
