@@ -107,7 +107,6 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         url: COMMON_API_PATH.USERINFO,
         manual: true,
         onSuccess: res => {
-            delete res.amount
             onSetUserInfo(res)
         }
     })
