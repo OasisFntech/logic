@@ -1,3 +1,4 @@
+import { onMounted } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
 
 let countdown_interval = null
@@ -24,6 +25,11 @@ export const useCountdown = (name = 'noname') => {
         countdown.value = time
         onStart()
     }
+
+    // 页面加载时有未完成倒计时，继续倒计时
+    onMounted(() => {
+        if (countdown.value > 0) onStart()
+    })
 
     return {
         countdown,
