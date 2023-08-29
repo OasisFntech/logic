@@ -84,7 +84,7 @@ export function useRequest({
         loading,
         response,
         run,
-        onRefresh: () => run(requestParams.value),
+        onRefresh: () => run(),
     }
 }
 
