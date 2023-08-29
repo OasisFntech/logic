@@ -3,19 +3,28 @@ import { useLocalStorage } from '@vueuse/core'
 
 let countdown_interval = null
 
+const onClear = () => {
+    clearInterval(countdown_interval)
+    countdown_interval = null
+}
+
 export const useCountdown = (name = 'noname') => {
     const key = `${name}-countdown`,
         countdown = useLocalStorage(key, 0)
 
     // 倒计时函数
     const onStart = () => {
+        if (countdown_interval) {
+            onClear()
+        }
+
         countdown_interval = setInterval(() => {
             if (countdown.value > 0) {
                 countdown.value --
+                localStorage.setItem(key, countdown.value)
             } else {
                 localStorage.removeItem(key)
-                clearInterval(countdown_interval)
-                countdown_interval = null
+                onClear()
             }
         }, 1000)
     }
@@ -33,6 +42,6 @@ export const useCountdown = (name = 'noname') => {
 
     return {
         countdown,
-        onCountdown
+        onCountdown,
     }
 }
