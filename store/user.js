@@ -138,7 +138,9 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         onRefreshUserInfo
     }
 }, {
-    persist: true
+    persist: {
+        storage: sessionStorage,
+    },
 })
 
 export const useMessageStore = defineStore('message', () => {
