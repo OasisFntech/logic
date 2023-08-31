@@ -179,5 +179,7 @@ export const utils_hide_info = (content, type) => {
     switch (type) {
         case 'mobile':
             return `${content.slice(0, 3)}****${content.slice(-4)}`
+        default:
+            return '****'
     }
 }
