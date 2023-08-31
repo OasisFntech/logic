@@ -1,6 +1,6 @@
 {
     "name": "frontend_common",
-    "version": "0.0.112",
+    "version": "0.0.113",
     "description": "frontend use",
     "main": "",
     "scripts": {},
@@ -12,9 +12,9 @@
     "license": "ISC",
     "homepage": "https://github.com/OasisFntech/logic.git",
     "dependencies": {
-        "@vueuse/core": "^10.2.1",
+        "@vueuse/core": "^10.4.1",
         "ant-design-vue": "4.0.0-rc.5",
-        "axios": "^1.4.0",
+        "axios": "^1.5.0",
         "dayjs": "^1.11.9",
         "jsencrypt": "^3.3.2",
         "lodash": "^4.17.21",

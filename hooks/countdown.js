@@ -1,4 +1,4 @@
-import { useLocalStorage } from '@vueuse/core'
+import { ref } from 'vue'
 import _ from 'lodash'
 
 let countdown_interval = null
@@ -10,7 +10,7 @@ const onClear = () => {
 
 export const useCountdown = (name = 'noname') => {
     const key = `${name}-countdown`,
-        countdown = useLocalStorage(key, 0)
+        countdown = ref(0)
 
     // 倒计时函数
     const onStart = () => {
