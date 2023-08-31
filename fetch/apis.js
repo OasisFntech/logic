@@ -12,7 +12,7 @@ export const COMMON_API_PATH = {
 
     // 站点配置项
     PC_CONFIG: '/member/systemConfig/getPCSiteConfig',
-    SITE_CONFIG: '/member/systemConfig//getSiteConfigHide',
+    SITE_CONFIG: '/member/systemConfig/getSiteConfigHide',
     // 基础信息 ps:重复接口数据可优化
     SITE_CONFIG_BASE: '/member/systemConfig/getSystemConfigValue',
     // 获取客服信息
