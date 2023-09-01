@@ -1,21 +1,16 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import JSEncrypt from 'jsencrypt'
 
 import { useRequest, COMMON_API_PATH } from '../fetch'
 
 export const usePublicKeyStore = defineStore('publicKey', () => {
-    const publicKey = ref('')
-
-    const { response, onRefresh } = useRequest({
+    const { response: publicKey, onRefresh: onUpdatePublicKey } = useRequest({
         url: COMMON_API_PATH.PUBLIC_KEY,
         initialValues: ''
     })
 
     const onEncode = async(content) => {
-        if (!publicKey.value) {
-            await onRefresh()
-        }
+        if (!publicKey.value) await onUpdatePublicKey()
 
         const encrypt = new JSEncrypt()
         encrypt.setPublicKey(publicKey.value)
@@ -24,9 +19,9 @@ export const usePublicKeyStore = defineStore('publicKey', () => {
     }
 
     return {
-        publicKey: response,
+        publicKey,
         onEncode,
-        onUpdatePublicKey: onRefresh
+        onUpdatePublicKey
     }
 }, {
     persist: {
