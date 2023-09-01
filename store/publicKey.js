@@ -10,12 +10,16 @@ export const usePublicKeyStore = defineStore('publicKey', () => {
     })
 
     const onEncode = async(content) => {
+        console.log(publicKey.value)
         if (!publicKey.value) await onUpdatePublicKey()
 
         const encrypt = new JSEncrypt()
         encrypt.setPublicKey(publicKey.value)
 
-        return encrypt.encrypt(content)
+        const encode = encrypt.encrypt(content)
+        console.log(encode)
+
+        return encode
     }
 
     return {
