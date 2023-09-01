@@ -4,11 +4,11 @@ import { storeToRefs } from 'pinia'
 import { COMMON_FORM_CONFIG } from '../config'
 import { api_fetch, COMMON_API_PATH, FETCH_METHOD, NOTICE_SOCKET } from '../fetch'
 import { utils_passwordEncode } from '../utils'
-import { usePublicKeyStore, useUserInfoStore } from '../store'
+import { useSiteConfigStore, useUserInfoStore } from '../store'
 import { useFormDisabled } from './index'
 
 export const useAccountLogin = () => {
-    const { publicKey } = storeToRefs(usePublicKeyStore()),
+    const { publicKey } = storeToRefs(useSiteConfigStore()),
         { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore()
 
     const formState = reactive({

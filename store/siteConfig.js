@@ -57,6 +57,11 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         }
     })
 
+    const { response: publicKey, onRefresh } = useRequest({
+        url: COMMON_API_PATH.PUBLIC_KEY,
+        initialValues: ''
+    })
+
     // 获取logo
     const { response: logoRes } = useRequest({
         url: COMMON_API_PATH.PC_CONFIG,
@@ -67,7 +72,10 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
 
     return {
         siteConfig,
-        logoRes
+        logoRes,
+
+        publicKey,
+        onUpdatePublicKey: onRefresh
     }
 })
 
