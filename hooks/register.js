@@ -78,7 +78,7 @@ export const useRegister = ({
                         inviterPhone: referrer,
                         userType: 1,
                         transactionPassword: '',
-                        loginPassword: onEncode(password),
+                        loginPassword: await onEncode(password),
                         exclusiveDomain: window.location.origin
                     }
                 })
