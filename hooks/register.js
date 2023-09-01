@@ -1,17 +1,15 @@
 import { reactive, ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import _ from 'lodash'
 
 import { api_fetch, COMMON_API_PATH } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
 import { usePublicKeyStore } from '../store'
-import { utils_passwordEncode } from '../utils'
 
 export const useRegister = ({
     submitCallback,
     initialValues
 }) => {
-    const { publicKey } = storeToRefs(usePublicKeyStore())
+    const { onEncode } = usePublicKeyStore()
 
     /**
      * @const formState form表单数据
@@ -80,7 +78,7 @@ export const useRegister = ({
                         inviterPhone: referrer,
                         userType: 1,
                         transactionPassword: '',
-                        loginPassword: utils_passwordEncode(password, publicKey.value),
+                        loginPassword: onEncode(password),
                         exclusiveDomain: window.location.origin
                     }
                 })

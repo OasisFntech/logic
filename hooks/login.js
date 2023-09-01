@@ -1,14 +1,12 @@
 import { ref, reactive } from 'vue'
-import { storeToRefs } from 'pinia'
 
 import { COMMON_FORM_CONFIG } from '../config'
 import { api_fetch, COMMON_API_PATH, FETCH_METHOD, NOTICE_SOCKET } from '../fetch'
-import { utils_passwordEncode } from '../utils'
-import { useSiteConfigStore, useUserInfoStore } from '../store'
+import { usePublicKeyStore, useUserInfoStore } from '../store'
 import { useFormDisabled } from './index'
 
 export const useAccountLogin = () => {
-    const { publicKey } = storeToRefs(useSiteConfigStore()),
+    const { onEncode } = usePublicKeyStore(),
         { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore()
 
     const formState = reactive({
@@ -26,7 +24,7 @@ export const useAccountLogin = () => {
                     url: COMMON_API_PATH.LOGIN_BY_ACCOUNT,
                     params: {
                         username: formState.account,
-                        password: utils_passwordEncode(formState.password, publicKey.value)
+                        password: onEncode(formState.password)
                     }
                 })
 

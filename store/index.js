@@ -1,4 +1,5 @@
 export * from './apiDomain'
 export * from './popup'
+export * from './publicKey'
 export * from './siteConfig'
 export * from './user'

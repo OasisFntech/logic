@@ -1,4 +1,3 @@
-import JSEncrypt from 'jsencrypt'
 import { inflate } from 'pako'
 import { useClipboard } from '@vueuse/core'
 import _ from 'lodash'
@@ -91,13 +90,6 @@ export const utils_number_format = (number, options) => {
 
         return `${prefix}${Number(number).toFixed(fixed)}${suffix}`
     }
-}
-
-// 密码加密
-export const utils_passwordEncode = (password, publicKey) => {
-    const encrypt = new JSEncrypt()
-    encrypt.setPublicKey(publicKey)
-    return encrypt.encrypt(password)
 }
 
 export const utils_inviteCode = () => {
