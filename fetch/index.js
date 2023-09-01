@@ -84,7 +84,7 @@ export function useRequest({
         loading,
         response,
         run,
-        onRefresh: () => run(),
+        onRefresh: async() => await run(),
     }
 }
 
