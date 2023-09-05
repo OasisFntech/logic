@@ -11,7 +11,8 @@ import { utils_assign_object } from '../utils'
 export const FETCH_METHOD = {
     POST: 'post',
     GET: 'get',
-    DELETE: 'delete'
+    DELETE: 'delete',
+    PUT: 'put'
 }
 
 export function api_fetch({ url, params, method = 'post', options }) {
@@ -27,6 +28,12 @@ export function api_fetch({ url, params, method = 'post', options }) {
                 )
             case FETCH_METHOD.POST:
                 return axios.post(
+                    url,
+                    params,
+                    options
+                )
+            case FETCH_METHOD.PUT:
+                return axios.put(
                     url,
                     params,
                     options
