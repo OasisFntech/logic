@@ -74,7 +74,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
 export const useNoticeStore = defineStore('notice', () => {
     const userInfoStore = useUserInfoStore(),
         { onRefreshUserInfo } = userInfoStore,
-        { userInfo } = storeToRefs(),
+        { userInfo } = storeToRefs(userInfoStore),
         { onRefreshReadStatus } = useMessageStore()
 
     if (userInfo.value.token && !NOTICE_SOCKET.active) {
