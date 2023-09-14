@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import _ from 'lodash'
 
 import { COMMON_API_PATH, useRequest } from '../fetch'
@@ -144,6 +144,8 @@ export const useUserInfoStore = defineStore('userInfo', () => {
 })
 
 export const useMessageStore = defineStore('message', () => {
+    const { userInfo } = storeToRefs(useUserInfoStore())
+
     const hasUnread = ref(false)
 
     const { response, onRefresh } = useRequest({
@@ -154,7 +156,7 @@ export const useMessageStore = defineStore('message', () => {
             isAnnouncementMessages: null,
             isStockWarning: false
         },
-        manual: true,
+        manual: !userInfo.value.token,
         onSuccess: res => {
             hasUnread.value = _.values(res).some(Boolean)
         }
