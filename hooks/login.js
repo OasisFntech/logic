@@ -2,12 +2,13 @@ import { ref, reactive } from 'vue'
 
 import { COMMON_FORM_CONFIG } from '../config'
 import { api_fetch, COMMON_API_PATH, FETCH_METHOD, NOTICE_SOCKET } from '../fetch'
-import { usePublicKeyStore, useUserInfoStore } from '../store'
+import { usePublicKeyStore, useUserInfoStore, useMessageStore } from '../store'
 import { useFormDisabled } from './index'
 
 export const useAccountLogin = () => {
     const { onEncode } = usePublicKeyStore(),
-        { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore()
+        { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore(),
+        { onRefreshReadStatus } = useMessageStore()
 
     const formState = reactive({
             account: '',
@@ -32,6 +33,7 @@ export const useAccountLogin = () => {
 
                 onSetUserInfo(res)
                 onRefreshUserInfo()
+                onRefreshReadStatus()
                 NOTICE_SOCKET.emit(undefined, {
                     memberId: res.memberId,
                     token: res.token,
@@ -55,7 +57,8 @@ export const useAccountLogin = () => {
 }
 
 export const useMobileLogin = (callback) => {
-    const { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore()
+    const { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore(),
+        { onRefreshReadStatus } = useMessageStore()
 
     const formState = reactive({
             mobile: '',
@@ -94,6 +97,7 @@ export const useMobileLogin = (callback) => {
 
                     onSetUserInfo(res)
                     onRefreshUserInfo()
+                    onRefreshReadStatus()
                     NOTICE_SOCKET.emit(undefined, {
                         memberId: res.memberId,
                         token: res.token,
