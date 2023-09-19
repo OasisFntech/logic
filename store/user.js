@@ -139,7 +139,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     }
 }, {
     persist: {
-        storage: sessionStorage,
+        storage: localStorage,
     },
 })
 

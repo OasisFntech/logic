@@ -25,6 +25,6 @@ export const usePublicKeyStore = defineStore('publicKey', () => {
     }
 }, {
     persist: {
-        storage: sessionStorage,
+        storage: localStorage,
     },
 })
