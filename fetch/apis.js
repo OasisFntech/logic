@@ -1,5 +1,8 @@
 export const COMMON_API_PATH = {
     /** 系统类 */
+    // 轮播图接口
+    CAROUSEL: '/information/viewpager/select/1',
+
     // 弹窗公告
     POPUP: '/information/platformPopups',
 
