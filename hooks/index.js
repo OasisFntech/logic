@@ -13,7 +13,6 @@ export * from './countdown'
 export * from './sms'
 export * from './login'
 export * from './news'
-export * from './carousel'
 
 export const useFormDisabled = (formState, omits) => computed(() => !_.every(_.omit(formState, omits), Boolean))
 
