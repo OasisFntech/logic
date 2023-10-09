@@ -175,3 +175,11 @@ export const utils_hide_info = (content, type) => {
             return '****'
     }
 }
+
+export const utils_referrer = () => {
+    const { href, origin, pathname } = window.location,
+        params = new URLSearchParams(href.replace(`${origin}${pathname}#/`, '')),
+        inviteCode = params.get('inviteCode')
+
+    if (inviteCode) sessionStorage.setItem('inviteCode', inviteCode)
+}
