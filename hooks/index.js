@@ -32,3 +32,15 @@ export const useSiteConfig = async(callback) => {
         utils_favicon(res.titleAddress)
     }
 }
+
+export const useRaiseFallColor = () => {
+    // 获取涨跌颜色值
+    const rootStyle = getComputedStyle(document.documentElement),
+        raiseColor = rootStyle.getPropertyValue('--raise'),
+        fallColor = rootStyle.getPropertyValue('--fall')
+
+    return {
+        raiseColor,
+        fallColor
+    }
+}

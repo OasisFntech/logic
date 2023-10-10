@@ -183,3 +183,18 @@ export const utils_referrer = () => {
 
     if (inviteCode) sessionStorage.setItem('inviteCode', inviteCode)
 }
+
+/**
+ * @function utils_colorful
+ * @description 根据数值大小返回颜色类名
+ * @param value 需要判断的数值
+ * @param defaultColor 默认类名
+ * @return String
+ * */
+export const utils_colorful = (value, defaultColor = 'text-gray-400') => {
+    let color = defaultColor
+    if (value > 0) color = 'text-raise'
+    if (value < 0) color = 'text-fall'
+
+    return color
+}
