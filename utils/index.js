@@ -3,6 +3,7 @@ import { useClipboard } from '@vueuse/core'
 import _ from 'lodash'
 
 export * from './charts'
+export * from './stock'
 
 /**
  * @function utils_base64

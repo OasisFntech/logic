@@ -1,7 +1,7 @@
 <template>
-    <div :class="[ color ]">
+    <span :class="[ color ]">
         {{ plus }}{{ content }}{{ suffix }}
-    </div>
+    </span>
 </template>
 
 <script setup>
