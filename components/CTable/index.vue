@@ -22,6 +22,7 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    fixed: Boolean,
     hideHeader: Boolean,
     hideHeaderWithoutData: Boolean,
     headerClass: [ String, Array, Object, Function ],
@@ -42,7 +43,7 @@ const HeadRender = () => {
             'div',
             {
                 class: classNames(
-                    [ 'c-table__thead-row min-h-[40px]' ],
+                    'c-table__thead-row',
                     _.isFunction(props.headerClass) ? props.headerClass() : props.headerClass,
                 ),
                 style: {
@@ -81,9 +82,9 @@ const HeadRender = () => {
 
 const BodyRender = () => {
     if (props.dataSource.length) {
-        return props.dataSource.map((d, index) => {
+        const tbody = props.dataSource.map((d, index) => {
             const classnames = classNames(
-                [ 'c-table__tbody-row min-h-[40px]' ],
+                [ 'c-table__tbody-row' ],
                 _.isFunction(props.rowsClass) ? props.rowsClass(d) : props.rowsClass,
             )
             
@@ -92,7 +93,7 @@ const BodyRender = () => {
                 {
                     class: classnames,
                     style: {
-                        gridTemplateColumns: `repeat(${gird.value}, minmax(0, 3fr))`,
+                        gridTemplateColumns: `repeat(${gird.value}, minmax(0, 1fr))`,
                     },
                     onClick: () => {
                         emits('rowsClick', d)
@@ -132,9 +133,22 @@ const BodyRender = () => {
                         },
                         childVNode,
                     )
-                }),
+                })
             )
         })
+        
+        return props.fixed
+            ? h(
+                'div',
+                {
+                    style: {
+                        height: 'calc(100% - 32px)',
+                        overflow: 'auto'
+                    }
+                },
+                tbody
+            )
+            : tbody
     } else {
         return slots?.empty
     }
@@ -145,7 +159,11 @@ defineOptions({ name: 'CTable' })
 
 <style scoped>
 .c-table {
-    @apply text-sm;
+    @apply text-sm h-full overflow-hidden;
+}
+
+:deep(.c-table__thead-row) {
+    @apply font-medium text-gray-500;
 }
 
 :deep(.c-table__thead-row),

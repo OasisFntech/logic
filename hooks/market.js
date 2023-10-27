@@ -10,7 +10,8 @@ import {
     utils_timeParser,
     utils_renderTooltip,
     utils_kLineCalculateMA,
-    utils_renderRealTimeChart
+    utils_renderRealTimeChart,
+    utils_table_render_amount
 } from '../utils'
 import {
     COMMON_API_PATH,
@@ -490,10 +491,11 @@ export const useMarketHooks = () => {
     }
 }
 
+// 今日股市分析
 export const useMarketAnalysis = () => {
     const { totalMarket } = storeToRefs(useStockMarketStore())
 
-    const analysis = computed(() => {
+    return computed(() => {
         const { fellNum, flatNum, roseNum } = totalMarket.value
 
         const percent = _.sum([
@@ -503,25 +505,21 @@ export const useMarketAnalysis = () => {
         ])
 
         return {
+            raise: roseNum,
             fallPercent: _.round(
                 _.divide(fellNum, percent) * 100,
                 2,
             ),
+            flat: flatNum,
             flatPercent: _.round(
                 _.divide(flatNum, percent) * 100,
                 2,
             ),
+            fall: fellNum,
             raisePercent: _.round(
                 _.divide(roseNum, percent) * 100,
                 2,
-            ),
+            )
         }
     })
-
-    return {
-        analysis,
-        raise: totalMarket.value.roseNum,
-        fall: totalMarket.value.fellNum,
-        flat: totalMarket.value.flatNum
-    }
 }
