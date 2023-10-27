@@ -1,4 +1,5 @@
 import { ref, computed, onBeforeUnmount } from 'vue'
+import { storeToRefs } from 'pinia'
 import _ from 'lodash'
 
 import { CHART_TYPE, CHART_TYPES_CONFIG } from '../config'
@@ -26,6 +27,7 @@ import {
     RAISE_FALL_SOCKET
 } from '../fetch'
 import { useRaiseFallColor } from './index'
+import { useStockMarketStore } from '../store'
 
 export const useMarketHooks = () => {
     // 当前大盘的股票代码
@@ -485,5 +487,41 @@ export const useMarketHooks = () => {
         raiseFallData,
         raiseFallLoading,
         onChangeRaiseFallType
+    }
+}
+
+export const useMarketAnalysis = () => {
+    const { totalMarket } = storeToRefs(useStockMarketStore())
+
+    const analysis = computed(() => {
+        const { fellNum, flatNum, roseNum } = totalMarket.value
+
+        const percent = _.sum([
+            fellNum,
+            flatNum,
+            roseNum,
+        ])
+
+        return {
+            fallPercent: _.round(
+                _.divide(fellNum, percent) * 100,
+                2,
+            ),
+            flatPercent: _.round(
+                _.divide(flatNum, percent) * 100,
+                2,
+            ),
+            raisePercent: _.round(
+                _.divide(roseNum, percent) * 100,
+                2,
+            ),
+        }
+    })
+
+    return {
+        analysis,
+        raise: totalMarket.value.roseNum,
+        fall: totalMarket.value.fellNum,
+        flat: totalMarket.value.flatNum
     }
 }
