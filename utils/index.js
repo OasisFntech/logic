@@ -7,7 +7,7 @@ export * from './stock'
 
 /**
  * @function utils_base64
- * @param base64String base64加密字符串
+ * @param base64String {string} base64加密字符串
  * @return object
  * @description 解析接口返回的base64加密字符串
  * */
@@ -31,7 +31,7 @@ export const utils_base64 = base64String => {
 
 /**
  * @function utils_link
- * @param url 跳转地址 | HTMLHyperlinkElementUtils.href
+ * @param url {string} 跳转地址 | HTMLHyperlinkElementUtils.href
  * @param target 跳转方式 | HTMLAnchorElement.target
  * @description 用 a 标签模拟跳转，避免兼容性问题
  * */
@@ -51,8 +51,8 @@ export const utils_link = (url, target = '_blank') => {
 
 /**
  * @function utils_amount_chinesization
- * @param amount 金额
- * @param options
+ * @param amount {number} 金额
+ * @param options {object}
  * @params showThousand 是否展示 千 位
  * @params fixed 保留小数位数
  * @return string
@@ -69,7 +69,7 @@ export const utils_amount_chinesization = (amount, options) => {
 
     if (amount < 1000) return amount.toFixed(fixed)
 
-    if (amount < 10000) return (amount / 1000).toFixed(fixed) + (showThousand ? '千' : '')
+    if (amount < 10000) return showThousand ? `${(amount / 1000).toFixed(fixed)}千` : amount.toFixed(fixed)
 
     if (amount < 100000000) return (amount / 10000).toFixed(fixed) + '万'
 
