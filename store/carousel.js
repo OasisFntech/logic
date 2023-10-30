@@ -22,6 +22,7 @@ export const useCarouselStore = defineStore('carousel', () => {
     }
 
     return {
+        loading,
         carousel,
         onGetCarousel
     }
