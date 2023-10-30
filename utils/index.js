@@ -65,17 +65,30 @@ export const utils_amount_chinesization = (amount, options) => {
         ...options
     }
 
+    let base = 0,
+        remainder = 0
+
     if (isNaN(amount)) return '--'
 
     if (amount < 1000) return amount.toFixed(fixed)
 
     if (amount < 10000) return showThousand ? `${(amount / 1000).toFixed(fixed)}千` : amount.toFixed(fixed)
 
-    if (amount < 100000000) return (amount / 10000).toFixed(fixed) + '万'
+    if (amount < 100000000) {
+        base = Math.floor(amount / 10000)
+        remainder = (amount % 10000) / 10000
+        return (base + remainder).toFixed(fixed) + '万'
+    }
 
-    if (amount < 1000000000000) return (amount / 100000000).toFixed(fixed) + '亿'
+    if (amount < 1000000000000) {
+        base = Math.floor(amount / 100000000)
+        remainder = (amount % 100000000) / 100000000
+        return (base + remainder).toFixed(fixed) + '亿'
+    }
 
-    return (amount / 1000000000000).toFixed(fixed) + '千亿'
+    base = Math.floor(amount / 100000000000)
+    remainder = (amount % 100000000000) / 100000000000
+    return (base + remainder).toFixed(fixed) + '千亿'
 }
 
 export const utils_number_format = (number, options) => {
