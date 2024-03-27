@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || '' +'/api'
-
+axios.defaults.baseURL = (import.meta.env.VITE_API_URL || '' ) + '/api'
+console.log(axios.defaults.baseURL)
 function axiosDefaultConfig(config) {
     Object.entries(config).forEach(e => {
         const [ key, val ] = e
