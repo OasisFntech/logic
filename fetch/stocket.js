@@ -12,19 +12,40 @@ export const SOCKET_EVENTS = {
 
 export let socket = null
 
-export const createSocket = (socketUri) => {
-    if (!socket) {
-        socket = SocketIO(
-            `${socketUri}?deviceID=${deviceID}`,
-            {
-                transports: [ 'websocket' ],
-                deviceID,
-            }
-        )
+export const createSocket = async (socketUri) => {
+    const uris = socketUri.split(',') // 拆分逗号隔开的地址为数组
+    for (const uri of uris) {
+        try {
+            // 尝试建立连接，使用 Promise 包装以便在连接成功时 resolve，连接失败时 reject
+            await new Promise((resolve, reject) => {
+                const socket = SocketIO(
+                    `${uri}?deviceID=${deviceID}`,
+                    {
+                        transports: ['websocket'],
+                        deviceID,
+                    }
+                )
 
-        socket.on('connect', (con) => {
-            console.log('socket connected successfully')
-        })
+                // 监听连接成功事件
+                socket.on('connect', () => {
+                    console.log('Socket connected successfully to', uri)
+                    resolve() // 解决 Promise
+                })
+
+                // 监听连接错误事件
+                socket.on('connect_error', (error) => {
+                    console.error('Socket connection failed to', uri, error)
+                    socket.close() // 关闭 socket 连接
+                    reject(error) // 拒绝 Promise
+                })
+            })
+
+            // 如果成功连接到一个地址，则结束循环
+            break
+        } catch (error) {
+            // 如果连接失败，则继续尝试下一个地址
+            console.error('Failed to connect to', uri, error)
+        }
     }
 }
 
