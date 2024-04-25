@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import * as dayjs from 'dayjs'
 import _ from 'lodash'
 
 // echart 图表通用配置 K 线图
