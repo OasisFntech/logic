@@ -1,6 +1,5 @@
-import dayjs_test from 'dayjs'
-const dayjs = dayjs_test
 import _ from 'lodash'
+import dayjs from 'dayjs'
 
 // echart 图表通用配置 K 线图
 export const ECHART_CONFIG = {
