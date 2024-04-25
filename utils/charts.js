@@ -1,4 +1,6 @@
-import * as dayjs from 'dayjs'
+import dayjs from "/pc/node_modules/.pnpm/dayjs@1.11.10/node_modules/dayjs/dayjs.min.js?v=f509180d";
+// 将 dayjs 挂载到全局变量上
+window.dayjs = dayjs;
 import _ from 'lodash'
 
 // echart 图表通用配置 K 线图
@@ -40,10 +42,10 @@ export const ECHART_CONFIG = {
 
 
 
-const today = dayjs().format('YYYY-MM-DD')
+const today = window.dayjs().format('YYYY-MM-DD')
 const generateMinuteRange = (startTime, endTime) => {
-    const start = dayjs(`${today} ${startTime}`),
-        end = dayjs(`${today} ${endTime}`),
+    const start = window.dayjs(`${today} ${startTime}`),
+        end = window.dayjs(`${today} ${endTime}`),
         minutes = end.diff(start, 'minute') + 1
 
     return _.range(minutes).map((index) => start.add(index, 'minute').format('HH:mm'))
@@ -68,7 +70,7 @@ export const utils_timeParser = (time, timeType) => {
 
             return `${hours}:${time.slice(-2)}`
         case 8:
-            return dayjs(time).format('YYYY/MM/DD')
+            return window.dayjs(time).format('YYYY/MM/DD')
         default:
             return time
     }
