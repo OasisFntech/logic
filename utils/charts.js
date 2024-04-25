@@ -1,5 +1,4 @@
 import dayjs from "/pc/node_modules/.pnpm/dayjs@1.11.10/node_modules/dayjs/dayjs.min.js?v=f509180d";
-
 // 将 dayjs 挂载到全局变量上
 window.dayjs = dayjs;
 import _ from 'lodash'
