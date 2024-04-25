@@ -1,4 +1,4 @@
-import * as dayjs from "/pc/node_modules/.pnpm/dayjs@1.11.10/node_modules/dayjs/dayjs.min.js?v=e80a4830";
+import dayjs from 'dayjs'
 import _ from 'lodash'
 
 // echart 图表通用配置 K 线图
