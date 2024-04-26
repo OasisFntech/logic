@@ -13,7 +13,7 @@ export const SOCKET_EVENTS = {
 
 export let socket = null
 const getKey = (socketUri) => {
-    return "ENV"+import.meta.env.PROD+"_"+import.meta.env.MODE+"_"+md5(socketUri);
+    return "ENV_"+import.meta.env.PROD+"_"+import.meta.env.MODE+"_socket_"+md5(socketUri);
 };
 
 const saveToLocalStorage = (key, value) => {
@@ -23,8 +23,7 @@ const saveToLocalStorage = (key, value) => {
 
 export const createSocket = async (socketUri) => {
     let uris = socketUri.split(','); // 拆分逗号隔开的地址为数组
-    const lastSuccessfulUriKey = getKey(socketUri);
-    const lastSuccessfulUri = localStorage.getItem(lastSuccessfulUriKey);
+    const lastSuccessfulUri = localStorage.getItem(getKey(socketUri));
 
     if (lastSuccessfulUri && uris.length > 1) {
         // 如果有缓存的 URI 并且有多个 URI，则将缓存的 URI 放到数组的第一个位置
@@ -47,8 +46,10 @@ export const createSocket = async (socketUri) => {
                 socket.on('connect', () => {
                     console.log('Socket connected successfully to', uri)
                     const key = getKey(socketUri);
-                    // 保存可用的 URI 到本地缓存中
-                    saveToLocalStorage(key, uri);
+                    if(uris.length > 1){
+                        // 保存可用的 URI 到本地缓存中
+                        saveToLocalStorage(key, uri);
+                    }
                     resolve() // 解决 Promise
                 })
 
