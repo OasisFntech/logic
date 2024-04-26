@@ -29,6 +29,9 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
+  md5:
+    specifier: ^2.3.0
+    version: 2.3.0
   pako:
     specifier: ^2.1.0
     version: 2.1.0
@@ -337,6 +340,10 @@ packages:
     resolution: {integrity: sha512-0vdNRFXn5q+dtOqjfFtmtlI9N2eVZ7LMyEV2iKC5mEEFvSg/69Ml6b/WU2qF8W1nLRa0wiSrDT3Y5jOHZCwKPQ==}
     dev: false
 
+  /charenc@0.0.2:
+    resolution: {integrity: sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==}
+    dev: false
+
   /classnames@2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
     dev: false
@@ -371,6 +378,10 @@ packages:
   /core-js@3.31.0:
     resolution: {integrity: sha512-NIp2TQSGfR6ba5aalZD+ZQ1fSxGhDo/s1w0nx3RYzf2pnJxt7YynxFlFScP6eV7+GZsKO95NSjGxyJsU3DZgeQ==}
     requiresBuild: true
+    dev: false
+
+  /crypt@0.0.2:
+    resolution: {integrity: sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==}
     dev: false
 
   /csstype@3.1.2:
@@ -491,6 +502,10 @@ packages:
     resolution: {integrity: sha512-i0G7hLJ1z0DE8dsqJa2rycj9dBmNKgXBvotXtZYXakU9oivfB9Uj2ZBC27qqef2U58/ZLwalxa1X/RDCdkHtVg==}
     dev: false
 
+  /is-buffer@1.1.6:
+    resolution: {integrity: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==}
+    dev: false
+
   /is-plain-object@3.0.1:
     resolution: {integrity: sha512-Xnpx182SBMrr/aBik8y+GuR4U1L9FqMSojwDQwPMmxyC6bvEqly9UBCxhauBF5vNh2gwWJNX6oDV7O+OM4z34g==}
     engines: {node: '>=0.10.0'}
@@ -528,6 +543,14 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
+    dev: false
+
+  /md5@2.3.0:
+    resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
+    dependencies:
+      charenc: 0.0.2
+      crypt: 0.0.2
+      is-buffer: 1.1.6
     dev: false
 
   /mime-db@1.52.0:

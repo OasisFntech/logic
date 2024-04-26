@@ -20,6 +20,7 @@
         "echarts": "^5.4.3",
         "jsencrypt": "^3.3.2",
         "lodash": "^4.17.21",
+        "md5": "^2.3.0",
         "pako": "^2.1.0",
         "pinia": "^2.1.6",
         "socket.io-client": "^2.3.0",
