@@ -75,6 +75,12 @@ export function useRequest({
                     method
                 })
 
+                if (res.status === 601) {
+                    // 如果遇到601错误码, 则执行页面刷新操作, 方便调用出/显示出 人机验证界面
+                    window.location.reload()
+                    return
+                }
+
                 response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
