@@ -44,7 +44,9 @@ export const createSocket = async (socketUri) => {
 
                 // 监听连接成功事件
                 socket.on('connect', () => {
-                    console.log('Socket connected successfully to', uri)
+                    const currentDate = new Date();
+                    const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+                    console.log(`Socket connected successfully to ${uri} at ${currentTime}`);
                     const key = getKey(socketUri);
                     if(uris.length > 1){
                         // 保存可用的 URI 到本地缓存中
