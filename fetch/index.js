@@ -74,15 +74,14 @@ export function useRequest({
                     params: actualParams,
                     method
                 })
-                console.log('>>',res, res.status, res.status === 601)
-                if (res.status === 601) {
+                response.value = formatResult ? formatResult(res) : res
+                console.log('>1>',response, response.status, response.status === 601)
+                if (response.status === 601) {
                     // 如果遇到601错误码, 则执行页面刷新操作, 方便调用出/显示出 人机验证界面
                     window.location.reload()
                     console.log('601 reload..')
                     return
                 }
-
-                response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
                 onErr?.(e)
