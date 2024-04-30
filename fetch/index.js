@@ -77,6 +77,7 @@ export function useRequest({
                 response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
+                debugger
                 // 处理错误
                 if (e.response && e.response.status === 601) {
                     // 如果遇到 503 错误码，则执行特定的处理逻辑
