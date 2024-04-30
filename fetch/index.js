@@ -84,6 +84,7 @@ export function useRequest({
                 }
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
+                console.log('>2>',e,onErr)
                 onErr?.(e)
             } finally {
                 loading.value = false
