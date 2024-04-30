@@ -77,15 +77,13 @@ export function useRequest({
                 response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
-                debugger
+                //debugger
                 // 处理错误
                 if (e.response && e.response.status === 601) {
                     // 如果遇到 503 错误码，则执行特定的处理逻辑
-                    console.error('e Service Unavailable:', e, onErr);
                     window.location.reload()
                     console.log('e 601 reload..')
                 } else {
-                    console.log('>2>',e,onErr)
                     // 处理其他错误
                     onErr?.(e);
                 }
