@@ -64,6 +64,7 @@ export function useRequest({
     const requestParams = computed(() => isRef(params) ? params.value : params)
 
     const run = async(runParams) => {
+        console.log('runrunrun',runParams)
         if (!loading.value) {
             loading.value = true
 
@@ -74,11 +75,16 @@ export function useRequest({
                     params: actualParams,
                     method
                 })
+                console.log('res',res)
+                console.log('url',url)
+                console.log('method',method)
+                console.log('params',actualParams)
                 response.value = formatResult ? formatResult(res) : res
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
                 //debugger
                 // 处理错误
+                console.log('22222',e.response)
                 if (e.response && e.response.status === 601) {
                     // 如果遇到 503 错误码，则执行特定的处理逻辑
                     window.location.reload()
