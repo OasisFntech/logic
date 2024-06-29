@@ -15,8 +15,6 @@ function onFetchErr(err) {
 }
 
 function axiosInterceptors({ request, response }) {
-    console.log('1111',request)
-    console.log('2222',response)
     axios.interceptors.request.use(request, onFetchErr)
     axios.interceptors.response.use(response, onFetchErr)
 }
