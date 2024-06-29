@@ -19,6 +19,7 @@ export const useVerifyStore = defineStore('verify', () => {
 
     return {
         visible,
+        config,
         onClose,
         onShow,
         setConfig
