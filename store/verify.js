@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useVerifyStore = defineStore('verify', () => {
     const visible = ref(false)
-    const config = ref(null)
+    const config = null
 
     const onClose = () => {
         visible.value = false
@@ -13,8 +13,8 @@ export const useVerifyStore = defineStore('verify', () => {
         visible.value = true
     }
 
-    const setConfig = () =>{
-        config.value = config
+    const setConfig = (newConfig) =>{
+        config = newConfig
     }
 
     return {
