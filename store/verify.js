@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useVerifyStore = defineStore('verify', () => {
     const visible = ref(false)
-    const config = ref({
+    let config = ref({
         url:'',
         mothod:'post',
         data:'',
@@ -19,7 +19,9 @@ export const useVerifyStore = defineStore('verify', () => {
     }
 
     const setConfig = (newConfig) =>{
+        console.log('object',newConfig)
         config.value = {...newConfig}
+        console.log(config.value )
     }
 
     return {
