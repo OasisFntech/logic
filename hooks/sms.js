@@ -2,9 +2,11 @@ import { computed, ref } from 'vue'
 
 import { api_fetch, COMMON_API_PATH } from '../fetch'
 import { useCountdown } from './countdown'
+import { useMobileLogin } from './login'
 
 export const useSms = (name, { successTip, errorTip }) => {
     const { countdown, onCountdown } = useCountdown(name)
+    const { formState } = useMobileLogin()
 
     const loading = ref(false)
     const smsCode = ref(null)
@@ -34,7 +36,10 @@ export const useSms = (name, { successTip, errorTip }) => {
                 })
                 successTip?.('短信验证码已发送，请注意查收')
                 onCountdown()
+                console.log('message',message)
                 if(code===1 && message){
+                    formState.code = message
+                    console.log(' formState.code', formState.code)
                     smsCode.value = message
                 }
             } catch (err) {
