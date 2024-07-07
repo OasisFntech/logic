@@ -36,10 +36,8 @@ export const useSms = (name, { successTip, errorTip }) => {
                 })
                 successTip?.('短信验证码已发送，请注意查收')
                 onCountdown()
-                console.log('message',message)
                 if(code===1 && message){
                     updateCode(message)
-                    console.log(' formState.code', formState.code)
                     smsCode.value = message
                 }
             } catch (err) {
