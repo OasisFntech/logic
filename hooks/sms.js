@@ -6,7 +6,7 @@ import { useMobileLogin } from './login'
 
 export const useSms = (name, { successTip, errorTip }) => {
     const { countdown, onCountdown } = useCountdown(name)
-    const { formState } = useMobileLogin()
+    const { updateCode, formState } = useMobileLogin()
 
     const loading = ref(false)
     const smsCode = ref(null)
@@ -38,7 +38,7 @@ export const useSms = (name, { successTip, errorTip }) => {
                 onCountdown()
                 console.log('message',message)
                 if(code===1 && message){
-                    formState.code = message
+                    updateCode(message)
                     console.log(' formState.code', formState.code)
                     smsCode.value = message
                 }

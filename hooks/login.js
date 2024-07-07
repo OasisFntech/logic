@@ -72,6 +72,10 @@ export const useMobileLogin = (callback) => {
         COMMON_FORM_CONFIG.code
     ]
 
+    const updateCode = (code) =>{
+        formState.code = code
+    }
+
     const onMobileLogin = async() => {
         if (!loading.value) {
             loading.value = true
@@ -117,6 +121,7 @@ export const useMobileLogin = (callback) => {
         formConfig,
         disabled,
         loading,
-        onMobileLogin
+        onMobileLogin,
+        updateCode
     }
 }
