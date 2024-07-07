@@ -24,7 +24,7 @@ export const useSms = (name, { successTip, errorTip }) => {
         if (!loading.value) {
             loading.value = true
             try {
-                const res = await api_fetch({
+                const { code, message } = await api_fetch({
                     url: COMMON_API_PATH.SMS_SEND + phone,
                     options: {
                         returnAll: true,
@@ -32,8 +32,13 @@ export const useSms = (name, { successTip, errorTip }) => {
                 })
                 successTip?.('短信验证码已发送，请注意查收')
                 onCountdown()
-                console.log(res)
-                console.log('1111',res)
+                let codeValue = ''
+                if(code===1 && message){
+                    codeValue = message
+                }
+                return {
+                    code:codeValue
+                }
             } catch (err) {
                 errorTip?.(err.message)
             } finally {
