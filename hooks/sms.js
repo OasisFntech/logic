@@ -7,6 +7,7 @@ export const useSms = (name, { successTip, errorTip }) => {
     const { countdown, onCountdown } = useCountdown(name)
 
     const loading = ref(false)
+    const smsCode = ref(null)
 
     const smsBtn = computed(() => {
         const isCounting = countdown.value === 0
@@ -14,7 +15,8 @@ export const useSms = (name, { successTip, errorTip }) => {
         return {
             text: isCounting ? '发送验证码' : `${countdown.value}s`,
             disabled: !isCounting,
-            loading: loading.value
+            loading: loading.value,
+            smsCode: smsCode.value
         }
     })
 
@@ -32,12 +34,8 @@ export const useSms = (name, { successTip, errorTip }) => {
                 })
                 successTip?.('短信验证码已发送，请注意查收')
                 onCountdown()
-                let codeValue = ''
                 if(code===1 && message){
-                    codeValue = message
-                }
-                return {
-                    code:codeValue
+                    smsCode.value = message
                 }
             } catch (err) {
                 errorTip?.(err.message)
@@ -49,6 +47,6 @@ export const useSms = (name, { successTip, errorTip }) => {
 
     return {
         smsBtn,
-        onSendSms
+        onSendSms,
     }
 }
