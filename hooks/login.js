@@ -81,10 +81,11 @@ export const useMobileLogin = (callback) => {
             loading.value = true
             try {
                 const isRegister = await api_fetch({
-                    url: COMMON_API_PATH.CHECK_MOBILE_REGISTER,
+                    url: COMMON_API_PATH.CHECK_MOBILE_V2_REGISTER,
                     method: FETCH_METHOD.GET,
                     params: {
-                        phone: formState.mobile
+                        phone: formState.mobile,
+                        code: formState.code,
                     }
                 })
 

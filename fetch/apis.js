@@ -33,6 +33,7 @@ export const COMMON_API_PATH = {
     // 检查注册账号、手机号是否注册过
     CHECK_ACCOUNT_REGISTER: '/auth/member/checkAccountRegister',
     CHECK_MOBILE_REGISTER: '/auth/member/checkPhoneRegister',
+    CHECK_MOBILE_V2_REGISTER: '/auth/member/v2/checkPhoneRegister',
     // 发送短信验证码
     SMS_SEND: '/member/sms/operlog/86/',
     // 检查短信验证码
