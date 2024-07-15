@@ -127,10 +127,6 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         ])
     }
 
-    onMounted(() => {
-        onRefreshUserInfo()
-    })
-
     return {
         userInfo,
         balance_visible,
