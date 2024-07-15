@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 import _ from 'lodash'
 
@@ -126,6 +126,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
             userBaseInfoRun()
         ])
     }
+
+    onMounted(() => {
+        onRefreshUserInfo()
+    })
 
     return {
         userInfo,
