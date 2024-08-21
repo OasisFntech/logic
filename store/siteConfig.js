@@ -40,7 +40,9 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         rebateSwitch: false,
         autoAgent: false,
         // 底部二维码地址 - Footer展示
-        qrCodeAddress: ''
+        qrCodeAddress: '',
+        withdrawUseFree: false,
+        followBuyUseFree: false
     })
 
     // 请求客服配置 ps:后端可优化的接口
