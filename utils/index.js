@@ -36,17 +36,21 @@ export const utils_base64 = base64String => {
  * @description 用 a 标签模拟跳转，避免兼容性问题
  * */
 export const utils_link = (url, target = '_blank') => {
-    const link = document.createElement('a')
+    if (window.App && window.App.openExternalLink) {
+        window.App.openExternalLink(url)
+    }else{
+        const link = document.createElement('a')
 
-    link.href = url
-    link.target = target
+        link.href = url
+        link.target = target
 
-    const event = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
-    })
-    link.dispatchEvent(event)
+        const event = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true
+        })
+        link.dispatchEvent(event)
+    }
 }
 
 /**
