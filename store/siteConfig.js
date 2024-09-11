@@ -44,6 +44,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         withdrawUseFree: false,
         followBuyUseFree: false,
         needCheckOldPwd: false,
+        bindCardCheckTxPwd: false,
     })
 
     // 请求客服配置 ps:后端可优化的接口
