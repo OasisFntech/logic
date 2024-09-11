@@ -42,7 +42,8 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         // 底部二维码地址 - Footer展示
         qrCodeAddress: '',
         withdrawUseFree: false,
-        followBuyUseFree: false
+        followBuyUseFree: false,
+        needCheckOldPwd: false,
     })
 
     // 请求客服配置 ps:后端可优化的接口
