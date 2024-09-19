@@ -30,13 +30,16 @@ export const useSms = (name, { successTip, errorTip }) => {
             try {
                 let params = {}
                 if(imgCode){
-                    params.imgCode = imgCode
+                    params.imgCode = `imgCode=${imgCode}`
                 }
                 const { code, message } = await api_fetch({
                     url: `${COMMON_API_PATH.SMS_SEND}${phone}/${bizType}`,
                     params,
                     options: {
                         returnAll: true,
+                        headers: {
+                            'Content-Type':'application/x-www-form-urlencoded'
+                        }
                     }
                 })
                 successTip?.('短信验证码已发送，请注意查收')
