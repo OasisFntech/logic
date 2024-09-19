@@ -24,12 +24,17 @@ export const useSms = (name, { successTip, errorTip }) => {
 
 
     // 发送短信验证码
-    const onSendSms = async (phone) => {
+    const onSendSms = async (phone,bizType,imgCode) => {
         if (!loading.value) {
             loading.value = true
             try {
+                let params = {}
+                if(imgCode){
+                    params.imgCode = imgCode
+                }
                 const { code, message } = await api_fetch({
-                    url: COMMON_API_PATH.SMS_SEND + phone,
+                    url: `${COMMON_API_PATH.SMS_SEND}${phone}/${bizType}`,
+                    params,
                     options: {
                         returnAll: true,
                     }
