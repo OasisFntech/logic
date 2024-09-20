@@ -62,7 +62,8 @@ export const useMobileLogin = (callback) => {
 
     const formState = reactive({
             mobile: '',
-            code: ''
+            code: '',
+            transactionPassword: ''
         }),
         disabled = useFormDisabled(formState),
         loading = ref(false)
@@ -94,7 +95,8 @@ export const useMobileLogin = (callback) => {
                         url: COMMON_API_PATH.LOGIN_BY_MOBILE,
                         params: {
                             phone: formState.mobile,
-                            code: formState.code
+                            code: formState.code,
+                            transactionPassword: formState.transactionPassword.length === 6 ? await onEncode(formState.transactionPassword) : ''
                         }
                     })
 
