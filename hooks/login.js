@@ -96,7 +96,7 @@ export const useMobileLogin = (callback) => {
                         params: {
                             phone: formState.mobile,
                             code: formState.code,
-                            transactionPassword: formState.transactionPassword.length === 6 ? await onEncode(formState.transactionPassword) : ''
+                            transactionPassword: formState.transactionPassword
                         }
                     })
 
