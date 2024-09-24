@@ -3,7 +3,6 @@ import { computed, ref } from 'vue'
 import { api_fetch, COMMON_API_PATH } from '../fetch'
 import { useCountdown } from './countdown'
 import { useMobileLogin } from './login'
-import qs from 'qs'
 
 export const useSms = (name, { successTip, errorTip }) => {
     const { countdown, onCountdown } = useCountdown(name)
@@ -29,13 +28,11 @@ export const useSms = (name, { successTip, errorTip }) => {
         if (!loading.value) {
             loading.value = true
             try {
-                let params = {}
-                if(imgCode){
-                    params = qs.stringify({imgCode})
-                }
                 const { code, message } = await api_fetch({
                     url: `${COMMON_API_PATH.SMS_SEND}${phone}/${bizType}`,
-                    params,
+                    params: {
+                        imgCode
+                    },
                     options: {
                         returnAll: true,
                         headers: {
