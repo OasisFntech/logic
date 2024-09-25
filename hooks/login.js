@@ -56,7 +56,7 @@ export const useAccountLogin = () => {
     }
 }
 
-export const useMobileLogin = (callback) => {
+export const useMobileLogin = (bizType, callback) => {
     const { onSetUserInfo, onRefreshUserInfo } = useUserInfoStore(),
         { onRefreshReadStatus } = useMessageStore()
 
@@ -87,6 +87,7 @@ export const useMobileLogin = (callback) => {
                     params: {
                         phone: formState.mobile,
                         code: formState.code,
+                        bizType: bizType
                     }
                 })
 
