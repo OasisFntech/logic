@@ -23,6 +23,7 @@ export const useRegister = ({
             mobile: '',
             code: '',
             referrer: '',
+            transactionPassword: '',
             ...initialValues
         }),
         checkLoading = ref(false),
@@ -57,7 +58,7 @@ export const useRegister = ({
             submitLoading.value = true
 
             try {
-                const { account, password, mobile, code, referrer } = values
+                const { account, password, mobile, code, referrer, transactionPassword } = values
 
                 // 校验短信验证码
                 await api_fetch({
@@ -77,7 +78,7 @@ export const useRegister = ({
                         code,
                         inviterPhone: referrer,
                         userType: 1,
-                        transactionPassword: '',
+                        transactionPassword,
                         loginPassword: await onEncode(password),
                         exclusiveDomain: window.location.origin
                     }
