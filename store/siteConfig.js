@@ -48,10 +48,12 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         registerSMS: 1,
         isCloseSMS: 1,
         changeSMS: 1,
+        showCapitalRecord: 1,
+        showRechargeRecord: 1
     })
 
     // 请求客服配置 ps:后端可优化的接口
-    useRequest({
+    const { run: getSiteConfigRun } = useRequest({
         url: COMMON_API_PATH.SITE_CONFIG_BASE,
         params: {
             configKey: 'customerServiceManagement'
@@ -72,9 +74,16 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         }
     })
 
+    const onRefreshSiteInfo = () => {
+        Promise.all([
+            getSiteConfigRun()
+        ])
+    }
+
     return {
         siteConfig,
-        logoRes
+        logoRes,
+        onRefreshSiteInfo
     }
 })
 
