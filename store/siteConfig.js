@@ -3,6 +3,7 @@ import { defineStore, storeToRefs } from 'pinia'
 
 import { useRequest, COMMON_API_PATH, NOTICE_SOCKET } from '../fetch'
 import { useMessageStore, useUserInfoStore } from './user'
+import { utils_assign_object } from '../utils'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
     // 站点配置
@@ -49,20 +50,25 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         isCloseSMS: 1,
         changeSMS: 1,
         showCapitalRecord: 1,
-        showRechargeRecord: 1
+        showRechargeRecord: 1,
     })
 
     // 请求客服配置 ps:后端可优化的接口
-    const { run: getSiteConfigRun } = useRequest({
+    const { onRefresh: onRefreshService } = useRequest({
         url: COMMON_API_PATH.SITE_CONFIG_BASE,
         params: {
             configKey: 'customerServiceManagement'
         },
         onSuccess: res => {
-            siteConfig.value = {
-                ...siteConfig.value,
-                ...res
-            }
+            siteConfig.value = utils_assign_object(siteConfig.value, res, true)
+        }
+    })
+
+    const { onRefresh: onRefreshSiteConfig } = useRequest({
+        url: COMMON_API_PATH.SITE_CONFIG,
+        manual: true,
+        onSuccess: res => {
+            siteConfig.value = utils_assign_object(siteConfig.value, res, true)
         }
     })
 
@@ -74,16 +80,11 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         }
     })
 
-    const onRefreshSiteInfo = () => {
-        Promise.all([
-            getSiteConfigRun()
-        ])
-    }
-
     return {
         siteConfig,
         logoRes,
-        onRefreshSiteInfo
+        onRefreshService,
+        onRefreshSiteConfig
     }
 })
 
