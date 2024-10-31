@@ -1,6 +1,5 @@
 import SocketIO from 'socket.io-client'
 import { v4 } from 'uuid'
-import md5 from 'md5'
 
 import { utils_base64 } from '../utils'
 
@@ -12,63 +11,20 @@ export const SOCKET_EVENTS = {
 }
 
 export let socket = null
-const getKey = (socketUri) => {
-    return "ENV_"+import.meta.env.PROD+"_"+import.meta.env.MODE+"_socket_"+md5(socketUri);
-};
 
-const saveToLocalStorage = (key, value) => {
-    // 将 key-value 对保存到本地缓存中
-    localStorage.setItem(key, value);
-};
+export const createSocket = (socketUri) => {
+    if (!socket) {
+        socket = SocketIO(
+            `${socketUri}?deviceID=${deviceID}`,
+            {
+                transports: [ 'websocket' ],
+                deviceID,
+            }
+        )
 
-export const createSocket = async (socketUri) => {
-    let uris = socketUri.split(','); // 拆分逗号隔开的地址为数组
-    const lastSuccessfulUri = localStorage.getItem(getKey(socketUri));
-
-    if (lastSuccessfulUri && uris.length > 1) {
-        // 如果有缓存的 URI 并且有多个 URI，则将缓存的 URI 放到数组的第一个位置
-        uris = [lastSuccessfulUri, ...uris.filter(uri => uri !== lastSuccessfulUri)];
-    }
-
-    for (const uri of uris) {
-        try {
-            // 尝试建立连接，使用 Promise 包装以便在连接成功时 resolve，连接失败时 reject
-            await new Promise((resolve, reject) => {
-                const socket = SocketIO(
-                    `${uri}?deviceID=${deviceID}`,
-                    {
-                        transports: ['websocket'],
-                        deviceID,
-                    }
-                )
-
-                // 监听连接成功事件
-                socket.on('connect', () => {
-                    const currentDate = new Date();
-                    const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
-                    console.log(`Socket connected successfully to ${uri} at ${currentTime}`);
-                    const key = getKey(socketUri);
-                    if(uris.length > 1){
-                        // 保存可用的 URI 到本地缓存中
-                        saveToLocalStorage(key, uri);
-                    }
-                    resolve() // 解决 Promise
-                })
-
-                // 监听连接错误事件
-                socket.on('connect_error', (error) => {
-                    console.error('Socket connection failed to', uri, error)
-                    socket.close() // 关闭 socket 连接
-                    reject(error) // 拒绝 Promise
-                })
-            })
-
-            // 如果成功连接到一个地址，则结束循环
-            break
-        } catch (error) {
-            // 如果连接失败，则继续尝试下一个地址
-            console.error('Failed to connect to', uri, error)
-        }
+        socket.on('connect', (con) => {
+            console.log('socket connected successfully')
+        })
     }
 }
 
