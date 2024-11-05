@@ -5,25 +5,29 @@ import { useRequest, usePagination, COMMON_API_PATH } from '../fetch'
 
 export const useNews = () => {
     return usePagination({
-        url: COMMON_API_PATH.NEWS,
-        params: {
-            type: 1
+        fetchOptions: {
+            url: COMMON_API_PATH.NEWS,
+            params: {
+                type: 1
+            }
         }
     })
 }
 
 export const useNewsFlash = () => {
     return usePagination({
-        url: COMMON_API_PATH.NEWS_FLASH,
-        params: {
-            type: 2
-        },
-        formatResult: res => res.map(e => {
-            return {
-                ...e,
-                publishDate: dayjs(e.publishDate).format('HH:mm')
-            }
-        })
+        fetchOptions: {
+            url: COMMON_API_PATH.NEWS_FLASH,
+            params: {
+                type: 2
+            },
+            formatResult: res => res.map(e => {
+                return {
+                    ...e,
+                    publishDate: dayjs(e.publishDate).format('HH:mm')
+                }
+            })
+        }
     })
 }
 
