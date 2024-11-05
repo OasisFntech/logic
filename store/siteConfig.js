@@ -51,6 +51,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         changeSMS: 1,
         showCapitalRecord: 1,
         showRechargeRecord: 1,
+        withdrawPriority: 1,
     })
 
     // 请求客服配置 ps:后端可优化的接口
