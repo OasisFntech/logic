@@ -137,7 +137,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         userInfo,
         balance_visible,
         balance,
-        loading: computed(() => userInfoLoading.value || userBaseInfoLoading.value),
+        loading: computed(() => userInfoLoading.value),
         onBalanceToggle,
         onSetUserInfo,
         onResetUserInfo,
