@@ -111,19 +111,19 @@ export const useUserInfoStore = defineStore('userInfo', () => {
         }
     })
 
-    const { loading: userBaseInfoLoading, run: userBaseInfoRun } = useRequest({
-        url: COMMON_API_PATH.USERINFO_BASE,
-        manual: true,
-        onSuccess: res => {
-            delete res.amount
-            onSetUserInfo(res)
-        }
-    })
+    // const { loading: userBaseInfoLoading, run: userBaseInfoRun } = useRequest({
+    //     url: COMMON_API_PATH.USERINFO_BASE,
+    //     manual: true,
+    //     onSuccess: res => {
+    //         delete res.amount
+    //         onSetUserInfo(res)
+    //     }
+    // })
 
     const onRefreshUserInfo = () => {
         Promise.all([
             userInfoRun(),
-            userBaseInfoRun()
+            // userBaseInfoRun()
         ])
     }
 
