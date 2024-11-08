@@ -1,4 +1,4 @@
-import { computed, isRef, ref } from 'vue'
+import { computed, isRef, ref, unref } from 'vue'
 import { set } from '@vueuse/core'
 
 export * from './apis'
@@ -61,16 +61,14 @@ export function useRequest({
     const response = ref(initialValues),
         loading = ref(false)
 
-    const requestParams = computed(() => isRef(params) ? params.value : params)
-
     const run = async(runParams) => {
         if (!loading.value) {
             loading.value = true
 
-            const actualParams = runParams ?? requestParams.value
+            const actualParams = runParams ?? unref(params)
             try {
                 const res = await api_fetch({
-                    url,
+                    url: unref(url),
                     params: actualParams,
                     method
                 })
