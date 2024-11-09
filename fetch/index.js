@@ -72,7 +72,9 @@ export function useRequest({
                     params: actualParams,
                     method
                 })
-                response.value = formatResult ? formatResult(res) : res
+                if (res) {
+                    response.value = formatResult ? formatResult(res) : res
+                }
                 onSuccess?.(response.value, actualParams)
             } catch (e) {
                 //debugger
