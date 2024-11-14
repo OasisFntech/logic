@@ -11,10 +11,11 @@ export const useCarouselStore = defineStore('carousel', () => {
             loading.value = true
 
             try {
-                carousel.value = await api_fetch({
+                const res = await api_fetch({
                     url: `${COMMON_API_PATH.CAROUSEL}/${device}`,
                     method: FETCH_METHOD.GET
                 })
+                if (res) carousel.value = res
             } finally {
                 loading.value = false
             }
