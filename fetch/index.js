@@ -72,8 +72,10 @@ export function useRequest({
                     url: unref(url),
                     params: actualParams,
                     method,
-                    headers: {
-                        responseAll
+                    options: {
+                        headers: {
+                            responseAll
+                        }
                     }
                 })
                 if (res) {
