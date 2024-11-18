@@ -52,6 +52,7 @@ export function useRequest({
     url,
     params,
     method,
+    responseAll,
     initialValues,
     manual,
     formatResult,
@@ -70,7 +71,10 @@ export function useRequest({
                 const res = await api_fetch({
                     url: unref(url),
                     params: actualParams,
-                    method
+                    method,
+                    headers: {
+                        responseAll
+                    }
                 })
                 if (res) {
                     response.value = formatResult ? formatResult(res) : res
