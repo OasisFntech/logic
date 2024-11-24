@@ -52,6 +52,8 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         showCapitalRecord: 1,
         showRechargeRecord: 1,
         withdrawPriority: 1,
+        // 余额宝审核开关
+        yueBaoReviewSwitch: false,
     })
 
     // 请求客服配置 ps:后端可优化的接口
