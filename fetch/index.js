@@ -127,7 +127,8 @@ export function usePagination(
         paginationOptions,
         mode,
         responseKeys,
-        paginationKeys
+        paginationKeys,
+        newSplit
     } = {
         mode: 'pagination'
     }
@@ -190,7 +191,11 @@ export function usePagination(
                 [total]: resTotal
             })
 
-            finished.value = !resTotal ? true : resCurrent >= resTotal / resPageSize
+            if (newSplit) {
+                finished.value = pagination.value[pageSize] > dataSource.length
+            } else {
+                finished.value = !resTotal ? true : resCurrent >= resTotal / resPageSize
+            }
 
             fetchOptions.onSuccess?.(res, list.value)
         },
