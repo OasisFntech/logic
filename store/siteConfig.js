@@ -69,7 +69,6 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
 
     const { onRefresh: onRefreshSiteConfig } = useRequest({
         url: COMMON_API_PATH.SITE_CONFIG,
-        manual: true,
         onSuccess: res => {
             siteConfig.value = utils_assign_object(siteConfig.value, res, true)
         }
