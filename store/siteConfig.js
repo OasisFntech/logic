@@ -60,15 +60,19 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         url: COMMON_API_PATH.SITE_CONFIG,
         onSuccess: res => {
             siteConfig.value = utils_assign_object(siteConfig.value, res, true)
+            run({
+                configKey: 'customerServiceManagement'
+            })
         }
     })
 
     // 请求客服配置 ps:后端可优化的接口
-    const { onRefresh: onRefreshService } = useRequest({
+    const { onRefresh: onRefreshService, run } = useRequest({
         url: COMMON_API_PATH.SITE_CONFIG_BASE,
-        params: {
-            configKey: 'customerServiceManagement'
-        },
+        // params: {
+        //     configKey: 'customerServiceManagement'
+        // },
+        manual: true,
         onSuccess: res => {
             siteConfig.value = utils_assign_object(siteConfig.value, res, true)
         }
