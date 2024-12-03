@@ -56,19 +56,19 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         yueBaoReviewSwitch: false,
     })
 
+    const { onRefresh: onRefreshSiteConfig } = useRequest({
+        url: COMMON_API_PATH.SITE_CONFIG,
+        onSuccess: res => {
+            siteConfig.value = utils_assign_object(siteConfig.value, res, true)
+        }
+    })
+
     // 请求客服配置 ps:后端可优化的接口
     const { onRefresh: onRefreshService } = useRequest({
         url: COMMON_API_PATH.SITE_CONFIG_BASE,
         params: {
             configKey: 'customerServiceManagement'
         },
-        onSuccess: res => {
-            siteConfig.value = utils_assign_object(siteConfig.value, res, true)
-        }
-    })
-
-    const { onRefresh: onRefreshSiteConfig } = useRequest({
-        url: COMMON_API_PATH.SITE_CONFIG,
         onSuccess: res => {
             siteConfig.value = utils_assign_object(siteConfig.value, res, true)
         }
