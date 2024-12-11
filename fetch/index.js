@@ -52,7 +52,7 @@ export function useRequest({
     url,
     params,
     method,
-    responseAll,
+    returnAll,
     initialValues,
     manual,
     formatResult,
@@ -73,9 +73,7 @@ export function useRequest({
                     params: actualParams,
                     method,
                     options: {
-                        headers: {
-                            responseAll
-                        }
+                        returnAll
                     }
                 })
                 if (res) {
