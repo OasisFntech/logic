@@ -60,14 +60,14 @@ export const useRegister = ({
             try {
                 const { account, password, mobile, code, referrer, transactionPassword } = values
 
-                // 校验短信验证码
-                await api_fetch({
-                    url: COMMON_API_PATH.SMS_CHECK,
-                    params: {
-                        phone: mobile,
-                        code
-                    }
-                })
+                // // 校验短信验证码
+                // await api_fetch({
+                //     url: COMMON_API_PATH.SMS_CHECK,
+                //     params: {
+                //         phone: mobile,
+                //         code
+                //     }
+                // })
 
                 await api_fetch({
                     url: COMMON_API_PATH.REGISTER,
