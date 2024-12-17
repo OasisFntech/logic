@@ -75,7 +75,7 @@ export const useRegister = ({
                         username: account,
                         nickName: mobile,
                         phone: mobile,
-                        code,
+                        // code,
                         inviterPhone: referrer,
                         userType: 1,
                         transactionPassword: await onEncode(transactionPassword),
