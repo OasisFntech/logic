@@ -3,7 +3,8 @@ import { defineStore, storeToRefs } from 'pinia'
 
 import { useRequest, COMMON_API_PATH, NOTICE_SOCKET } from '../fetch'
 import { useMessageStore, useUserInfoStore } from './user'
-import { utils_assign_object } from '../utils'
+import { utils_assets_src, utils_assign_object, utils_favicon } from '../utils'
+import { useTitle } from '@vueuse/core'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
     // 站点配置
@@ -60,6 +61,8 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         url: COMMON_API_PATH.SITE_CONFIG,
         onSuccess: res => {
             siteConfig.value = utils_assign_object(siteConfig.value, res, true)
+            useTitle(res.siteName)
+            utils_favicon(utils_assets_src(res.titleAddress))
             run({
                 configKey: 'customerServiceManagement'
             })
@@ -74,7 +77,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         // },
         manual: true,
         onSuccess: res => {
-            siteConfig.value = utils_assign_object(siteConfig.value, res, true)
+            siteConfig.value = utils_assign_object(siteConfig.value, { ...res, qrCodeAddress: utils_assign_object(res.qrCodeAddress) }, true)
         }
     })
 
@@ -82,8 +85,10 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
     const { response: logoRes } = useRequest({
         url: COMMON_API_PATH.PC_CONFIG,
         initialValues: {
-            logoAddress: ''
-        }
+            logoAddress: '',
+            hideHelpCenter: null
+        },
+        formatResult: res => ({ ...res, logoAddress: utils_assets_src(res.logoAddress) })
     })
 
     return {

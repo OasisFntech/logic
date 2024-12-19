@@ -216,3 +216,19 @@ export const utils_colorful = (value, defaultColor = 'text-gray-400') => {
 
     return color
 }
+
+/**
+ * @function utils_assets_src
+ * @description 替换资源路径
+ * @param src {string} 资源路径
+ * @return string
+ * */
+export const utils_assets_src = (src) => {
+    const { VITE_ASSETS_BASE, VITE_ASSETS_REPLACE } = import.meta.env
+
+    if (VITE_ASSETS_BASE && VITE_ASSETS_REPLACE && !_.isEqual(VITE_ASSETS_BASE, VITE_ASSETS_REPLACE)) {
+        return src.replace(VITE_ASSETS_BASE, VITE_ASSETS_REPLACE)
+    }
+
+    return src
+}
