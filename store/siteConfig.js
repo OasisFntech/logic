@@ -75,15 +75,19 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
     const { onRefresh: onRefreshSiteConfig } = useRequest({
         url: COMMON_API_PATH.SITE_CONFIG,
         onSuccess: async(res) => {
-            const domains = res.imgDomains.split(',')
-            if (domains.length) {
-                domains.forEach(e => {
-                    const img = new Image()
-                    img.src = `https://${e}/media/image/check_image_0101.png`
-                    img.onload = () => {
-                        assetsDomains.push(e)
-                    }
-                })
+            if (!res.imgDomains || res.imgDomains.trim() === '') {
+                console.warn('No image domains provided');
+            } else {
+                const domains = res.imgDomains.split(',')
+                if (domains.length) {
+                    domains.forEach(e => {
+                        const img = new Image()
+                        img.src = `https://${e}/media/image/check_image_0101.png`
+                        img.onload = () => {
+                            assetsDomains.push(e)
+                        }
+                    })
+                }
             }
 
             siteConfig.value = utils_assign_object(siteConfig.value, res, true)
