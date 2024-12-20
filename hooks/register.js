@@ -73,7 +73,7 @@ export const useRegister = ({
                     url: COMMON_API_PATH.REGISTER,
                     params: {
                         username: account,
-                        nickName: mobile,
+                        // nickName: mobile,
                         phone: mobile,
                         // code,
                         inviterPhone: referrer,
