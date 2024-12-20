@@ -5,8 +5,7 @@ import { useRequest, COMMON_API_PATH, NOTICE_SOCKET } from '../fetch'
 import { useMessageStore, useUserInfoStore } from './user'
 import { utils_assets_src, utils_assign_object, utils_favicon } from '../utils'
 import { useTitle } from '@vueuse/core'
-
-export const assetsDomains = []
+import { assetsDomains } from '../config'
 
 export const useSiteConfigStore = defineStore('siteConfig', () => {
     // 站点配置

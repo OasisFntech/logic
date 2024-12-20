@@ -2,7 +2,7 @@ import { inflate } from 'pako'
 import { useClipboard } from '@vueuse/core'
 import _ from 'lodash'
 
-import { assetsDomains } from '../store/siteConfig'
+import { assetsDomains } from '../config'
 export * from './charts'
 export * from './stock'
 
