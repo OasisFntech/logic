@@ -81,7 +81,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
                     const img = new Image()
                     img.src = `https://${e}/media/image/check_image_0101.png`
                     img.onload = () => {
-                        assetsDomains.push(`https://${e}`)
+                        assetsDomains.push(e)
                     }
                 })
             }
