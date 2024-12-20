@@ -1,13 +1,14 @@
 import { reactive, ref } from 'vue'
 import _ from 'lodash'
 
-import { api_fetch, COMMON_API_PATH } from '../fetch'
+import { api_fetch, COMMON_API_PATH, FETCH_METHOD } from '../fetch'
 import { COMMON_FORM_CONFIG } from '../config'
 import { usePublicKeyStore } from '../store'
 
 export const useRegister = ({
     submitCallback,
-    initialValues
+    initialValues,
+    errMsg
 }) => {
     const { onEncode } = usePublicKeyStore()
 
@@ -60,31 +61,46 @@ export const useRegister = ({
             try {
                 const { account, password, mobile, code, referrer, transactionPassword } = values
 
-                // // 校验短信验证码
-                // await api_fetch({
-                //     url: COMMON_API_PATH.SMS_CHECK,
-                //     params: {
-                //         phone: mobile,
-                //         code
-                //     }
-                // })
-
-                await api_fetch({
-                    url: COMMON_API_PATH.REGISTER,
+                const isRegister = await api_fetch({
+                    url: COMMON_API_PATH.CHECK_MOBILE_V2_REGISTER,
+                    method: FETCH_METHOD.GET,
                     params: {
-                        username: account,
-                        // nickName: mobile,
                         phone: mobile,
-                        // code,
-                        inviterPhone: referrer,
-                        userType: 1,
-                        transactionPassword: await onEncode(transactionPassword),
-                        loginPassword: await onEncode(password),
-                        exclusiveDomain: window.location.origin
+                        code,
+                        bizType: 'register'
                     }
                 })
 
-                submitCallback?.()
+                if (isRegister) {
+                    errMsg('该手机号已注册')
+                    return Promise.reject()
+                } else {
+                    // // 校验短信验证码
+                    // await api_fetch({
+                    //     url: COMMON_API_PATH.SMS_CHECK,
+                    //     params: {
+                    //         phone: mobile,
+                    //         code
+                    //     }
+                    // })
+
+                    await api_fetch({
+                        url: COMMON_API_PATH.REGISTER,
+                        params: {
+                            username: account,
+                            // nickName: mobile,
+                            phone: mobile,
+                            // code,
+                            inviterPhone: referrer,
+                            userType: 1,
+                            transactionPassword: await onEncode(transactionPassword),
+                            loginPassword: await onEncode(password),
+                            exclusiveDomain: window.location.origin
+                        }
+                    })
+
+                    submitCallback?.()
+                }
             } finally {
                 submitLoading.value = false
             }
