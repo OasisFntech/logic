@@ -225,12 +225,17 @@ export const utils_colorful = (value, defaultColor = 'text-gray-400') => {
  * @return string
  * */
 export const utils_assets_src = (src) => {
-    const { VITE_ASSETS_BASE, VITE_ASSETS_REPLACE } = import.meta.env
+    const { VITE_ASSETS_BASE, VITE_ASSETS_REPLACE, VITE_ASSETS_BASE1 } = import.meta.env
 
     const replace = assetsDomains[0] ?? VITE_ASSETS_REPLACE
 
+    console.log(!_.isEqual(VITE_ASSETS_BASE, replace))
     if (VITE_ASSETS_BASE && replace && !_.isEqual(VITE_ASSETS_BASE, replace)) {
-        return src.replace(VITE_ASSETS_BASE, replace)
+        src = src.replace(VITE_ASSETS_BASE, replace)
+    }
+
+    if (VITE_ASSETS_BASE1 && replace && !_.isEqual(VITE_ASSETS_BASE1, replace)) {
+        src = src.replace(VITE_ASSETS_BASE1, replace)
     }
 
     return src
