@@ -89,13 +89,11 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
             try {
                 await checkDomainAvailability(savedDomain)
                 assetsDomains.push(savedDomain)
-                console.log(`Domain from localStorage is valid: ${savedDomain}`)
             } catch (error) {
-                console.warn(`Domain from localStorage is invalid: ${savedDomain}`)
                 localStorage.removeItem('validDomain')
             }
         } else {
-            console.warn('No domain found in localStorage to validate.')
+            // console.warn('No domain found in localStorage to validate.')
         }
     }
 
@@ -108,10 +106,9 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
                 img.src = `https://${savedDomain}/media/image/check_image_0101.png`
                 img.onload = () => {
                     assetsDomains.push(savedDomain)
-                    console.log(`Using domain from localStorage: ${savedDomain}`)
                 }
                 img.onerror = () => {
-                    console.warn(`Saved domain is invalid: ${savedDomain}`)
+                    // console.warn(`Saved domain is invalid: ${savedDomain}`)
                     localStorage.removeItem('validDomain')
                     detectNewDomains(res)
                 }
@@ -147,7 +144,6 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
                         assetsDomains.push(e)
                         localStorage.setItem('validDomain', e)
                         savedToLocalStorage = true
-                        console.log(`Saved new domain to localStorage: ${e}`)
                     }
                 }
             })
