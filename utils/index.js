@@ -224,6 +224,7 @@ export const utils_colorful = (value, defaultColor = 'text-gray-400') => {
  * @return string
  * */
 export const utils_assets_src = (src) => {
+    if (!src) return src
     const { VITE_ASSETS_BASE, VITE_ASSETS_REPLACE, VITE_ASSETS_BASE1 } = import.meta.env
 
     const replace = localStorage.getItem('validDomain') ?? VITE_ASSETS_REPLACE
