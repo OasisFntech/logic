@@ -2,7 +2,6 @@ import { inflate } from 'pako'
 import { useClipboard } from '@vueuse/core'
 import _ from 'lodash'
 
-import { assetsDomains } from '../config'
 export * from './charts'
 export * from './stock'
 
@@ -227,7 +226,7 @@ export const utils_colorful = (value, defaultColor = 'text-gray-400') => {
 export const utils_assets_src = (src) => {
     const { VITE_ASSETS_BASE, VITE_ASSETS_REPLACE, VITE_ASSETS_BASE1 } = import.meta.env
 
-    const replace = assetsDomains[0] ?? VITE_ASSETS_REPLACE
+    const replace = localStorage.getItem('validDomain') ?? VITE_ASSETS_REPLACE
 
     if (VITE_ASSETS_BASE && replace && !_.isEqual(VITE_ASSETS_BASE, replace)) {
         src = src.replace(VITE_ASSETS_BASE, replace)
