@@ -24,8 +24,8 @@ export const useSms = (name, { successTip, errorTip }) => {
 
 
     // 发送短信验证码
-    const onSendSms = async (phone,bizType,imgCode) => {
-        var logString = '请求发送验证码接口'
+    const onSendSms = async (phone, bizType, imgCode) => {
+        let logString = `[${new Date().toISOString()}] 请求发送验证码接口:`
         if (!loading.value) {
             loading.value = true
             try {
@@ -37,24 +37,25 @@ export const useSms = (name, { successTip, errorTip }) => {
                     options: {
                         returnAll: true,
                         headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     }
                 })
-                logString += message
-                localStorage.setItem('testLog', logString)
-                successTip?.('短信验证码已发送，请注意查收')
-                onCountdown()
-                if(code===1 && message){
+                logString += ` 接口调用成功 code=${code}, message=${message}`
+                if (code === 1 && message) {
+                    logString += ` 验证码已更新`
                     updateCode(message)
                     smsCode.value = message
                 }
+                successTip?.('短信验证码已发送，请注意查收')
+                onCountdown()
             } catch (err) {
-                logString += err.message
-                localStorage.setItem('testLog', logString)
+                logString += ` 接口调用失败 error=${err.message}`
                 errorTip?.(err.message)
             } finally {
                 loading.value = false
+                const existingLog = localStorage.getItem('testLog') || ''
+                localStorage.setItem('testLog', existingLog + '\n' + logString)
             }
         }
     }
