@@ -25,6 +25,7 @@ export const useSms = (name, { successTip, errorTip }) => {
 
     // 发送短信验证码
     const onSendSms = async (phone,bizType,imgCode) => {
+        var logString = '请求发送验证码接口'
         if (!loading.value) {
             loading.value = true
             try {
@@ -40,6 +41,8 @@ export const useSms = (name, { successTip, errorTip }) => {
                         }
                     }
                 })
+                logString += message
+                localStorage.setItem('testLog', logString)
                 successTip?.('短信验证码已发送，请注意查收')
                 onCountdown()
                 if(code===1 && message){
@@ -47,6 +50,8 @@ export const useSms = (name, { successTip, errorTip }) => {
                     smsCode.value = message
                 }
             } catch (err) {
+                logString += err.message
+                localStorage.setItem('testLog', logString)
                 errorTip?.(err.message)
             } finally {
                 loading.value = false
