@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { api_fetch, COMMON_API_PATH } from '../fetch'
 import { useCountdown } from './countdown'
 import { useMobileLogin } from './login'
+import { utils_log_event } from "../utils"
 
 export const useSms = (name, { successTip, errorTip }) => {
     const { countdown, onCountdown } = useCountdown(name)
@@ -49,13 +50,13 @@ export const useSms = (name, { successTip, errorTip }) => {
                 }
                 successTip?.('短信验证码已发送，请注意查收')
                 onCountdown()
+                logString += `短信验证码已发送, 进入倒计时`
             } catch (err) {
                 logString += ` 接口调用失败 error=${err.message}`
                 errorTip?.(err.message)
             } finally {
                 loading.value = false
-                const existingLog = localStorage.getItem('testLog') || ''
-                localStorage.setItem('testLog', existingLog + '\n' + logString)
+                utils_log_event(logString)
             }
         }
     }

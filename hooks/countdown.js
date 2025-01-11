@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import _ from 'lodash'
+import { utils_log_event } from "../utils"
 
 let countdown_interval = null
 
@@ -22,6 +23,8 @@ export const useCountdown = (name = 'noname') => {
             if (countdown.value > 0) {
                 countdown.value --
                 localStorage.setItem(key, countdown.value)
+
+                utils_log_event(countdown.value)
             } else {
                 localStorage.removeItem(key)
                 onClear()
