@@ -24,7 +24,7 @@ export const useCountdown = (name = 'noname') => {
                 countdown.value --
                 localStorage.setItem(key, countdown.value)
 
-                utils_log_event(countdown.value)
+                // utils_log_event(countdown.value)
             } else {
                 localStorage.removeItem(key)
                 onClear()
