@@ -4,6 +4,7 @@ import { COMMON_FORM_CONFIG } from '../config'
 import { api_fetch, COMMON_API_PATH, FETCH_METHOD, NOTICE_SOCKET } from '../fetch'
 import { usePublicKeyStore, useUserInfoStore, useMessageStore } from '../store'
 import { useFormDisabled } from './index'
+import {utils_log_event} from "../utils"
 
 export const useAccountLogin = () => {
     const { onEncode } = usePublicKeyStore(),
@@ -30,7 +31,7 @@ export const useAccountLogin = () => {
                 })
 
                 sessionStorage.clear()
-
+                utils_log_event(` 登录成功,用户信息=${res}`)
                 onSetUserInfo(res)
                 onRefreshUserInfo()
                 onRefreshReadStatus()
