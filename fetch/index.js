@@ -209,11 +209,14 @@ export function usePagination(
         await run(requestParams.value)
     }
 
-    const onLoadMore = async() => {
-        if (!finished.value){
-            pagination.value[current] += 1
-            await run(requestParams.value)
+    const onLoadMore = async (type = false) => {
+        if (finished.value) return;
+
+        const shouldIncrement = !type || (type && list.value.length > 0);
+        if (shouldIncrement) {
+            pagination.value[current] += 1;
         }
+        await run(requestParams.value);
     }
 
     const onChange = async(_pagination) => {
