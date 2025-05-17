@@ -227,7 +227,7 @@ export const utils_assets_src = (src) => {
     if (!src) return src
 
     // 若链接中不包含 /media/，直接返回
-    if (!src.includes('/media/')) return src
+    if (typeof src !== 'string' || !src.includes('/media/')) return src
 
     const validDomain = localStorage.getItem('validDomain')
     if (!validDomain) return src
@@ -267,6 +267,8 @@ export const utils_assets_src = (src) => {
 }
 
 export const extractBaseUrl = (url) => {
+    if (typeof url !== 'string' || !url.includes('/media/')) return url
+
     if (url.startsWith('https://')) {
         url = url.slice(8)
     } else if (url.startsWith('http://')) {
