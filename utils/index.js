@@ -238,7 +238,7 @@ export const utils_assets_src = (src) => {
             if (oldDomain === validDomain) return src
             const newUrl = src.replace(oldDomain, validDomain)
             console.log(`替换图片URL: ${src} -> ${newUrl}`)
-            return newUrl
+            return newUrl ?? ''
         } else {
             // 富文本或模板中可能嵌套的 https 图片链接替换
             const reg = /https:\/\/([^\/]+)(\/[^"]*?\.(png|jpg|jpeg))/gi
@@ -258,11 +258,11 @@ export const utils_assets_src = (src) => {
                 console.log(`替换图片URL: ${fullMatch} -> ${newUrl}`)
             }
 
-            return result
+            return result ?? ''
         }
     } catch (e) {
         console.error('替换图片域名失败', e)
-        return src
+        return src ?? ''
     }
 }
 
