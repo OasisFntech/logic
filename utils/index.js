@@ -225,21 +225,61 @@ export const utils_colorful = (value, defaultColor = 'text-gray-400') => {
  * */
 export const utils_assets_src = (src) => {
     if (!src) return src
-    const { VITE_ASSETS_BASE, VITE_ASSETS_REPLACE, VITE_ASSETS_BASE1 } = import.meta.env
 
-    const replace = localStorage.getItem('validDomain') ?? VITE_ASSETS_REPLACE
+    // 若链接中不包含 /media/，直接返回
+    if (!src.includes('/media/')) return src
 
-    if (VITE_ASSETS_BASE && replace && !_.isEqual(VITE_ASSETS_BASE, replace)) {
-        src = src.replace(VITE_ASSETS_BASE, replace)
+    const validDomain = localStorage.getItem('validDomain')
+    if (!validDomain) return src
+
+    try {
+        if (src.startsWith('https://')) {
+            const oldDomain = extractBaseUrl(src)
+            if (oldDomain === validDomain) return src
+            const newUrl = src.replace(oldDomain, validDomain)
+            console.log(`替换图片URL: ${src} -> ${newUrl}`)
+            return newUrl
+        } else {
+            // 富文本或模板中可能嵌套的 https 图片链接替换
+            const reg = /https:\/\/([^\/]+)(\/[^"]*?\.(png|jpg|jpeg))/gi
+
+            let result = src
+            const matches = src.matchAll(reg)
+
+            for (const match of matches) {
+                const fullMatch = match[0]
+                const oldDomain = match[1]
+                const path = match[2]
+
+                if (oldDomain === validDomain) continue
+
+                const newUrl = `https://${validDomain}${path}`
+                result = result.replace(fullMatch, newUrl)
+                console.log(`替换图片URL: ${fullMatch} -> ${newUrl}`)
+            }
+
+            return result
+        }
+    } catch (e) {
+        console.error('替换图片域名失败', e)
+        return src
     }
-
-    if (VITE_ASSETS_BASE1 && replace && !_.isEqual(VITE_ASSETS_BASE1, replace)) {
-        src = src.replace(VITE_ASSETS_BASE1, replace)
-    }
-
-    return src
 }
 
+export const extractBaseUrl = (url) => {
+    if (url.startsWith('https://')) {
+        url = url.slice(8)
+    } else if (url.startsWith('http://')) {
+        url = url.slice(7)
+    }
+
+    const index = url.indexOf('/media/')
+    if (index !== -1) {
+        return url.substring(0, index)
+    } else {
+        return url
+    }
+}
 
 // 记录日志
 export const utils_log_event = (message) => {
