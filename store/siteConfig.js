@@ -95,7 +95,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
         }
     }
 
-    const { onRefresh: onRefreshSiteConfig } = useRequest({
+    const { onRefresh: onRefreshSiteConfig, loading: siteConfigLoading } = useRequest({
         url: COMMON_API_PATH.SITE_CONFIG,
         onSuccess: async(res) => {
             const savedDomain = localStorage.getItem('validDomain')
@@ -172,6 +172,7 @@ export const useSiteConfigStore = defineStore('siteConfig', () => {
     return {
         siteConfig,
         logoRes,
+        siteConfigLoading,
         onRefreshService,
         onRefreshSiteConfig,
         validateSavedDomain
